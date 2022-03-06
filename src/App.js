@@ -8,7 +8,7 @@ function App() {
 
 	const responseGoogle = async (payload) => {
 		const { tokenId, profileObj: { email } } = payload;
-		const data = await fetch('http://localhost:3000/login/google', {
+		const data = await fetch(`${process.env.REACT_APP_SERVER_HOST}/login/google`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -25,10 +25,10 @@ function App() {
 
 	return (
 		<div className="App">
-			<h1>Hello World</h1>
+			<h1>Hello World {process.env.REACT_APP_GOOGLE_CLIENT_ID}</h1>
 			<div>
 				<GoogleLogin
-					clientId={"670781469452-58l9b45eben8smb1qsldn34ajnfcifgn.apps.googleusercontent.com"}
+					clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
 					buttonText="Login"
 					onSuccess={responseGoogle}
 					onFailure={failedGoogle}
