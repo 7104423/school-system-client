@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 
 export const FluidInput = (props) => {
-  const { type, label, style, id } = props;
+  const { type, label, style, id, onChange } = props;
   const [state, setState] = useState({
     focused: false,
     value: "",
@@ -23,8 +23,9 @@ export const FluidInput = (props) => {
         ...state,
         value: value,
       });
+      onChange?.(value);
     },
-    [state]
+    [state, onChange]
   );
 
   const { focused, value } = state;

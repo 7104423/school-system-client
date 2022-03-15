@@ -6,12 +6,9 @@ export class Button extends React.Component {
 
   render() {
     return (
-      <div
-        className={`button ${this.props.className}`}
-        onClick={this.props.onClick}
-      >
+      <button {...this.props} className={`button ${this.props.className}`}>
         {this.props.children}
-      </div>
+      </button>
     );
   }
 }

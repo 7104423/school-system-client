@@ -22,7 +22,7 @@ export const GoogleLoginButton = () => {
     <div>
       <GoogleLogin
         clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-        buttonText="Login"
+        buttonText="Sign in"
         onSuccess={responseGoogle}
         onFailure={failedGoogle}
         cookiePolicy={"single_host_origin"}
