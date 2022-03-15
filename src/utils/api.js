@@ -1,6 +1,6 @@
-export const login = async (email, tokenId) => {
+export const loginGoogle = async (email, tokenId) => {
   const data = await fetch(
-    `${process.env.REACT_APP_SERVER_HOST}/login/google`,
+    `${process.env.REACT_APP_SERVER_HOST}/api/login/google`,
     {
       method: "POST",
       headers: {

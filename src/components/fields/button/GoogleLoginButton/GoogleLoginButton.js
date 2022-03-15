@@ -1,6 +1,6 @@
 import { useState } from "react";
 import GoogleLogin from "react-google-login";
-import { login } from "../../../../utils/api";
+import { loginGoogle } from "../../../../utils/api";
 
 export const GoogleLoginButton = () => {
   const [state, setState] = useState("");
@@ -10,7 +10,7 @@ export const GoogleLoginButton = () => {
       tokenId,
       profileObj: { email },
     } = payload;
-    const json = await login(email, tokenId);
+    const json = await loginGoogle(email, tokenId);
     setState(`email: ${email}, token: ${json.token}`);
   };
 
