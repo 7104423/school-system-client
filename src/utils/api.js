@@ -6,7 +6,7 @@ export const loginGoogle = async (email, tokenId) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ password: tokenId, email }),
+      body: JSON.stringify({ idToken: tokenId, email }),
     }
   );
   return await data.json();
