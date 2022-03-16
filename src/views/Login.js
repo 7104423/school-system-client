@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { Button } from "../components/fields/button";
@@ -8,14 +8,30 @@ import { login } from "../utils/api";
 export const LoginContainer = () => {
   const { control, handleSubmit } = useForm();
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const formHandler = useCallback(
-    async ({ email, password }) => {
-      const { token } = await login(email, password);
+  const loginHandler = useCallback(
+    (token) => {
       localStorage.setItem("token", token);
       navigate("/app");
     },
     [navigate]
+  );
+
+  const errorHandler = useCallback((error) => {
+    setErrorMessage(String(error));
+  }, []);
+
+  const formHandler = useCallback(
+    async ({ email, password }) => {
+      try {
+        const { token } = await login(email, password);
+        loginHandler(token);
+      } catch (error) {
+        errorHandler(error);
+      }
+    },
+    [loginHandler, errorHandler]
   );
 
   return (
@@ -30,7 +46,7 @@ export const LoginContainer = () => {
           name="email"
           render={({ field: { onChange } }) => (
             <Input.FluidInput
-              type="text"
+              type="email"
               label="email"
               id="email"
               onChange={onChange}
@@ -55,6 +71,9 @@ export const LoginContainer = () => {
             />
           )}
         />
+        <div>
+          {errorMessage && <span className="text-danger">{errorMessage}</span>}
+        </div>
         <Button
           style={{
             margin: "15px 0",
@@ -69,7 +88,10 @@ export const LoginContainer = () => {
             margin: "15px 0",
           }}
         >
-          <Button.GoogleLogin />
+          <Button.GoogleLogin
+            onReponse={loginHandler}
+            onFailure={errorHandler}
+          />
         </div>
       </div>
     </form>
