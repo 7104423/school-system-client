@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { Button } from "../components/fields/button";
 import { Input } from "../components/fields/input";
@@ -7,16 +6,12 @@ import { login } from "../utils/api";
 
 export const LoginContainer = () => {
   const { control, handleSubmit } = useForm();
-  const navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState("");
 
-  const loginHandler = useCallback(
-    (token) => {
-      localStorage.setItem("token", token);
-      navigate("/app");
-    },
-    [navigate]
-  );
+  const loginHandler = useCallback((token) => {
+    localStorage.setItem("token", token);
+    window.location.href = "/app";
+  }, []);
 
   const errorHandler = useCallback((error) => {
     setErrorMessage(String(error));
@@ -97,3 +92,4 @@ export const LoginContainer = () => {
     </form>
   );
 };
+
