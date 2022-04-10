@@ -4,7 +4,7 @@ import { Button } from "../components/fields/button";
 import { Input } from "../components/fields/input";
 import { login } from "../utils/api";
 
-export const LoginContainer = () => {
+export const LoginView = () => {
   const { control, handleSubmit } = useForm();
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -39,14 +39,14 @@ export const LoginContainer = () => {
         <Controller
           control={control}
           name="email"
-          render={({ field: { onChange } }) => (
+          render={({ field: { onChange, value } }) => (
             <Input.FluidInput
               type="email"
               label="email"
               id="email"
-              onChange={onChange}
-              style={{
-                margin: "15px 0",
+              value={value}
+              onChange={(event) => {
+                onChange(event?.target?.value);
               }}
             />
           )}
@@ -54,14 +54,14 @@ export const LoginContainer = () => {
         <Controller
           control={control}
           name="password"
-          render={({ field: { onChange } }) => (
+          render={({ field: { onChange, value } }) => (
             <Input.FluidInput
               type="password"
               label="password"
               id="password"
-              onChange={onChange}
-              style={{
-                margin: "15px 0",
+              value={value}
+              onChange={(event) => {
+                onChange(event?.target?.value);
               }}
             />
           )}

@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./assets/style.css";
 import { validateUser } from "./utils/api";
 import { Dashboard } from "./views/Dashboard";
-import { LoginContainer } from "./views/Login";
+import { LoginView } from "./views/Login";
 import { WholePageLoader } from "./containers/WholePageLoader";
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
                 <Route path="/app/*" element={<Dashboard />} />
               </>
             )}
-            <Route path="*" element={<LoginContainer />} />
+            <Route path="*" element={<LoginView />} />
           </Routes>
         </BrowserRouter>
       )}
