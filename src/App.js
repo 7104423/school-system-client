@@ -10,7 +10,12 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          {token && <Route path="/app" element={<Dashboard />} />}
+          {token && (
+            <>
+              <Route exact path="/app" element={<Dashboard />} />
+              <Route path="/app/*" element={<Dashboard />} />
+            </>
+          )}
           <Route path="*" element={<LoginContainer />} />
         </Routes>
       </BrowserRouter>
