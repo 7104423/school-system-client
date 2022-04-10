@@ -1,18 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, Routes, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./assets/style.css";
 import { Dashboard } from "./views/Dashboard";
 import { LoginContainer } from "./views/Login";
 
 function App() {
-  const token = localStorage.get("token");
+  const token = localStorage.getItem("token");
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
+          {token && <Route exact path="/app" element={<Dashboard />} />}
           <Route path="/" element={<LoginContainer />} />
-          {token && <Route path="/app" element={<Dashboard />} />}
-          <Redirect to="/" />
         </Routes>
       </BrowserRouter>
     </div>
