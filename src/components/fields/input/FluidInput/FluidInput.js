@@ -76,23 +76,19 @@ const StyledFluidInput = styled.div`
   }
 `;
 
-export const FluidInput = (props) => {
-  const { type, label, style, id, ...rest } = props;
-
-  return (
-    <StyledFluidInput style={style}>
-      <div className="fluid-input-holder">
-        <input
-          className="fluid-input-input"
-          type={type || "text"}
-          id={id}
-          {...rest}
-        />
-        <label className="fluid-input-label" htmlFor={id}>
-          {label}
-        </label>
-      </div>
-    </StyledFluidInput>
-  );
-};
+export const FluidInput = ({ type, label, style, id, ...rest }) => (
+  <StyledFluidInput style={style}>
+    <div className="fluid-input-holder">
+      <input
+        className="fluid-input-input"
+        type={type || "text"}
+        id={id}
+        {...rest}
+      />
+      <label className="fluid-input-label" htmlFor={id}>
+        {label}
+      </label>
+    </div>
+  </StyledFluidInput>
+);
 
