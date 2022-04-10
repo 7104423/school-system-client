@@ -8,7 +8,7 @@ export const LoginContainer = () => {
   const { control, handleSubmit } = useForm();
   const [errorMessage, setErrorMessage] = useState("");
 
-  const loginHandler = useCallback((token) => {
+  const loginHandler = useCallback(({ token }) => {
     localStorage.setItem("token", token);
     window.location.href = "/app";
   }, []);
@@ -20,8 +20,8 @@ export const LoginContainer = () => {
   const formHandler = useCallback(
     async ({ email, password }) => {
       try {
-        const { token } = await login(email, password);
-        loginHandler(token);
+        const response = await login(email, password);
+        loginHandler(response);
       } catch (error) {
         errorHandler(error);
       }
