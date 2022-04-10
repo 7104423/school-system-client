@@ -34,3 +34,7 @@ export const login = async (email, password) => {
   });
 };
 
+export const validateUser = async () => {
+  return await fetchJSON(`${url}/api/app/index`);
+};
+
