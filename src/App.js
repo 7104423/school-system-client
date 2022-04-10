@@ -11,7 +11,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           {token && <Route exact path="/app" element={<Dashboard />} />}
-          <Route path="/" element={<LoginContainer />} />
+          <Route path="*" element={<LoginContainer />} />
         </Routes>
       </BrowserRouter>
     </div>
