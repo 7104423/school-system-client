@@ -6,6 +6,7 @@ import { validateUser } from "./utils/api";
 import { Dashboard } from "./views/Dashboard";
 import { LoginView } from "./views/Login";
 import { WholePageLoader } from "./containers/WholePageLoader";
+import { ViewTrapProvider, ViewTrapRender } from "./components/viewtrap";
 
 function App() {
   const [hasAccess, setAccess] = useState(null);
@@ -30,17 +31,20 @@ function App() {
     <div className="App">
       {hasAccess === null && <WholePageLoader />}
       {hasAccess !== null && (
-        <BrowserRouter>
-          <Routes>
-            {hasAccess && (
-              <>
-                <Route exact path="/app" element={<Dashboard />} />
-                <Route path="/app/*" element={<Dashboard />} />
-              </>
-            )}
-            <Route path="*" element={<LoginView />} />
-          </Routes>
-        </BrowserRouter>
+        <ViewTrapProvider>
+          <BrowserRouter>
+            <Routes>
+              {hasAccess && (
+                <>
+                  <Route exact path="/app" element={<Dashboard />} />
+                  <Route path="/app/*" element={<Dashboard />} />
+                </>
+              )}
+              <Route path="*" element={<LoginView />} />
+            </Routes>
+          </BrowserRouter>
+          <ViewTrapRender />
+        </ViewTrapProvider>
       )}
     </div>
   );
