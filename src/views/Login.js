@@ -84,7 +84,7 @@ export const LoginView = () => {
           }}
         >
           <Button.GoogleLogin
-            onReponse={loginHandler}
+            onResponse={loginHandler}
             onFailure={errorHandler}
           />
         </div>

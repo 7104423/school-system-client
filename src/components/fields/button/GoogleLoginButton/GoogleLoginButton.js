@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import GoogleLogin from "react-google-login";
 import { loginGoogle } from "../../../../utils/api";
 
-export const GoogleLoginButton = ({ onReponse, onFailure }) => {
+export const GoogleLoginButton = ({ onResponse, onFailure }) => {
   const responseGoogle = useCallback(
     async (payload) => {
       const {
@@ -11,12 +11,12 @@ export const GoogleLoginButton = ({ onReponse, onFailure }) => {
       } = payload;
       try {
         const json = await loginGoogle(email, tokenId);
-        onReponse(json);
+        onResponse(json);
       } catch (error) {
         onFailure(error);
       }
     },
-    [onReponse, onFailure]
+    [onResponse, onFailure]
   );
 
   const failedGoogle = useCallback(
@@ -36,3 +36,4 @@ export const GoogleLoginButton = ({ onReponse, onFailure }) => {
     />
   );
 };
+
