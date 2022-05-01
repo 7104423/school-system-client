@@ -3,17 +3,23 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./assets/style.css";
 import { validateUser } from "./utils/api";
-import { Dashboard } from "./views/Dashboard";
+import { Subjects } from "./views/Subjects";
 import { LoginView } from "./views/Login";
 import { WholePageLoader } from "./containers/WholePageLoader";
 import { ViewTrapProvider, ViewTrapRender } from "./components/viewtrap";
+import { useUser } from "./contexts/userContext";
+import { Topics } from "./views/Topics";
+import { DigitalContents } from "./views/DigitalContents";
+import { StudyProgrammes } from "./views/StudyProgrammes";
+import { Users } from "./views/Users";
 
 function App() {
   const [hasAccess, setAccess] = useState(null);
+  const user = useUser();
 
   useEffect(() => {
-    const storageToken = localStorage.getItem("token");
-    if (!storageToken) {
+    const token = user.getToken();
+    if (!token) {
       setAccess(false);
       return;
     }
@@ -25,7 +31,7 @@ function App() {
         setAccess(false);
       }
     })();
-  }, []);
+  }, [user]);
 
   return (
     <div className="App">
@@ -36,8 +42,21 @@ function App() {
             <Routes>
               {hasAccess && (
                 <>
-                  <Route exact path="/app" element={<Dashboard />} />
-                  <Route path="/app/*" element={<Dashboard />} />
+                  <Route exact path="/app" element={<Subjects />} />
+                  <Route exact path="/app/subjects" element={<Subjects />} />
+                  <Route exact path="/app/topics" element={<Topics />} />
+                  <Route
+                    exact
+                    path="/app/digital-contents"
+                    element={<DigitalContents />}
+                  />
+                  <Route
+                    exact
+                    path="/app/study-programmes"
+                    element={<StudyProgrammes />}
+                  />
+                  <Route exact path="/app/users" element={<Users />} />
+                  <Route path="/app/*" element={<Subjects />} />
                 </>
               )}
               <Route path="*" element={<LoginView />} />
