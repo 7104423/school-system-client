@@ -1,6 +1,6 @@
 import React from "react";
 import { Sidebar } from "../components/sidebar";
-import { DataGrid } from "@mui/x-data-grid";
+import { Table } from "../components/table";
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
@@ -43,16 +43,7 @@ export const Subjects = () => {
       <Sidebar active="subjects" />
       <div className="dash-view">
         <h2 className="view-heading">Subjects</h2>
-        <div
-          style={{ height: "100%", paddingBottom: "2rem", paddingTop: "2rem" }}
-        >
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            rowsPerPageOptions={[5, 10, 25, 100]}
-            checkboxSelection
-          />
-        </div>
+        <Table columns={columns} rows={rows} />
       </div>
     </div>
   );
