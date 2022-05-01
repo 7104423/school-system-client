@@ -15,8 +15,7 @@ export const LoginView = () => {
 
   const loginHandler = useCallback(
     ({ token, ...user }) => {
-      userContext.setToken(token);
-      userContext.setUser(user);
+      userContext.login(token, user);
       window.location.href = "/app";
     },
     [userContext]

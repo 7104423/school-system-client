@@ -19,8 +19,14 @@ export const UserProvider = ({ children }) => {
     return localStorage.setItem("token", token);
   };
 
-  const clearToken = () => {
+  const login = (token, user) => {
+    setToken(token);
+    setUser(user);
+  };
+
+  const logout = () => {
     localStorage.clear("token");
+    localStorage.clear("user");
   };
 
   return (
@@ -30,7 +36,8 @@ export const UserProvider = ({ children }) => {
         setUser,
         getToken,
         setToken,
-        clearToken,
+        login,
+        logout,
       }}
     >
       {children}

@@ -8,7 +8,7 @@ export const Sidebar = (props) => {
   const user = useUser();
 
   const handleSignOut = useCallback(() => {
-    user.clearToken();
+    user.logout();
     window.location.href = "/login";
   }, [user]);
 
