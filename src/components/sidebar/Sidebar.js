@@ -75,7 +75,10 @@ const UserProfileView = () => {
   const user = useUser();
 
   const fullName = useMemo(
-    () => `${user.getUser()?.name ?? ""} ${user.getUser()?.surname ?? ""}`,
+    () =>
+      `${user.getUser()?.user?.name ?? ""} ${
+        user.getUser()?.user?.surname ?? ""
+      }`,
     [user]
   );
 
