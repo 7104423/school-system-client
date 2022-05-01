@@ -1,10 +1,18 @@
 import React from "react";
 import { Sidebar } from "../components/sidebar";
 import { Table } from "../components/table";
+import { Link } from "react-router-dom";
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
-  { field: "firstName", headerName: "First name", width: 130 },
+  {
+    field: "firstName",
+    headerName: "First name",
+    renderCell: ({ row: { firstName } }) => (
+      <Link to="/app/subject">{firstName}</Link>
+    ),
+    width: 130,
+  },
   { field: "lastName", headerName: "Last name", width: 130 },
   {
     field: "age",

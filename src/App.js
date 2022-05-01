@@ -12,6 +12,7 @@ import { Topics } from "./views/Topics";
 import { DigitalContents } from "./views/DigitalContents";
 import { StudyProgrammes } from "./views/StudyProgrammes";
 import { Users } from "./views/Users";
+import { SubjectDetail } from "./views/SubjectDetail";
 
 function App() {
   const [hasAccess, setAccess] = useState(null);
@@ -44,6 +45,11 @@ function App() {
                 <>
                   <Route exact path="/app" element={<Subjects />} />
                   <Route exact path="/app/subjects" element={<Subjects />} />
+                  <Route
+                    exact
+                    path="/app/subject"
+                    element={<SubjectDetail />}
+                  />
                   <Route exact path="/app/topics" element={<Topics />} />
                   <Route
                     exact
