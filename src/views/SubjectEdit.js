@@ -5,12 +5,15 @@ import {
   Grid,
   MenuItem,
   TextField,
-  Typography,
 } from "@mui/material";
-import { Box } from "@mui/system";
-import FormDialog from "../components/dialog/FormDialog";
 import { Sidebar } from "../components/sidebar";
+import { Table } from "../components/table";
+import { digitalContentColumns } from "../config/columns/digitalContents";
+import { topicColumns } from "../config/columns/topics";
+import { subjectMockup } from "../mockups/subjects.mockup";
 import { top100Films } from "../mockups/top100films.mockup";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import { Link } from "react-router-dom";
 
 export const SubjectEdit = () => {
   return (
@@ -90,9 +93,7 @@ export const SubjectEdit = () => {
             </Grid>
             <Grid item xs={6}></Grid>
             <Grid item xs={12}>
-              <Button variant="contained" primary>
-                Submit
-              </Button>
+              <Button variant="contained">Submit</Button>
             </Grid>
           </Grid>
         </form>
@@ -100,8 +101,34 @@ export const SubjectEdit = () => {
           <Grid xs={12} item>
             <Divider variant="middle">Topics</Divider>
           </Grid>
-          <Grid xs={6}>
-            <FormDialog />
+          <Grid xs={6} item>
+            <Link target="_blank" to="/app/topic/add">
+              <Button
+                variant="outlined"
+                endIcon={<OpenInNewIcon fontSize="small" />}
+              >
+                Create Topic
+              </Button>
+            </Link>
+          </Grid>
+          <Grid height={500} xs={12} item>
+            <Table columns={topicColumns} rows={subjectMockup} />
+          </Grid>
+          <Grid xs={12} item>
+            <Divider variant="middle">Digital contents</Divider>
+          </Grid>
+          <Grid xs={6} item>
+            <Link target="_blank" to="/app/digital-content/add">
+              <Button
+                variant="outlined"
+                endIcon={<OpenInNewIcon fontSize="small" />}
+              >
+                Create Digital content
+              </Button>
+            </Link>
+          </Grid>
+          <Grid height={500} xs={12} item>
+            <Table columns={digitalContentColumns} rows={subjectMockup} />
           </Grid>
         </Grid>
       </div>

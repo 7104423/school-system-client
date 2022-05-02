@@ -234,3 +234,7 @@ th {
   color: #4834d4;
 }
 
+.MuiAutocomplete-popper {
+  z-index: 999999 !important;
+}
+
