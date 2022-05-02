@@ -45,11 +45,7 @@ function App() {
                 <>
                   <Route exact path="/app" element={<Subjects />} />
                   <Route exact path="/app/subjects" element={<Subjects />} />
-                  <Route
-                    exact
-                    path="/app/subject"
-                    element={<SubjectDetail />}
-                  />
+                  <Route path="/app/subject/:id" element={<SubjectDetail />} />
                   <Route exact path="/app/topics" element={<Topics />} />
                   <Route
                     exact

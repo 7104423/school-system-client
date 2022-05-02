@@ -32,7 +32,7 @@ export const SubjectDetail = () => {
     <div id="dashboard">
       <Sidebar active="subjects" />
       <div className="dash-view">
-        <h2 className="view-heading">Subjects</h2>
+        <h2 className="view-heading">Subject</h2>
         <FormLabel component="legend">Assign responsibility</FormLabel>
         <p>Checkbox group</p>
         <FormGroup>

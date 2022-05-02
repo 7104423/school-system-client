@@ -1,4 +1,4 @@
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 export const Table = ({ rows, columns }) => {
   return (
@@ -6,8 +6,9 @@ export const Table = ({ rows, columns }) => {
       <DataGrid
         rows={rows}
         columns={columns}
-        rowsPerPageOptions={[5, 10, 25, 100]}
-        checkboxSelection
+        pageSize={25}
+        rowsPerPageOptions={[25]}
+        components={{ Toolbar: GridToolbar }}
       />
     </div>
   );

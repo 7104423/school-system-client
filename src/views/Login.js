@@ -32,9 +32,9 @@ export const LoginView = () => {
         setIsLoaded(false);
         const response = await login(email, password);
         loginHandler(response);
-        setIsLoaded(true);
       } catch (error) {
         errorHandler(error);
+        setIsLoaded(true);
       }
     },
     [loginHandler, errorHandler]
