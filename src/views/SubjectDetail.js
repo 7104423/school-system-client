@@ -1,16 +1,22 @@
 import {
+  Button,
   Checkbox,
   FormControlLabel,
   FormGroup,
   FormHelperText,
   FormLabel,
+  Grid,
   Radio,
   RadioGroup,
   Switch,
   TextField,
 } from "@mui/material";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Sidebar } from "../components/sidebar";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 export const SubjectDetail = () => {
   const [state, setState] = useState({
@@ -32,7 +38,27 @@ export const SubjectDetail = () => {
     <div id="dashboard">
       <Sidebar active="subjects" />
       <div className="dash-view">
-        <h2 className="view-heading">Subject</h2>
+        <Grid container alignItems={"center"} spacing={"0.25rem"}>
+          <Grid item>
+            <h2 className="view-heading">Subject Title</h2>
+          </Grid>
+          <Grid item>
+            <Grid container py={"1rem"} spacing="0.25rem">
+              <Grid item>
+                <Link to="/app/subject/edit/123">
+                  <IconButton>
+                    <EditIcon fontSize="inherit" />
+                  </IconButton>
+                </Link>
+              </Grid>
+              <Grid item>
+                <IconButton>
+                  <DeleteIcon fontSize="inherit" />
+                </IconButton>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
         <FormLabel component="legend">Assign responsibility</FormLabel>
         <p>Checkbox group</p>
         <FormGroup>
