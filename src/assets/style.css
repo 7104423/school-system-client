@@ -102,15 +102,16 @@ body {
 /* App */
 #dashboard {
   display: flex;
-  height: 100vh;
+  align-items: stretch;
+  min-height: 100vh;
 }
 .sidebar-menu {
   text-align: center;
   align-items: center;
   background: white;
-  height: 100%;
+  bottom: 0;
   padding: 15px 0px 10px 0px;
-  flex: 1 1 300px;
+  width: 300px;
   overflow: hidden;
 }
 
@@ -232,9 +233,5 @@ th {
 .lg-nmbr {
   font-size: 3em;
   color: #4834d4;
-}
-
-.MuiAutocomplete-popper {
-  z-index: 999999 !important;
 }
 
