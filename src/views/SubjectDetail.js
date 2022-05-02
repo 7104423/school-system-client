@@ -1,4 +1,12 @@
-import { Button, Grid, TextField, Typography } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Button,
+  Grid,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Sidebar } from "../components/sidebar";
@@ -9,6 +17,13 @@ import { maa } from "../mockups/maa.mockup";
 
 export const SubjectDetail = () => {
   const { id } = useParams();
+
+  const [expanded, setExpanded] = useState(false);
+
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
+
   return (
     <div id="dashboard">
       <Sidebar active="subjects" />
@@ -55,6 +70,75 @@ export const SubjectDetail = () => {
           </Grid>
           <Grid item xs={6}>
             <strong>Study programme</strong>: Software development
+          </Grid>
+        </Grid>
+        <Grid mt={"1rem"} container flexDirection={"column"} spacing={"1rem"}>
+          <Grid item>
+            <Typography align="center" variant="h4">
+              Topics
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Accordion
+              expanded={expanded === "panel1"}
+              onChange={handleChange("panel1")}
+            >
+              <AccordionSummary
+                aria-controls="panel1d-content"
+                id="panel1d-header"
+              >
+                <Typography>Collapsible Group Item #1</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+                  eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+                  eget.
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              expanded={expanded === "panel2"}
+              onChange={handleChange("panel2")}
+            >
+              <AccordionSummary
+                aria-controls="panel2d-content"
+                id="panel2d-header"
+              >
+                <Typography>Collapsible Group Item #2</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+                  eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+                  eget.
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+            <Accordion
+              expanded={expanded === "panel3"}
+              onChange={handleChange("panel3")}
+            >
+              <AccordionSummary
+                aria-controls="panel3d-content"
+                id="panel3d-header"
+              >
+                <Typography>Collapsible Group Item #3</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+                  eget. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
+                  eget.
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
           </Grid>
         </Grid>
         <Grid mt={"1rem"} container flexDirection={"column"} spacing={"1rem"}>
