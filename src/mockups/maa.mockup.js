@@ -1,0 +1,1 @@
+export const maa = `V knize Matematická analýza se naučíte používat matematické nástroje potřebné k dalšímu studiu. Tato kniha je zaměřena zejména na práci s funkcemi. V přednáškách se dozvíte, jaké vlastnosti a vztahy matematické funkce mají, zatímco na seminářích se naučíte, jak to všechno počítat pro konkrétně zadané funkce.`;
