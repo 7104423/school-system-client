@@ -1,4 +1,14 @@
-import { Autocomplete, Button, Grid, MenuItem, TextField } from "@mui/material";
+import {
+  Autocomplete,
+  Button,
+  Divider,
+  Grid,
+  MenuItem,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { Box } from "@mui/system";
+import FormDialog from "../components/dialog/FormDialog";
 import { Sidebar } from "../components/sidebar";
 import { top100Films } from "../mockups/top100films.mockup";
 
@@ -79,13 +89,21 @@ export const SubjectEdit = () => {
               </TextField>
             </Grid>
             <Grid item xs={6}></Grid>
-            <Grid item alignItems={"end"}>
+            <Grid item xs={12}>
               <Button variant="contained" primary>
                 Submit
               </Button>
             </Grid>
           </Grid>
         </form>
+        <Grid container>
+          <Grid xs={12} item>
+            <Divider variant="middle">Topics</Divider>
+          </Grid>
+          <Grid xs={6}>
+            <FormDialog />
+          </Grid>
+        </Grid>
       </div>
     </div>
   );
