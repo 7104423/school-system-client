@@ -22,6 +22,12 @@ export const LoginView = () => {
   );
 
   const errorHandler = useCallback((error) => {
+    /**
+     * Error -> when user is not logged at google at all
+     */
+    if (error?.error === "idpiframe_initialization_failed") {
+      return;
+    }
     setErrorMessage(String(error));
     setIsLoaded(true);
   }, []);
