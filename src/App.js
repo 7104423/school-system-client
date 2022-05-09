@@ -13,7 +13,11 @@ import { DigitalContents } from "./views/DigitalContents";
 import { StudyProgrammes } from "./views/StudyProgrammes";
 import { Users } from "./views/Users";
 import { SubjectDetail } from "./views/SubjectDetail";
+import { DigitalContentDetail } from "./views/DigitalContentDetail";
 import { SubjectEdit } from "./views/SubjectEdit";
+import { TopicDetail } from "./views/TopicDetail";
+import { StudyProgrammeDetail } from "./views/StudyProgrammeDetail";
+import { UserDetail } from "./views/UserDetail";
 
 function App() {
   const [hasAccess, setAccess] = useState(null);
@@ -59,10 +63,21 @@ function App() {
                   />
                   <Route
                     exact
+                    path="/app/digital-content/:id"
+                    element={<DigitalContentDetail />}
+                  />
+                  <Route path="/app/topic/:id" element={<TopicDetail />} />
+                  <Route
+                    exact
                     path="/app/study-programmes"
                     element={<StudyProgrammes />}
                   />
+                  <Route
+                    path="/app/study-programme/:id"
+                    element={<StudyProgrammeDetail />}
+                  />
                   <Route exact path="/app/users" element={<Users />} />
+                  <Route path="/app/user/:id" element={<UserDetail />} />
                   <Route path="/app/*" element={<Subjects />} />
                 </>
               )}

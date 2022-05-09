@@ -9,7 +9,7 @@ export const Sidebar = (props) => {
 
   const handleSignOut = useCallback(() => {
     user.logout();
-    window.location.href = "/login";
+    window.location.href = "/app/login";
   }, [user]);
 
   return (
