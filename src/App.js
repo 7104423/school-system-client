@@ -18,6 +18,7 @@ import { SubjectEdit } from "./views/SubjectEdit";
 import { TopicDetail } from "./views/TopicDetail";
 import { StudyProgrammeDetail } from "./views/StudyProgrammeDetail";
 import { UserDetail } from "./views/UserDetail";
+import { SubjectAdd } from "./views/SubjectAdd";
 
 function App() {
   const [hasAccess, setAccess] = useState(null);
@@ -50,6 +51,7 @@ function App() {
                 <>
                   <Route exact path="/app" element={<Subjects />} />
                   <Route exact path="/app/subjects" element={<Subjects />} />
+                  <Route path="/app/subject/add" element={<SubjectAdd />} />
                   <Route
                     path="/app/subject/edit/:id"
                     element={<SubjectEdit />}
