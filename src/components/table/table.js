@@ -1,7 +1,6 @@
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 export const Table = ({ rows, columns }) => {
-  console.log(rows);
   return (
     <div style={{ height: "100%", paddingBottom: "2rem", paddingTop: "2rem" }}>
       <DataGrid
