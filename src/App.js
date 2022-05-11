@@ -20,6 +20,7 @@ import { StudyProgrammeDetail } from "./views/StudyProgrammeDetail";
 import { UserDetail } from "./views/UserDetail";
 import { SubjectAdd } from "./views/SubjectAdd";
 import { StudyProgrammeAdd } from "./views/StudyProgrammeAdd";
+import { StudyProgrammeEdit } from "./views/StudyProgrammeEdit";
 
 function App() {
   const [hasAccess, setAccess] = useState(null);
@@ -82,6 +83,10 @@ function App() {
                   <Route
                     path="/app/study-programme/add"
                     element={<StudyProgrammeAdd />}
+                  />
+                  <Route
+                    path="/app/study-programme/edit/:id"
+                    element={<StudyProgrammeEdit />}
                   />
                   <Route exact path="/app/users" element={<Users />} />
                   <Route path="/app/user/:id" element={<UserDetail />} />
