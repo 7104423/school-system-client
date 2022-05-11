@@ -1,11 +1,20 @@
+// MUI > Card > Media Control Card
+import { useTheme } from '@mui/material/styles';
+import CardMedia from '@mui/material/CardMedia';
+import IconButton from '@mui/material/IconButton';
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
+
+// MUI > Card > Multi Action Area Card
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
+import { Button, CardActionArea, CardActions } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
+// MUI > Kosťa
 import {
   Accordion,
   AccordionDetails,
@@ -19,47 +28,75 @@ import { useParams } from "react-router-dom";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
 import { Layout } from "../containers/Layout";
 
-const bull = (
-  <Box
-    component="span"
-    sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-  >
-    •
-  </Box>
-);
 
-const card = (
-  <React.Fragment>
-    <CardContent>
-      <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-        Word of the Day
-      </Typography>
-      <Typography variant="h5" component="div">
-        be{bull}nev{bull}o{bull}lent
-      </Typography>
-      <Typography sx={{ mb: 1.5}} color="text.secondary">
-        adjective
-      </Typography>
-      <Typography variant="body2">
-        well meaning and kindly.
-        <br />
-        {'"a benevolent smile"'}
-      </Typography>
-    </CardContent>
-    <CardActions>
-      <Button size="small">Learn More</Button>
-    </CardActions>
-  </React.Fragment>
-);
-
-export default function OutlinedCard() {
+// MUI > Card > // MUI > Card > Multi Action Area Card
+export function MultiActionAreaCard() {
   return (
-    <Box sx={{ minWidth: 275}}>
-      <Card variant="outlined" sx={{mx: "30px"}}>{card}</Card>
-    </Box>
+    <Card sx={{ maxWidth: 345, mx: "30px", my: "30px"  }}>
+      <CardActionArea>
+        <CardMedia
+          component="img"
+          height="140"
+          image="https://www.eurodiaconia.org/wordpress/wp-content/uploads/2017/01/education.jpg"
+          alt="Picture of book related iconography"
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Book4u
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Books are great for many reasons. The best one is that you never have them all. There is always at least one missing.
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary">
+          Share
+        </Button>
+      </CardActions>
+    </Card>
   );
 }
 
+
+// MUI > Card > Media Control Card
+export function MediaControlCard() {
+  const theme = useTheme();
+
+  return (
+    <Card sx={{ display: 'flex', mx: "30px", my: "30px" }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column'}}>
+        <CardContent sx={{ flex: '1 0 auto' }}>
+          <Typography component="div" variant="h5">
+            Video4u
+          </Typography>
+          <Typography variant="subtitle1" color="text.secondary" component="div">
+            Videos are great for speeding up learning process 
+          </Typography>
+        </CardContent>
+        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+          <IconButton aria-label="previous">
+            {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
+          </IconButton>
+          <IconButton aria-label="play/pause">
+            <PlayArrowIcon sx={{ height: 38, width: 38 }} />
+          </IconButton>
+          <IconButton aria-label="next">
+            {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
+          </IconButton>
+        </Box>
+      </Box>
+      <CardMedia
+        component="img"
+        sx={{ width: 151 }}
+        image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSr92KBak_uPbiCxAaCixCIg7nQ5AAaDUpSQ&usqp=CAU"
+        alt="Topic related video content"
+      />
+    </Card>
+  );
+}
+
+// Page Content
 export const TopicDetail = () => {
   const { id } = useParams();
 
@@ -68,6 +105,7 @@ export const TopicDetail = () => {
     setExpanded(newExpanded ? panel : false);
   };
 
+  // TopicDetail Data Grid
   return (
     <Layout active="topics">
       <ControlPanel title={"TopicDetail"} id={id} page={"topic"} />
@@ -120,7 +158,7 @@ export const TopicDetail = () => {
       </Grid>
       
       <br/>
-      
+      {/* Studijní materiály */}
       <Grid mt={"1rem"} container flexDirection={"column"} spacing={"1rem"}>
         
         <Grid item>
@@ -136,7 +174,7 @@ export const TopicDetail = () => {
         </Grid>
       
         <br/>
-      
+      {/* Online knihy */}
         <Grid item>
           <Typography align="left" variant="h4">
             Online knihy
@@ -164,37 +202,37 @@ export const TopicDetail = () => {
               </Typography>
               
               <br/>
-
+              {/* MUI > Card > Multi Action Area Card */}
               <Grid  container  sflexDirection={"row"}>
-                {/* OutlineCard */}
-                <Grid item xs={2}>
-                <OutlinedCard></OutlinedCard>
+                
+                <Grid item xs={3}>
+                <MultiActionAreaCard></MultiActionAreaCard>
                 </Grid>  
 
-                <Grid item xs={2}>
-                <OutlinedCard></OutlinedCard>
+                <Grid item xs={3}>
+                <MultiActionAreaCard></MultiActionAreaCard>
                 </Grid>  
 
-                <Grid item xs={2}>
-                <OutlinedCard></OutlinedCard>
+                <Grid item xs={3}>
+                <MultiActionAreaCard></MultiActionAreaCard>
                 </Grid>  
 
-                <Grid item xs={2}>
-                <OutlinedCard></OutlinedCard>
+                <Grid item xs={3}>
+                <MultiActionAreaCard></MultiActionAreaCard>
                 </Grid>  
 
-                <Grid item xs={2}>
-                <OutlinedCard></OutlinedCard>
+                <Grid item xs={3}>
+                <MultiActionAreaCard></MultiActionAreaCard>
                 </Grid>  
-
-
               </Grid>
+
             </AccordionDetails>
           </Accordion>
         </Grid>
             
       <br/>
-      
+
+      {/* Výuková videa */}
         <Grid item>
           <Typography align="left" variant="h4">
             Výuková videa
@@ -220,6 +258,32 @@ export const TopicDetail = () => {
                 Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
                 eget.
               </Typography>
+              
+              <br/>
+              {/* MUI > Card > Media Control Card */}
+              <Grid  container  sflexDirection={"row"}>
+                
+                <Grid item xs={3}>
+                <MediaControlCard></MediaControlCard>
+                </Grid>  
+
+                <Grid item xs={3}>
+                <MediaControlCard></MediaControlCard>
+                </Grid>  
+
+                <Grid item xs={3}>
+                <MediaControlCard></MediaControlCard>
+                </Grid>  
+
+                <Grid item xs={3}>
+                <MediaControlCard></MediaControlCard>
+                </Grid>  
+
+                <Grid item xs={3}>
+                <MediaControlCard></MediaControlCard>
+                </Grid>  
+              </Grid>
+              
             </AccordionDetails>
           </Accordion>
         </Grid>
