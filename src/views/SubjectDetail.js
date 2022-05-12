@@ -37,7 +37,6 @@ export const SubjectDetail = () => {
   };
 
   useEffect(() => {
-    console.log(contentID, id);
     if (contentID === id) return;
     fetchSubject();
     fetchTopic();
