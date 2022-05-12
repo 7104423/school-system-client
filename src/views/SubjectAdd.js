@@ -60,8 +60,8 @@ export const SubjectAdd = () => {
           </Grid>
           <Grid item xs={6}>
             <TextField fullWidth label="Degree" value="20" select>
-              <MenuItem value="BACHELOR">Bachelor</MenuItem>
-              <MenuItem value="MASTER">Master</MenuItem>
+              <MenuItem value="Bc.">Bachelor</MenuItem>
+              <MenuItem value="Mgr.">Master</MenuItem>
             </TextField>
           </Grid>
           <Grid item xs={6}>
