@@ -23,7 +23,7 @@ export const Topics = () => {
       <Layout active="topics">
         <h2 className="view-heading">Topics</h2>
         <Box mt={3}>
-          <Link to="/app/subject/add">
+          <Link to="/app/topic/add">
             <Button variant="outlined" startIcon={<Add fontSize="small" />}>
               Add subject
             </Button>

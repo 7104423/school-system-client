@@ -23,7 +23,7 @@ export const DigitalContents = () => {
       <Layout active="digital-contents">
         <h2 className="view-heading">Digital Contents</h2>
         <Box mt={3}>
-          <Link to="/app/subject/add">
+          <Link to="/app/digital-content/add">
             <Button variant="outlined" startIcon={<Add fontSize="small" />}>
               Add subject
             </Button>

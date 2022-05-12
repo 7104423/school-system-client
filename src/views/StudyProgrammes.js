@@ -23,7 +23,7 @@ export const StudyProgrammes = () => {
       <Layout active="study-programmes">
         <h2 className="view-heading">Study Programmes</h2>
         <Box mt={3}>
-          <Link to="/app/subject/add">
+          <Link to="/app/study-programme/add">
             <Button variant="outlined" startIcon={<Add fontSize="small" />}>
               Add subject
             </Button>
