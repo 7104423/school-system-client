@@ -24,7 +24,7 @@ export const DigitalContentDetail = () => {
           <strong>Digital Content Type</strong>:
         </Grid>
         <Grid item xs={4.5}>
-          Úvodní seznámení s proměnnými...
+          Nejaky Digital Content Type
         </Grid>
 
         <Grid item xs={1.5}></Grid>

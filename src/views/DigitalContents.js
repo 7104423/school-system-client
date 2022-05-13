@@ -25,7 +25,7 @@ export const DigitalContents = () => {
         <Box mt={3}>
           <Link to="/app/digital-content/add">
             <Button variant="outlined" startIcon={<Add fontSize="small" />}>
-              Add subject
+              Create Digital Content
             </Button>
           </Link>
         </Box>
@@ -34,4 +34,3 @@ export const DigitalContents = () => {
     </>
   );
 };
-
