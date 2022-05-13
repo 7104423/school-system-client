@@ -8,22 +8,22 @@ export const UserDetail = () => {
 
   return (
     <Layout active="users">
-      <ControlPanel title={"Nejaky titulek"} id={id} page={"user"} />
+      <ControlPanel title={"User Detail"} id={id} page={"user"} />
       <Grid container>
-        <Grid xs={6}>Email:</Grid>
-        <Grid xs={6}>dan@study.com</Grid>
-      </Grid>
-      <Grid container>
-        <Grid xs={6}>Name:</Grid>
+        <Grid xs={6}><strong>Name:</strong></Grid>
         <Grid xs={6}>Daniel</Grid>
       </Grid>
       <Grid container>
-        <Grid xs={6}>Surname:</Grid>
+        <Grid xs={6}><strong>Surname:</strong></Grid>
         <Grid xs={6}>Black</Grid>
       </Grid>
       <Grid container>
-        <Grid xs={6}>Role:</Grid>
+        <Grid xs={6}><strong>Role:</strong></Grid>
         <Grid xs={6}>Student</Grid>
+      </Grid>
+      <Grid container>
+        <Grid xs={6}> <strong>Email:</strong></Grid>
+        <Grid xs={6}>dan@study.com</Grid>
       </Grid>
     </Layout>
   );
