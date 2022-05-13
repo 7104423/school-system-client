@@ -22,6 +22,7 @@ import { SubjectAdd } from "./views/SubjectAdd";
 import { StudyProgrammeAdd } from "./views/StudyProgrammeAdd";
 import { StudyProgrammeEdit } from "./views/StudyProgrammeEdit";
 import { DigitalContentAdd } from "./views/DigitalContentAdd";
+import { DigitalContentEdit } from "./views/DigitalContentEdit";
 
 function App() {
   const [hasAccess, setAccess] = useState(null);
@@ -71,6 +72,11 @@ function App() {
                     exact
                     path="/app/digital-content/add"
                     element={<DigitalContentAdd />}
+                  />
+                  {/* Nova routa pro digital content edit */}
+                  <Route
+                    path="/app/digital-content/edit/:id"
+                    element={<DigitalContentEdit />}
                   />
                   <Route
                     exact

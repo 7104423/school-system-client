@@ -2,7 +2,7 @@ import { Autocomplete, Button, Grid, MenuItem, TextField } from "@mui/material";
 import { top100Films } from "../mockups/top100films.mockup";
 import { Layout } from "../containers/Layout";
 
-export const DigitalContentAdd = () => {
+export const DigitalContentEdit = () => {
   return (
     <Layout active="digital-contents">
       <form style={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
@@ -18,7 +18,7 @@ export const DigitalContentAdd = () => {
           <Grid item xs={12}>
             <TextField
               id="outlined-basic"
-              label="Link to new Digital Content"
+              label="Link to Digital Content"
               variant="outlined"
               fullWidth
             />
