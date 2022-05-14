@@ -25,7 +25,7 @@ export const StudyProgrammes = () => {
         <Box mt={3}>
           <Link to="/app/study-programme/add">
             <Button variant="outlined" startIcon={<Add fontSize="small" />}>
-              Add subject
+              Add study programme
             </Button>
           </Link>
         </Box>
