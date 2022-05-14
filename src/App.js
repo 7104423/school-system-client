@@ -10,6 +10,7 @@ import { LoginView } from "./views/Login";
 import { Users } from "./views/Users";
 import { UserDetail } from "./views/UserDetail";
 import { UserAdd } from "./views/UserAdd";
+import { UserEdit } from "./views/UserEdit";
 import { Subjects } from "./views/Subjects";
 import { SubjectDetail } from "./views/SubjectDetail";
 import { SubjectAdd } from "./views/SubjectAdd";
@@ -125,6 +126,10 @@ function App() {
                   <Route
                     path="/app/user/add"
                     element={<UserAdd />}
+                  />
+                  <Route
+                    path="/app/user/edit/:id"
+                    element={<UserEdit />}
                   />
                   <Route path="/app/*" element={<Subjects />} />
                 </>
