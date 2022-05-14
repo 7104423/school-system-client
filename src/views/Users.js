@@ -13,9 +13,9 @@ export const Users = () => {
       <h2 className="view-heading">Users</h2>
 
       <Box mt={3}>
-        <Link to="/app/subject/add">
+        <Link to="/app/user/add">
           <Button variant="outlined" startIcon={<Add fontSize="small" />}>
-            Add subject
+            Add user
           </Button>
         </Link>
       </Box>

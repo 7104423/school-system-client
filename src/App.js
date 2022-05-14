@@ -3,28 +3,29 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./assets/style.css";
 import { validateUser } from "./utils/api";
-import { Subjects } from "./views/Subjects";
-import { LoginView } from "./views/Login";
 import { WholePageLoader } from "./containers/WholePageLoader";
 import { ViewTrapProvider, ViewTrapRender } from "./components/viewtrap";
 import { useUser } from "./contexts/userContext";
+import { LoginView } from "./views/Login";
+import { Users } from "./views/Users";
+import { UserDetail } from "./views/UserDetail";
+import { UserAdd } from "./views/UserAdd";
+import { Subjects } from "./views/Subjects";
+import { SubjectDetail } from "./views/SubjectDetail";
+import { SubjectAdd } from "./views/SubjectAdd";
+import { SubjectEdit } from "./views/SubjectEdit";
 import { Topics } from "./views/Topics";
 import { TopicDetail } from "./views/TopicDetail";
 import { TopicAdd } from "./views/TopicAdd";
 import { TopicEdit } from "./views/TopicEdit";
 import { DigitalContents } from "./views/DigitalContents";
-import { StudyProgrammes } from "./views/StudyProgrammes";
-import { Users } from "./views/Users";
-import { SubjectDetail } from "./views/SubjectDetail";
 import { DigitalContentDetail } from "./views/DigitalContentDetail";
-import { SubjectEdit } from "./views/SubjectEdit";
-import { StudyProgrammeDetail } from "./views/StudyProgrammeDetail";
-import { UserDetail } from "./views/UserDetail";
-import { SubjectAdd } from "./views/SubjectAdd";
-import { StudyProgrammeAdd } from "./views/StudyProgrammeAdd";
-import { StudyProgrammeEdit } from "./views/StudyProgrammeEdit";
 import { DigitalContentAdd } from "./views/DigitalContentAdd";
 import { DigitalContentEdit } from "./views/DigitalContentEdit";
+import { StudyProgrammes } from "./views/StudyProgrammes";
+import { StudyProgrammeDetail } from "./views/StudyProgrammeDetail";
+import { StudyProgrammeAdd } from "./views/StudyProgrammeAdd";
+import { StudyProgrammeEdit } from "./views/StudyProgrammeEdit";
 
 function App() {
   const [hasAccess, setAccess] = useState(null);
@@ -113,8 +114,18 @@ function App() {
                     path="/app/study-programme/edit/:id"
                     element={<StudyProgrammeEdit />}
                   />
-                  <Route exact path="/app/users" element={<Users />} />
-                  <Route path="/app/user/:id" element={<UserDetail />} />
+                  <Route
+                    exact path="/app/users"
+                    element={<Users />}
+                  />
+                  <Route 
+                    path="/app/user/:id" 
+                    element={<UserDetail />} 
+                  />
+                  <Route
+                    path="/app/user/add"
+                    element={<UserAdd />}
+                  />
                   <Route path="/app/*" element={<Subjects />} />
                 </>
               )}
