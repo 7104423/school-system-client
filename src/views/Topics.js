@@ -25,7 +25,7 @@ export const Topics = () => {
         <Box mt={3}>
           <Link to="/app/topic/add">
             <Button variant="outlined" startIcon={<Add fontSize="small" />}>
-              Add subject
+              Add Topic
             </Button>
           </Link>
         </Box>

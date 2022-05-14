@@ -9,13 +9,15 @@ import { WholePageLoader } from "./containers/WholePageLoader";
 import { ViewTrapProvider, ViewTrapRender } from "./components/viewtrap";
 import { useUser } from "./contexts/userContext";
 import { Topics } from "./views/Topics";
+import { TopicDetail } from "./views/TopicDetail";
+import { TopicAdd } from "./views/TopicAdd";
+import { TopicEdit } from "./views/TopicEdit";
 import { DigitalContents } from "./views/DigitalContents";
 import { StudyProgrammes } from "./views/StudyProgrammes";
 import { Users } from "./views/Users";
 import { SubjectDetail } from "./views/SubjectDetail";
 import { DigitalContentDetail } from "./views/DigitalContentDetail";
 import { SubjectEdit } from "./views/SubjectEdit";
-import { TopicDetail } from "./views/TopicDetail";
 import { StudyProgrammeDetail } from "./views/StudyProgrammeDetail";
 import { UserDetail } from "./views/UserDetail";
 import { SubjectAdd } from "./views/SubjectAdd";
@@ -83,7 +85,17 @@ function App() {
                     path="/app/digital-content/:id"
                     element={<DigitalContentDetail />}
                   />
-                  <Route path="/app/topic/:id" element={<TopicDetail />} />
+                  <Route
+                    exact
+                    path="/app/topic/add"
+                    element={<TopicAdd />}
+                  />
+                  <Route
+                    path="/app/topic/edit/:id"
+                    element={<TopicEdit />}
+                  />
+                  <Route path="/app/topic/:id" 
+                    element={<TopicDetail />} />
                   <Route
                     exact
                     path="/app/study-programmes"
