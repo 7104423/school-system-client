@@ -16,17 +16,14 @@ import { WholePageLoader } from "../containers/WholePageLoader";
 export const SubjectDetail = () => {
   const { id } = useParams();
 
-  const {
-    isLoaded: isSubjectLoaded,
-    contentID,
-    data: subjectData,
-    fetch: fetchSubject,
-  } = useContent("subject", id);
-  const {
-    isLoaded: isSubjectTopicsLoaded,
-    data: subjectTopicData,
-    fetch: fetchTopic,
-  } = useContent("subjectTopics", id);
+  const [isSubjectLoaded, subjectData, fetchSubject, contentID] = useContent(
+    "subject",
+    id
+  );
+  const [isSubjectTopicsLoaded, subjectTopicData, fetchTopic] = useContent(
+    "subjectTopics",
+    id
+  );
 
   const isLoaded = isSubjectLoaded && isSubjectTopicsLoaded;
 
@@ -96,6 +93,11 @@ export const SubjectDetail = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>{topic.description}</Typography>
+                  <ul>
+                    {topic?.contents?.map((content) => (
+                      <div>{Object.entries(content)}</div>
+                    ))}
+                  </ul>
                 </AccordionDetails>
               </Accordion>
             ))}
@@ -122,4 +124,3 @@ export const SubjectDetail = () => {
     </>
   );
 };
-

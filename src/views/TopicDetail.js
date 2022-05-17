@@ -1,18 +1,18 @@
 // MUI > Card > Media Control Card
-import { useTheme } from '@mui/material/styles';
-import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
+import React, { useEffect } from "react";
+import { useTheme } from "@mui/material/styles";
+import CardMedia from "@mui/material/CardMedia";
+import IconButton from "@mui/material/IconButton";
+import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import SkipNextIcon from "@mui/icons-material/SkipNext";
 
 // MUI > Card > Multi Action Area Card
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import { Button, CardActionArea, CardActions } from '@mui/material';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import { Button, CardActionArea, CardActions } from "@mui/material";
+import Typography from "@mui/material/Typography";
 
 // MUI > Kosťa
 import {
@@ -24,15 +24,17 @@ import {
 } from "@mui/material";
 
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
 import { Layout } from "../containers/Layout";
-
+import { useContent } from "../hooks/useContent";
+import { ViewTrap } from "../components/viewtrap";
+import { WholePageLoader } from "../containers/WholePageLoader";
 
 // MUI > Card > // MUI > Card > Multi Action Area Card
 export function MultiActionAreaCard() {
   return (
-    <Card sx={{ maxWidth: 345, mx: "30px", my: "30px"  }}>
+    <Card sx={{ maxWidth: 345, mx: "30px", my: "30px" }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -45,7 +47,8 @@ export function MultiActionAreaCard() {
             Book4u
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Books are great for many reasons. The best one is that you never have them all. There is always at least one missing.
+            Books are great for many reasons. The best one is that you never
+            have them all. There is always at least one missing.
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -58,31 +61,42 @@ export function MultiActionAreaCard() {
   );
 }
 
-
 // MUI > Card > Media Control Card
 export function MediaControlCard() {
   const theme = useTheme();
 
   return (
-    <Card sx={{ display: 'flex', mx: "30px", my: "30px" }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column'}}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
+    <Card sx={{ display: "flex", mx: "30px", my: "30px" }}>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <CardContent sx={{ flex: "1 0 auto" }}>
           <Typography component="div" variant="h5">
             Video4u
           </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            Videos are great for speeding up learning process 
+          <Typography
+            variant="subtitle1"
+            color="text.secondary"
+            component="div"
+          >
+            Videos are great for speeding up learning process
           </Typography>
         </CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+        <Box sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}>
           <IconButton aria-label="previous">
-            {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
+            {theme.direction === "rtl" ? (
+              <SkipNextIcon />
+            ) : (
+              <SkipPreviousIcon />
+            )}
           </IconButton>
           <IconButton aria-label="play/pause">
             <PlayArrowIcon sx={{ height: 38, width: 38 }} />
           </IconButton>
           <IconButton aria-label="next">
-            {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
+            {theme.direction === "rtl" ? (
+              <SkipPreviousIcon />
+            ) : (
+              <SkipNextIcon />
+            )}
           </IconButton>
         </Box>
       </Box>
@@ -99,68 +113,45 @@ export function MediaControlCard() {
 // Page Content
 export const TopicDetail = () => {
   const { id } = useParams();
+  const [isLoaded, data, fetch, contentID] = useContent("topic", id);
 
   const [expanded, setExpanded] = useState(false);
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
 
+  useEffect(() => {
+    if (contentID === id) return;
+    fetch();
+  }, [id]);
+
+  console.log(data);
+
   // TopicDetail Data Grid
   return (
     <Layout active="topics">
-      <ControlPanel title={"TopicDetail"} id={id} page={"topic"} />
+      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
+      <ControlPanel title={data?.name} id={id} page={"topic"} />
 
       <Grid justifyContent={"end"} container spacing={2}>
         <Grid item xs={12}>
-          <p>Toto je mockup text pouze pro účely nastavení front-endu. Mohlo by zde být lorem ipsum, ale to by bylo suchý...</p>
-          <br></br>
+          <p>{data?.description}</p>
         </Grid>
-        <Grid item xs={1.5}>
-          <strong>Name</strong>:
+        <Grid item xs={6}>
+          <strong>Subject</strong>:
         </Grid>
-        <Grid item xs={4.5}>
-          Proměnné v JavaScript
+        <Grid item xs={6}>
+          {data?.subject && (
+            <Link to={`/app/subject/${data.subject._id}`}>
+              {data.subject.name}
+            </Link>
+          )}
         </Grid>
-
-        <Grid item xs={1.5}></Grid>
-        <Grid item xs={4.5}></Grid>
-
-        <Grid item xs={1.5}>
-          <strong>Description</strong>: 
-        </Grid>
-        <Grid item xs={4.5}>
-          Úvodní seznámení s proměnnými...
-        </Grid>
-
-        <Grid item xs={1.5}></Grid>
-        <Grid item xs={4.5}></Grid>
-
-        <Grid item xs={1.5}>
-          <strong>Topic ID</strong>: 
-        </Grid>
-        <Grid item xs={4.5}>
-          a6892c0031bf3
-        </Grid>
-
-        <Grid item xs={1.5}></Grid>
-        <Grid item xs={4.5}></Grid>
-
-        <Grid item xs={1.5}>
-          <strong>Subject</strong>: 
-        </Grid>
-        <Grid item xs={4.5}>
-          919a42baf4a41
-        </Grid>
-
-        <Grid item xs={1.5}></Grid>
-        <Grid item xs={4.5}></Grid>
-        
       </Grid>
-      
-      <br/>
+
+      <br />
       {/* Studijní materiály */}
       <Grid mt={"1rem"} container flexDirection={"column"} spacing={"1rem"}>
-        
         <Grid item>
           <Typography align="left" variant="h3">
             Studijní materiály k tématu
@@ -169,18 +160,18 @@ export const TopicDetail = () => {
 
         <Grid item>
           <Typography>
-            Zde naleznete seznam studijních materiálů pro dané téma / Topic...
+            Zde naleznete seznam studijních materiálů pro dané téma
           </Typography>
         </Grid>
-      
-        <br/>
-      {/* Online knihy */}
+
+        <br />
+        {/* Online knihy */}
         <Grid item>
           <Typography align="left" variant="h4">
             Online knihy
           </Typography>
         </Grid>
-        
+
         <Grid item>
           <Accordion
             expanded={expanded === "panel1"}
@@ -200,39 +191,37 @@ export const TopicDetail = () => {
                 Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
                 eget.
               </Typography>
-              
-              <br/>
+
+              <br />
               {/* MUI > Card > Multi Action Area Card */}
-              <Grid  container  sflexDirection={"row"}>
-                
+              <Grid container sflexDirection={"row"}>
                 <Grid item xs={3}>
-                <MultiActionAreaCard></MultiActionAreaCard>
-                </Grid>  
+                  <MultiActionAreaCard></MultiActionAreaCard>
+                </Grid>
 
                 <Grid item xs={3}>
-                <MultiActionAreaCard></MultiActionAreaCard>
-                </Grid>  
+                  <MultiActionAreaCard></MultiActionAreaCard>
+                </Grid>
 
                 <Grid item xs={3}>
-                <MultiActionAreaCard></MultiActionAreaCard>
-                </Grid>  
+                  <MultiActionAreaCard></MultiActionAreaCard>
+                </Grid>
 
                 <Grid item xs={3}>
-                <MultiActionAreaCard></MultiActionAreaCard>
-                </Grid>  
+                  <MultiActionAreaCard></MultiActionAreaCard>
+                </Grid>
 
                 <Grid item xs={3}>
-                <MultiActionAreaCard></MultiActionAreaCard>
-                </Grid>  
+                  <MultiActionAreaCard></MultiActionAreaCard>
+                </Grid>
               </Grid>
-
             </AccordionDetails>
           </Accordion>
         </Grid>
-            
-      <br/>
 
-      {/* Výuková videa */}
+        <br />
+
+        {/* Výuková videa */}
         <Grid item>
           <Typography align="left" variant="h4">
             Výuková videa
@@ -258,50 +247,46 @@ export const TopicDetail = () => {
                 Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
                 eget.
               </Typography>
-              
-              <br/>
+
+              <br />
               {/* MUI > Card > Media Control Card */}
-              <Grid  container  sflexDirection={"row"}>
-                
+              <Grid container sflexDirection={"row"}>
                 <Grid item xs={3}>
-                <MediaControlCard></MediaControlCard>
-                </Grid>  
+                  <MediaControlCard></MediaControlCard>
+                </Grid>
 
                 <Grid item xs={3}>
-                <MediaControlCard></MediaControlCard>
-                </Grid>  
+                  <MediaControlCard></MediaControlCard>
+                </Grid>
 
                 <Grid item xs={3}>
-                <MediaControlCard></MediaControlCard>
-                </Grid>  
+                  <MediaControlCard></MediaControlCard>
+                </Grid>
 
                 <Grid item xs={3}>
-                <MediaControlCard></MediaControlCard>
-                </Grid>  
+                  <MediaControlCard></MediaControlCard>
+                </Grid>
 
                 <Grid item xs={3}>
-                <MediaControlCard></MediaControlCard>
-                </Grid>  
+                  <MediaControlCard></MediaControlCard>
+                </Grid>
               </Grid>
-              
             </AccordionDetails>
           </Accordion>
         </Grid>
-            
-      <br/>
-      
+
+        <br />
       </Grid>
     </Layout>
   );
 };
 
-
-  // Application Model
-  // ------------------------------------------------------------------------
-  // const topicSchema = {
-  //   id: "a6892c0031bf3", // topic ID; required; unique
-  //   name: "Proměnné v JavaScript", // topic name; required; unique
-  //   description: "Úvodní seznámení s proměnnými...", // topic description
-  //   subject: "919a42baf4a41" // subject ID; required
-  // };
-  // ------------------------------------------------------------------------
+// Application Model
+// ------------------------------------------------------------------------
+// const topicSchema = {
+//   id: "a6892c0031bf3", // topic ID; required; unique
+//   name: "Proměnné v JavaScript", // topic name; required; unique
+//   description: "Úvodní seznámení s proměnnými...", // topic description
+//   subject: "919a42baf4a41" // subject ID; required
+// };
+// ------------------------------------------------------------------------

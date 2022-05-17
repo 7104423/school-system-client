@@ -1,72 +1,70 @@
 import { Grid } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
+import { ViewTrap } from "../components/viewtrap";
 import { Layout } from "../containers/Layout";
+import { WholePageLoader } from "../containers/WholePageLoader";
+import { useContent } from "../hooks/useContent";
 
 export const DigitalContentDetail = () => {
   const { id } = useParams();
+
+  const [isLoaded, data, fetch] = useContent("digitalContent", id);
+
+  useEffect(() => {
+    if (isLoaded) return;
+    fetch();
+  }, []);
+
+  console.log(data);
+
   return (
-    <Layout active="digital-content">
+    <Layout active="digital-contents">
+      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <ControlPanel
         title={"Digital Content Detail"}
         id={id}
         page={"digital-content"}
       />
       <Grid justifyContent={"end"} container spacing={2}>
-        <Grid item xs={12}>
-          <p>
-            Toto je mockup text pouze pro účely nastavení front-endu. Mohlo by
-            zde být lorem ipsum, ale to by bylo suchý...
-          </p>
-          <br></br>
-        </Grid>
-        <Grid item xs={1.5}>
+        <Grid item xs={6}>
           <strong>Digital Content Type</strong>:
         </Grid>
-        <Grid item xs={4.5}>
-          Nejaky Digital Content Type
+        <Grid item xs={6}>
+          {data?.type}
         </Grid>
 
-        <Grid item xs={1.5}></Grid>
-        <Grid item xs={4.5}></Grid>
-
-        <Grid item xs={1.5}>
-          <strong>Digital Content ID</strong>:
+        <Grid item xs={6}>
+          <strong>Digital Content Value</strong>:
         </Grid>
-        <Grid item xs={4.5}>
-          a6892c0031bf3
+        <Grid item xs={6}>
+          {data?.content && (
+            <a target="_blank" href={data?.content} rel="noreferrer">
+              LINK
+            </a>
+          )}
         </Grid>
-
-        <Grid item xs={1.5}></Grid>
-        <Grid item xs={4.5}></Grid>
-
-        <Grid item xs={1.5}>
-          <strong>Link to Digital Content</strong>:
-        </Grid>
-        <Grid item xs={4.5}>
-          919a42baf4a41
-        </Grid>
-
-        <Grid item xs={1.5}></Grid>
-        <Grid item xs={4.5}></Grid>
-        <Grid item xs={1.5}>
+        <Grid item xs={6}>
           <strong>Subject</strong>:
         </Grid>
-        <Grid item xs={4.5}>
-          a6892c0031bf3
+        <Grid item xs={6}>
+          {data?.subject && (
+            <Link to={`/app/subject/${data?.subject?._id}`}>
+              {data?.subject?.name}
+            </Link>
+          )}
         </Grid>
-
-        <Grid item xs={1.5}></Grid>
-        <Grid item xs={4.5}></Grid>
-        <Grid item xs={1.5}>
+        <Grid item xs={6}>
           <strong>Topic</strong>:
         </Grid>
-        <Grid item xs={4.5}>
-          a6892c0031bf3
+        <Grid item xs={6}>
+          {data?.topic && (
+            <Link to={`/app/subject/${data?.topic?._id}`}>
+              {data?.topic?.name}
+            </Link>
+          )}
         </Grid>
-
-        <Grid item xs={1.5}></Grid>
-        <Grid item xs={4.5}></Grid>
       </Grid>
     </Layout>
   );

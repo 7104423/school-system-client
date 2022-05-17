@@ -10,7 +10,7 @@ import { ViewTrap } from "../components/viewtrap";
 import { WholePageLoader } from "../containers/WholePageLoader";
 
 export const Topics = () => {
-  const { isLoaded, data, fetch } = useContent("topics");
+  const [isLoaded, data, fetch] = useContent("topics");
 
   useEffect(() => {
     if (isLoaded) return;
@@ -34,4 +34,3 @@ export const Topics = () => {
     </>
   );
 };
-

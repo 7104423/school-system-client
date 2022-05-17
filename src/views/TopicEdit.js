@@ -8,7 +8,6 @@ export const TopicEdit = () => {
       <h2 className="view-heading">Edit Topic</h2>
       <form style={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
         <Grid justifyContent={"end"} container spacing={2}>
-    
           <Grid item xs={12}>
             <TextField
               id="outlined-basic"
@@ -35,7 +34,7 @@ export const TopicEdit = () => {
               renderInput={(params) => (
                 <TextField fullWidth {...params} label="Subject" />
               )}
-            />          
+            />
           </Grid>
           <Grid item xs={6}>
             <TextField fullWidth label="Language" value="20" select>
@@ -43,14 +42,12 @@ export const TopicEdit = () => {
               <MenuItem value="EN">English</MenuItem>
             </TextField>
           </Grid>
-                    
+
           <Grid item xs={12}>
             <Button variant="contained">Submit</Button>
           </Grid>
-
         </Grid>
       </form>
     </Layout>
   );
 };
-

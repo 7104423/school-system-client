@@ -9,6 +9,10 @@ import {
   fetchStudyProgrammes,
   fetchUsers,
   fetchSubjectTopics,
+  fetchTopic,
+  fetchDigitalContent,
+  fetchStudyProgramme,
+  fetchUser,
 } from "../utils/api";
 
 const contentMap = {
@@ -19,6 +23,10 @@ const contentMap = {
   digitalContents: fetchDigitalContents,
   studyProgrammes: fetchStudyProgrammes,
   users: fetchUsers,
+  topic: fetchTopic,
+  digitalContent: fetchDigitalContent,
+  studyProgramme: fetchStudyProgramme,
+  user: fetchUser,
 };
 
 export const useContent = (contentName = "subjects", id) => {
@@ -57,11 +65,5 @@ export const useContent = (contentName = "subjects", id) => {
     }
   }, [dispatch, contentName, id]);
 
-  return {
-    isLoaded,
-    data,
-    contentID,
-    fetch,
-  };
+  return [isLoaded, data, fetch, contentID];
 };
-

@@ -10,7 +10,7 @@ import { ViewTrap } from "../components/viewtrap";
 import { WholePageLoader } from "../containers/WholePageLoader";
 
 export const DigitalContents = () => {
-  const { isLoaded, data, fetch } = useContent("digitalContents");
+  const [isLoaded, data, fetch] = useContent("digitalContents");
 
   useEffect(() => {
     if (isLoaded) return;

@@ -74,3 +74,18 @@ export const fetchUsers = async () => {
   return await fetchJSON(`${url}/api/user/list`);
 };
 
+export const fetchTopic = async (id) => {
+  return await fetchJSON(`${url}/api/topic/${id}`);
+};
+
+export const fetchDigitalContent = async (id) => {
+  return await fetchJSON(`${url}/api/content/${id}`);
+};
+
+export const fetchStudyProgramme = async (id) => {
+  return await fetchJSON(`${url}/api/study-programme/${id}`);
+};
+
+export const fetchUser = async (id) => {
+  return await fetchJSON(`${url}/api/user/${id}`);
+};

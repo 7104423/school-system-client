@@ -12,7 +12,7 @@ export const topicColumns = [
   {
     field: "subject",
     headerName: "Subject",
+    valueGetter: (params) => params.row.subject?.name,
     flex: 1,
   },
 ];
-

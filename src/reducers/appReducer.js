@@ -19,6 +19,9 @@ export const appInitialState = {
   topics: defaultInitialState,
   digitalContents: defaultInitialState,
   studyProgrammes: defaultInitialState,
+  topic: defaultInitialState,
+  digitalContent: defaultInitialState,
+  studyProgramme: defaultInitialState,
+  user: defaultInitialState,
   users: defaultInitialState,
 };
-

@@ -1,36 +1,59 @@
 import { Grid } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
+import { ViewTrap } from "../components/viewtrap";
 import { Layout } from "../containers/Layout";
+import { WholePageLoader } from "../containers/WholePageLoader";
+import { useContent } from "../hooks/useContent";
 
 export const StudyProgrammeDetail = () => {
   const { id } = useParams();
 
+  const [isLoaded, data, fetch] = useContent("studyProgramme", id);
+
+  useEffect(() => {
+    if (isLoaded) return;
+    fetch();
+  }, []);
+
   return (
     <Layout active="study-programmes">
-      
-      <ControlPanel title={"Software development"} id={id} page={"study-programme"} />
-      
+      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
+      <ControlPanel title={data?.name} id={id} page={"study-programme"} />
+
       <Grid justifyContent={"end"} container spacing={2}>
-
         <Grid item xs={12}>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce blandit tempor pharetra. Nulla rhoncus mauris molestie dolor sodales, et tempus leo pretium. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Fusce semper bibendum nibh, a molestie diam molestie eu. Maecenas lobortis blandit quam, a elementum est placerat nec. Aenean id tellus mi. In elementum convallis odio, eget congue tortor pulvinar non. Mauris scelerisque dolor in erat facilisis, consequat rhoncus ex tempus.</p>
+          <p>{data?.description}</p>
         </Grid>
 
         <Grid item xs={6}>
-          <strong>Supervisor</strong>: Zdeněk Zelinger
+          <strong>Supervisor</strong>:{" "}
+          <Link
+            to={`/app/user/${data?.supervisor?._id}`}
+          >{`${data?.supervisor?.name} ${data?.supervisor?.surname}`}</Link>
         </Grid>
 
         <Grid item xs={6}>
-          <strong>Degree</strong>: Master
+          <strong>Degree</strong>: {data?.degree}
         </Grid>
 
         <Grid item xs={12}>
-          <strong>Students</strong>: John Smith, Tamara Johanson, Marty Williams, Jakc Brown, Lily Jones, Anthony Garcia, Kevin Miller, Tom Davis, Patricia Martinez, Jenifer Lopez, Justin Wilson, Michale Anderson
+          <strong>Students</strong>:{" "}
+          {data?.students?.map((student, index) => (
+            <>
+              {student?.name && (
+                <>
+                  <Link
+                    to={`/app/user/${student?._id}`}
+                  >{`${student?.name} ${student?.surname}`}</Link>
+                  {index !== data.students.length - 1 && ", "}
+                </>
+              )}
+            </>
+          ))}
         </Grid>
-      
       </Grid>
-
     </Layout>
   );
 };
