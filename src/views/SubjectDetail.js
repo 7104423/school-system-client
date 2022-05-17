@@ -12,6 +12,7 @@ import { ControlPanel } from "../components/control-panel/ControlPanel";
 import { useContent } from "../hooks/useContent";
 import { ViewTrap } from "../components/viewtrap";
 import { WholePageLoader } from "../containers/WholePageLoader";
+import { ContentCard } from "../components/card/ContentCard";
 
 export const SubjectDetail = () => {
   const { id } = useParams();
@@ -145,7 +146,14 @@ export const SubjectDetail = () => {
             ))}
           </Grid>
         </Grid>
-        <Grid mt={"1rem"} container flexDirection={"column"} spacing={"1rem"}>
+        <Grid
+          mt={"1rem"}
+          container
+          flexDirection={"column"}
+          alignItems={"start"}
+          justifyContent={"start"}
+          spacing={"1rem"}
+        >
           <Grid item>
             <Typography align="center" variant="h3">
               Studijní materiály
@@ -155,10 +163,12 @@ export const SubjectDetail = () => {
             <Typography align="center" variant="h4">
               Online knihy
             </Typography>
+          </Grid>
+          <Grid xs={12} item>
             <Grid container>
               {contentMap["Unicorn University link"]?.map((content) => (
-                <Grid xs={4} item>
-                  {Object.entries(content)}
+                <Grid xs={3} item>
+                  <ContentCard {...content} />
                 </Grid>
               ))}
             </Grid>
@@ -167,12 +177,10 @@ export const SubjectDetail = () => {
             <Typography align="center" variant="h4">
               Výuková videa
             </Typography>
+          </Grid>
+          <Grid item>
             <Grid container>
-              {contentMap["YouTube link"]?.map((content) => (
-                <Grid xs={4} item>
-                  {Object.entries(content)}
-                </Grid>
-              ))}
+              <Grid xs={4} item></Grid>
             </Grid>
           </Grid>
         </Grid>

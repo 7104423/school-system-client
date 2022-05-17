@@ -30,36 +30,7 @@ import { Layout } from "../containers/Layout";
 import { useContent } from "../hooks/useContent";
 import { ViewTrap } from "../components/viewtrap";
 import { WholePageLoader } from "../containers/WholePageLoader";
-
-// MUI > Card > // MUI > Card > Multi Action Area Card
-export function MultiActionAreaCard() {
-  return (
-    <Card sx={{ maxWidth: 345, mx: "30px", my: "30px" }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image="https://www.eurodiaconia.org/wordpress/wp-content/uploads/2017/01/education.jpg"
-          alt="Picture of book related iconography"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Book4u
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Books are great for many reasons. The best one is that you never
-            have them all. There is always at least one missing.
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-      </CardActions>
-    </Card>
-  );
-}
+import { ContentCard } from "../components/card/ContentCard";
 
 // MUI > Card > Media Control Card
 export function MediaControlCard() {
@@ -195,24 +166,8 @@ export const TopicDetail = () => {
               <br />
               {/* MUI > Card > Multi Action Area Card */}
               <Grid container sflexDirection={"row"}>
-                <Grid item xs={3}>
-                  <MultiActionAreaCard></MultiActionAreaCard>
-                </Grid>
-
-                <Grid item xs={3}>
-                  <MultiActionAreaCard></MultiActionAreaCard>
-                </Grid>
-
-                <Grid item xs={3}>
-                  <MultiActionAreaCard></MultiActionAreaCard>
-                </Grid>
-
-                <Grid item xs={3}>
-                  <MultiActionAreaCard></MultiActionAreaCard>
-                </Grid>
-
-                <Grid item xs={3}>
-                  <MultiActionAreaCard></MultiActionAreaCard>
+                <Grid item xs={4}>
+                  <ContentCard />
                 </Grid>
               </Grid>
             </AccordionDetails>
