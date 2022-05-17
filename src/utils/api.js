@@ -58,6 +58,10 @@ export const fetchSubjectTopics = async (id) => {
   return await fetchJSON(`${url}/api/subject/${id}/topics`);
 };
 
+export const fetchSubjectContents = async (id) => {
+  return await fetchJSON(`${url}/api/subject/${id}/contents`);
+};
+
 export const fetchTopics = async () => {
   return await fetchJSON(`${url}/api/topic/list`);
 };

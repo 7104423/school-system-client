@@ -1,6 +1,5 @@
 import { useCallback, useEffect } from "react";
 import { useApp } from "../contexts/appContext";
-import { defaultInitialState } from "../reducers/defaultContentReducer";
 import {
   fetchSubjects,
   fetchSubject,
@@ -13,12 +12,14 @@ import {
   fetchDigitalContent,
   fetchStudyProgramme,
   fetchUser,
+  fetchSubjectContents,
 } from "../utils/api";
 
 const contentMap = {
   subjects: fetchSubjects,
   subject: fetchSubject,
   subjectTopics: fetchSubjectTopics,
+  subjectContents: fetchSubjectContents,
   topics: fetchTopics,
   digitalContents: fetchDigitalContents,
   studyProgrammes: fetchStudyProgrammes,

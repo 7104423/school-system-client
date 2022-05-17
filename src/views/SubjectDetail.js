@@ -5,8 +5,8 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Layout } from "../containers/Layout";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
 import { useContent } from "../hooks/useContent";
@@ -20,12 +20,16 @@ export const SubjectDetail = () => {
     "subject",
     id
   );
-  const [isSubjectTopicsLoaded, subjectTopicData, fetchTopic] = useContent(
+  const [isTopicsLoaded, topicData, fetchTopic] = useContent(
     "subjectTopics",
     id
   );
+  const [isContentsLoaded, contentData, fetchContents] = useContent(
+    "subjectContents",
+    id
+  );
 
-  const isLoaded = isSubjectLoaded && isSubjectTopicsLoaded;
+  const isLoaded = isSubjectLoaded && isTopicsLoaded && isContentsLoaded;
 
   const [expanded, setExpanded] = useState(false);
 
@@ -33,10 +37,21 @@ export const SubjectDetail = () => {
     setExpanded(newExpanded ? panel : false);
   };
 
+  const contentMap = useMemo(() => {
+    return contentData.reduce((acc, content) => {
+      if (!acc[content.type]) {
+        acc[content.type] = [];
+      }
+      acc[content.type].push(content);
+      return acc;
+    }, {});
+  }, [contentData]);
+
   useEffect(() => {
     if (contentID === id) return;
     fetchSubject();
     fetchTopic();
+    fetchContents();
   }, [id]);
 
   return (
@@ -50,16 +65,39 @@ export const SubjectDetail = () => {
           </Grid>
           <Grid item xs={6}>
             <strong>Supervisor</strong>:{" "}
-            {`${subjectData?.supervisor?.name} ${subjectData?.supervisor?.surname}`}
+            {subjectData?.supervisor && (
+              <Link
+                to={`/app/user/${subjectData?.supervisor?._id}`}
+              >{`${subjectData?.supervisor?.name} ${subjectData?.supervisor?.surname}`}</Link>
+            )}
           </Grid>
           <Grid item xs={6}>
             <strong>Teachers</strong>:{" "}
-            {subjectData?.teachers
-              ?.map((t) => `${t.name} ${t.surname}`)
-              ?.join(", ")}
+            {subjectData?.teachers &&
+              subjectData?.teachers?.map((t, index, arr) => (
+                <>
+                  <Link
+                    to={`/app/user/${t?._id}`}
+                  >{`${t.name} ${t.surname}`}</Link>
+                  {index !== arr.length - 1 && ", "}
+                </>
+              ))}
           </Grid>
           <Grid item xs={6}>
-            <strong>Students</strong>: Konstantin Kožokar
+            <strong>Students</strong>:{" "}
+            {subjectData?.studyProgramme &&
+              subjectData?.studyProgramme?.students?.map((s, index, arr) => (
+                <>
+                  {s.name && (
+                    <>
+                      <Link
+                        to={`/app/user/${s._id}`}
+                      >{`${s.name} ${s.surname}`}</Link>
+                      {index !== arr.length - 1 && ", "}
+                    </>
+                  )}
+                </>
+              ))}
           </Grid>
           <Grid item xs={6}>
             <strong>Study degree</strong>: {subjectData?.studyProgramme?.degree}
@@ -69,7 +107,11 @@ export const SubjectDetail = () => {
           </Grid>
           <Grid item xs={6}>
             <strong>Study programme</strong>:{" "}
-            {subjectData?.studyProgramme?.name}
+            <Link
+              to={`/app/study-programme/${subjectData?.studyProgramme?._id}`}
+            >
+              {subjectData?.studyProgramme?.name}
+            </Link>
           </Grid>
         </Grid>
         <Grid mt={"1rem"} container flexDirection={"column"} spacing={"1rem"}>
@@ -79,7 +121,7 @@ export const SubjectDetail = () => {
             </Typography>
           </Grid>
           <Grid item>
-            {subjectTopicData.map((topic) => (
+            {topicData.map((topic) => (
               <Accordion
                 key={topic.id}
                 expanded={expanded === topic.id}
@@ -95,7 +137,7 @@ export const SubjectDetail = () => {
                   <Typography>{topic.description}</Typography>
                   <ul>
                     {topic?.contents?.map((content) => (
-                      <div>{Object.entries(content)}</div>
+                      <li>{Object.entries(content)}</li>
                     ))}
                   </ul>
                 </AccordionDetails>
@@ -113,11 +155,25 @@ export const SubjectDetail = () => {
             <Typography align="center" variant="h4">
               Online knihy
             </Typography>
+            <Grid container>
+              {contentMap["Unicorn University link"]?.map((content) => (
+                <Grid xs={4} item>
+                  {Object.entries(content)}
+                </Grid>
+              ))}
+            </Grid>
           </Grid>
           <Grid item>
             <Typography align="center" variant="h4">
               Výuková videa
             </Typography>
+            <Grid container>
+              {contentMap["YouTube link"]?.map((content) => (
+                <Grid xs={4} item>
+                  {Object.entries(content)}
+                </Grid>
+              ))}
+            </Grid>
           </Grid>
         </Grid>
       </Layout>
