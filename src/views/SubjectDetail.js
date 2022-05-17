@@ -2,6 +2,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Box,
   Grid,
   Typography,
 } from "@mui/material";
@@ -115,7 +116,7 @@ export const SubjectDetail = () => {
             </Link>
           </Grid>
         </Grid>
-        <Grid mt={"1rem"} container flexDirection={"column"} spacing={"1rem"}>
+        <Box mt={"1rem"} spacing={"1rem"}>
           <Grid item>
             <Typography align="center" variant="h4">
               Topics
@@ -136,16 +137,18 @@ export const SubjectDetail = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <Typography>{topic.description}</Typography>
-                  <ul>
+                  <Grid mt={3} gap={1} container>
                     {topic?.contents?.map((content) => (
-                      <li>{Object.entries(content)}</li>
+                      <Grid xs={3} item>
+                        <ContentCard {...content} />
+                      </Grid>
                     ))}
-                  </ul>
+                  </Grid>
                 </AccordionDetails>
               </Accordion>
             ))}
           </Grid>
-        </Grid>
+        </Box>
         <Grid
           mt={"1rem"}
           container

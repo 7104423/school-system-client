@@ -10,7 +10,7 @@ const getUU = (inputContent) => {
 };
 
 const getYT = (queryInput) => {
-  const query = queryInput.split("?")[1];
+  const query = queryInput?.split("?")?.[1];
   return query
     ? (/^[?#]/.test(query) ? query.slice(1) : query)
         .split("&")
