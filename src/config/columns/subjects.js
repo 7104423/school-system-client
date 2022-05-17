@@ -9,10 +9,17 @@ export const subjectColumns = [
     ),
     flex: 1,
   },
-  { field: "supervisor", headerName: "Supervisor", flex: 1 },
+  {
+    field: "supervisor",
+    headerName: "Supervisor",
+    flex: 1,
+    valueGetter: (params) =>
+      `${params.row.supervisor?.name} ${params.row.supervisor?.surname}`,
+  },
   {
     field: "degree",
     headerName: "Degree",
+    valueGetter: (params) => params.row.studyProgramme?.degree,
   },
   {
     field: "language",
@@ -21,7 +28,7 @@ export const subjectColumns = [
   {
     field: "studyProgramme",
     headerName: "Study Programme",
+    valueGetter: (params) => params.row.studyProgramme?.name,
     flex: 1,
   },
 ];
-
