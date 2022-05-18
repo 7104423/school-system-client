@@ -8,13 +8,17 @@ import { Add } from "@mui/icons-material";
 import { useContent } from "../hooks/useContent";
 import { ViewTrap } from "../components/viewtrap";
 import { WholePageLoader } from "../containers/WholePageLoader";
+import { useUser } from "../contexts/userContext";
 
 export const DigitalContents = () => {
   const [isLoaded, data, fetch] = useContent("digitalContents");
+  const user = useUser();
+  const userRoles = user.getRoles();
 
   useEffect(() => {
     if (isLoaded) return;
     fetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -23,11 +27,13 @@ export const DigitalContents = () => {
       <Layout active="digital-contents">
         <h2 className="view-heading">Digital Contents</h2>
         <Box mt={3}>
-          <Link to="/app/digital-content/add">
-            <Button variant="outlined" startIcon={<Add fontSize="small" />}>
-              Create Digital Content
-            </Button>
-          </Link>
+          {["ADMIN"].some((role) => userRoles.includes(role)) && (
+            <Link to="/app/digital-content/add">
+              <Button variant="outlined" startIcon={<Add fontSize="small" />}>
+                Create Digital Content
+              </Button>
+            </Link>
+          )}
         </Box>
         <Table columns={digitalContentColumns} rows={data} />
       </Layout>

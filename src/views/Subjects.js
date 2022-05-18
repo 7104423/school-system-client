@@ -8,9 +8,12 @@ import { Layout } from "../containers/Layout";
 import { useContent } from "../hooks/useContent";
 import { ViewTrap } from "../components/viewtrap";
 import { WholePageLoader } from "../containers/WholePageLoader";
+import { useUser } from "../contexts/userContext";
 
 export const Subjects = () => {
   const [isLoaded, data, fetch] = useContent("subjects");
+  const user = useUser();
+  const userRoles = user.getRoles();
 
   useEffect(() => {
     if (isLoaded) return;
@@ -24,11 +27,13 @@ export const Subjects = () => {
       <Layout active="subjects">
         <h2 className="view-heading">Subjects</h2>
         <Box mt={3}>
-          <Link to="/app/subject/add">
-            <Button variant="outlined" startIcon={<Add fontSize="small" />}>
-              Add subject
-            </Button>
-          </Link>
+          {["ADMIN"].some((role) => userRoles.includes(role)) && (
+            <Link to="/app/subject/add">
+              <Button variant="outlined" startIcon={<Add fontSize="small" />}>
+                Add subject
+              </Button>
+            </Link>
+          )}
         </Box>
         <Table columns={subjectColumns} rows={data} />
       </Layout>

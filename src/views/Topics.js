@@ -8,13 +8,17 @@ import { Add } from "@mui/icons-material";
 import { useContent } from "../hooks/useContent";
 import { ViewTrap } from "../components/viewtrap";
 import { WholePageLoader } from "../containers/WholePageLoader";
+import { useUser } from "../contexts/userContext";
 
 export const Topics = () => {
   const [isLoaded, data, fetch] = useContent("topics");
+  const user = useUser();
+  const userRoles = user.getRoles();
 
   useEffect(() => {
     if (isLoaded) return;
     fetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -23,11 +27,13 @@ export const Topics = () => {
       <Layout active="topics">
         <h2 className="view-heading">Topics</h2>
         <Box mt={3}>
-          <Link to="/app/topic/add">
-            <Button variant="outlined" startIcon={<Add fontSize="small" />}>
-              Add Topic
-            </Button>
-          </Link>
+          {["ADMIN"].some((role) => userRoles.includes(role)) && (
+            <Link to="/app/topic/add">
+              <Button variant="outlined" startIcon={<Add fontSize="small" />}>
+                Add Topic
+              </Button>
+            </Link>
+          )}
         </Box>
         <Table columns={topicColumns} rows={data} />
       </Layout>

@@ -38,6 +38,7 @@ export const useContent = (contentName = "subjects", id) => {
       [contentName]: { isLoaded, data, contentID },
     },
     dispatch,
+    setError,
   } = useApp();
 
   const fetch = useCallback(async () => {
@@ -60,13 +61,14 @@ export const useContent = (contentName = "subjects", id) => {
         type: "failed",
         target: contentName,
         payload: {
-          message: "Failed to load data stream",
+          message: "Failed to download data",
           code: error.status,
           id,
         },
       });
+      setError("Failed to download data");
     }
-  }, [dispatch, contentName, id]);
+  }, [dispatch, contentName, id, setError]);
 
   return [isLoaded, data, fetch, contentID];
 };

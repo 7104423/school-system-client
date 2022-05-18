@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { Button } from "../components/fields/button";
 import { Input } from "../components/fields/input";
 import { ViewTrap } from "../components/viewtrap";
@@ -12,13 +13,14 @@ export const LoginView = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const userContext = useUser();
   const [isLoaded, setIsLoaded] = useState(true);
+  const navigate = useNavigate();
 
   const loginHandler = useCallback(
     ({ token, ...data }) => {
       userContext.login(token, data.user);
-      window.location.href = "/app";
+      navigate("/app/subjects");
     },
-    [userContext]
+    [navigate, userContext]
   );
 
   const errorHandler = useCallback((error) => {

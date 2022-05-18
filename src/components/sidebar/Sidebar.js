@@ -2,15 +2,17 @@ import classNames from "classnames";
 import React, { useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../../contexts/userContext";
+import { useNavigate } from "react-router-dom";
 
 export const Sidebar = (props) => {
   const { active } = props;
   const user = useUser();
+  const navigate = useNavigate();
 
   const handleSignOut = useCallback(() => {
     user.logout();
-    window.location.href = "/app/login";
-  }, [user]);
+    navigate("/app/login");
+  }, [user, navigate]);
 
   return (
     <div className="sidebar-menu">

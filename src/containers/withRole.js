@@ -1,4 +1,5 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useApp } from "../contexts/appContext";
 import { useUser } from "../contexts/userContext";
 
 export const withRole =
@@ -6,6 +7,8 @@ export const withRole =
   (props) => {
     const user = useUser();
     const { id } = useParams();
+    const { setError } = useApp();
+    const navigate = useNavigate();
 
     if (roles.includes("$CURRENT_USER") && user.getUser()?.id === id) {
       return <Component {...props} />;
@@ -14,8 +17,8 @@ export const withRole =
     const userRoles = user.getRoles();
     const hasRole = roles.some((role) => userRoles.includes(role));
     if (!hasRole) {
-      user.logout();
-      window.location.href = "/app/subjects";
+      navigate("/app");
+      setError("You don't have access for this page");
       return null;
     }
     return <Component {...props} />;
