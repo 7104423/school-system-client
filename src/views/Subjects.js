@@ -15,6 +15,7 @@ export const Subjects = () => {
   useEffect(() => {
     if (isLoaded) return;
     fetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

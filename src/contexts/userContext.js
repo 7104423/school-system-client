@@ -3,6 +3,10 @@ import { createContext, useContext } from "react";
 const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
+  const getRoles = () => {
+    return ["ADMIN"];
+  };
+
   const getUser = () => {
     return JSON.parse(localStorage.getItem("user"));
   };
@@ -38,6 +42,7 @@ export const UserProvider = ({ children }) => {
         setToken,
         login,
         logout,
+        getRoles,
       }}
     >
       {children}
@@ -49,4 +54,3 @@ export const useUser = () => {
   const user = useContext(UserContext);
   return user;
 };
-

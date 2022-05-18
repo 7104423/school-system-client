@@ -14,8 +14,9 @@ import { top100Films } from "../mockups/top100films.mockup";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { Link } from "react-router-dom";
 import { Layout } from "../containers/Layout";
+import { withRole } from "../containers/withRole";
 
-export const SubjectEdit = () => {
+export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
   return (
     <Layout active="subjects">
       <form style={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
@@ -131,5 +132,4 @@ export const SubjectEdit = () => {
       </Grid>
     </Layout>
   );
-};
-
+});

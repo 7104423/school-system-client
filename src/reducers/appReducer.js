@@ -18,6 +18,7 @@ export const appInitialState = {
   subjectTopics: defaultInitialState,
   subjectContents: defaultInitialState,
   topics: defaultInitialState,
+  topicContents: defaultInitialState,
   digitalContents: defaultInitialState,
   studyProgrammes: defaultInitialState,
   topic: defaultInitialState,

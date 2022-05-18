@@ -1,8 +1,9 @@
 import { Autocomplete, Button, Grid, MenuItem, TextField } from "@mui/material";
 import { top100Films } from "../mockups/top100films.mockup";
 import { Layout } from "../containers/Layout";
+import { withRole } from "../containers/withRole";
 
-export const TopicEdit = () => {
+export const TopicEdit = withRole(["TEACHER", "ADMIN"], () => {
   return (
     <Layout active="topics">
       <h2 className="view-heading">Edit Topic</h2>
@@ -50,4 +51,4 @@ export const TopicEdit = () => {
       </form>
     </Layout>
   );
-};
+});

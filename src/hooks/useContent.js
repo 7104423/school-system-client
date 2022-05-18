@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { useApp } from "../contexts/appContext";
 import {
   fetchSubjects,
@@ -13,6 +13,7 @@ import {
   fetchStudyProgramme,
   fetchUser,
   fetchSubjectContents,
+  fetchTopicContents,
 } from "../utils/api";
 
 const contentMap = {
@@ -21,6 +22,7 @@ const contentMap = {
   subjectTopics: fetchSubjectTopics,
   subjectContents: fetchSubjectContents,
   topics: fetchTopics,
+  topicContents: fetchTopicContents,
   digitalContents: fetchDigitalContents,
   studyProgrammes: fetchStudyProgrammes,
   users: fetchUsers,
