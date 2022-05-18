@@ -3,7 +3,7 @@ import { Layout } from "../containers/Layout";
 import { withRole } from "../containers/withRole";
 
 export const UserEdit = withRole([
-  ["ADMIN"],
+  ["ADMIN", "$CURRENT_USER"],
   () => {
     return (
       <Layout active="users">
