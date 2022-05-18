@@ -1,14 +1,13 @@
 import { Autocomplete, Button, Grid, MenuItem, TextField } from "@mui/material";
 import { top100Films } from "../mockups/top100films.mockup";
 import { Layout } from "../containers/Layout";
+import { withRole } from "../containers/withRole";
 
-export const StudyProgrammeAdd = () => {
+export const StudyProgrammeAdd = withRole(["ADMIN"], () => {
   return (
     <Layout active="study-programmes">
       <form style={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
-
         <Grid justifyContent={"end"} container spacing={2}>
-
           <Grid item xs={12}>
             <TextField
               id="outlined-basic"
@@ -65,10 +64,8 @@ export const StudyProgrammeAdd = () => {
           <Grid item xs={12}>
             <Button variant="contained">Submit</Button>
           </Grid>
-
         </Grid>
-
       </form>
     </Layout>
   );
-};
+});

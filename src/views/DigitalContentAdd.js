@@ -1,8 +1,9 @@
 import { Autocomplete, Button, Grid, MenuItem, TextField } from "@mui/material";
 import { top100Films } from "../mockups/top100films.mockup";
 import { Layout } from "../containers/Layout";
+import { withRole } from "../containers/withRole";
 
-export const DigitalContentAdd = () => {
+export const DigitalContentAdd = withRole(["ADMIN", "TEACHER"], () => {
   return (
     <Layout active="digital-contents">
       <form style={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
@@ -57,4 +58,4 @@ export const DigitalContentAdd = () => {
       </form>
     </Layout>
   );
-};
+});
