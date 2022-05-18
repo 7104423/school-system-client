@@ -14,8 +14,8 @@ export const LoginView = () => {
   const [isLoaded, setIsLoaded] = useState(true);
 
   const loginHandler = useCallback(
-    ({ token, ...user }) => {
-      userContext.login(token, user);
+    ({ token, ...data }) => {
+      userContext.login(token, data.user);
       window.location.href = "/app";
     },
     [userContext]
@@ -117,4 +117,3 @@ export const LoginView = () => {
     </>
   );
 };
-

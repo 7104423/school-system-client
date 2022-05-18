@@ -1,18 +1,16 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 const UserContext = createContext({});
 
 export const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
   const getRoles = () => {
-    return ["ADMIN"];
+    return user.groups.map(({ name }) => name);
   };
 
   const getUser = () => {
-    return JSON.parse(localStorage.getItem("user"));
-  };
-
-  const setUser = (user) => {
-    localStorage.setItem("user", JSON.stringify(user));
+    return user;
   };
 
   const getToken = () => {
@@ -30,7 +28,6 @@ export const UserProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.clear("token");
-    localStorage.clear("user");
   };
 
   return (

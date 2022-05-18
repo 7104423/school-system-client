@@ -8,4 +8,3 @@ export const Layout = ({ children, active }) => {
     </div>
   );
 };
-

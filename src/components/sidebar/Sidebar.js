@@ -75,22 +75,20 @@ const UserProfileView = () => {
   const user = useUser();
 
   const fullName = useMemo(
-    () =>
-      `${user.getUser()?.user?.name ?? ""} ${
-        user.getUser()?.user?.surname ?? ""
-      }`,
+    () => `${user.getUser()?.name ?? ""} ${user.getUser()?.surname ?? ""}`,
     [user]
   );
 
   return (
     <div className="user-profile">
-      <img
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ2wn18dnC8OmX7Qx49epjgoHREUBHEviB10griBGemOmkYQoK5g"
-        id="profile-pic"
-        alt="profile pic"
-      />
+      <Link to={`/app/user/edit/${user.getUser()?.id}`}>
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ2wn18dnC8OmX7Qx49epjgoHREUBHEviB10griBGemOmkYQoK5g"
+          id="profile-pic"
+          alt="profile pic"
+        />
+      </Link>
       <h3 id="display-name">{fullName}</h3>
     </div>
   );
 };
-

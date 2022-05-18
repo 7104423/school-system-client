@@ -40,13 +40,14 @@ function App() {
     }
     (async () => {
       try {
-        await validateUser();
+        const data = await validateUser();
+        user.setUser(data.user);
         setAccess(true);
       } catch (error) {
         setAccess(false);
       }
     })();
-  }, [user]);
+  }, []);
 
   return (
     <div className="App">
@@ -87,17 +88,9 @@ function App() {
                     path="/app/digital-content/:id"
                     element={<DigitalContentDetail />}
                   />
-                  <Route
-                    exact
-                    path="/app/topic/add"
-                    element={<TopicAdd />}
-                  />
-                  <Route
-                    path="/app/topic/edit/:id"
-                    element={<TopicEdit />}
-                  />
-                  <Route path="/app/topic/:id" 
-                    element={<TopicDetail />} />
+                  <Route exact path="/app/topic/add" element={<TopicAdd />} />
+                  <Route path="/app/topic/edit/:id" element={<TopicEdit />} />
+                  <Route path="/app/topic/:id" element={<TopicDetail />} />
                   <Route
                     exact
                     path="/app/study-programmes"
@@ -115,22 +108,10 @@ function App() {
                     path="/app/study-programme/edit/:id"
                     element={<StudyProgrammeEdit />}
                   />
-                  <Route
-                    exact path="/app/users"
-                    element={<Users />}
-                  />
-                  <Route 
-                    path="/app/user/:id" 
-                    element={<UserDetail />} 
-                  />
-                  <Route
-                    path="/app/user/add"
-                    element={<UserAdd />}
-                  />
-                  <Route
-                    path="/app/user/edit/:id"
-                    element={<UserEdit />}
-                  />
+                  <Route exact path="/app/users" element={<Users />} />
+                  <Route path="/app/user/:id" element={<UserDetail />} />
+                  <Route path="/app/user/add" element={<UserAdd />} />
+                  <Route path="/app/user/edit/:id" element={<UserEdit />} />
                   <Route path="/app/*" element={<Subjects />} />
                 </>
               )}
