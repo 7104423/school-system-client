@@ -9,5 +9,5 @@ export const withRole = (roles, Component) => (props) => {
     window.location.href = "/app/subjects";
     return null;
   }
-  return <Component />;
+  return <Component {...props} />;
 };
