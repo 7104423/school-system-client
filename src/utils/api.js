@@ -1,6 +1,6 @@
-const url = process.env.REACT_APP_SERVER_HOST;
+export const url = process.env.REACT_APP_SERVER_HOST;
 
-const fetchJSON = async (url, optionProp) => {
+export const fetchJSON = async (url, optionProp) => {
   const token = localStorage.getItem("token");
   const option = {
     ...optionProp,

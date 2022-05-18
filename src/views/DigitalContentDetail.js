@@ -26,6 +26,8 @@ export const DigitalContentDetail = () => {
         title={"Digital Content Detail"}
         id={id}
         page={"digital-content"}
+        rolesDelete={["ADMIN", "TEACHER"]}
+        rolesEdit={["ADMIN", "TEACHER"]}
       />
       <Grid justifyContent={"end"} container spacing={2}>
         <Grid item xs={6}>

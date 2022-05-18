@@ -60,7 +60,13 @@ export const SubjectDetail = () => {
     <>
       <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <Layout active="subjects">
-        <ControlPanel title={subjectData?.name} id={id} page={"subject"} />
+        <ControlPanel
+          title={subjectData?.name}
+          id={id}
+          page={"subject"}
+          rolesDelete={["ADMIN"]}
+          rolesEdit={["ADMIN", "TEACHER"]}
+        />
         <Grid justifyContent={"end"} container spacing={2}>
           <Grid item xs={12}>
             <p>{subjectData?.goal}</p>

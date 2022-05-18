@@ -20,7 +20,13 @@ export const StudyProgrammeDetail = () => {
   return (
     <Layout active="study-programmes">
       <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
-      <ControlPanel title={data?.name} id={id} page={"study-programme"} />
+      <ControlPanel
+        title={data?.name}
+        id={id}
+        page={"study-programme"}
+        rolesDelete={["ADMIN"]}
+        rolesEdit={["ADMIN"]}
+      />
 
       <Grid justifyContent={"end"} container spacing={2}>
         <Grid item xs={12}>

@@ -112,7 +112,13 @@ export const TopicDetail = () => {
   return (
     <Layout active="topics">
       <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
-      <ControlPanel title={dataTopic?.name} id={id} page={"topic"} />
+      <ControlPanel
+        title={dataTopic?.name}
+        id={id}
+        page={"topic"}
+        rolesDelete={["ADMIN", "TEACHER"]}
+        rolesEdit={["ADMIN", "TEACHER"]}
+      />
 
       <Grid justifyContent={"end"} container spacing={2}>
         <Grid item xs={12}>
