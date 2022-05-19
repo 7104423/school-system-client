@@ -47,7 +47,7 @@ export const useContent = (contentName = "subjects", id) => {
       target: contentName,
     });
     try {
-      if (contentMap[contentName]) {
+      if (!contentMap[contentName]) {
         throw new Error("Failed to download data");
       }
       const content = await contentMap[contentName]?.(id);
