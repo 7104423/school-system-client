@@ -6,14 +6,17 @@ const AppContext = createContext({});
 export const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, appInitialState);
   const [error, setError] = useState("");
+  const [warning, setWarning] = useState("");
 
   return (
     <AppContext.Provider
       value={{
         error,
+        warning,
         state,
         dispatch,
         setError,
+        setWarning,
       }}
     >
       {children}

@@ -1,10 +1,10 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useCallback, useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "./assets/style.css";
 import { validateUser } from "./utils/api";
 import { WholePageLoader } from "./containers/WholePageLoader";
-import { ViewTrapProvider, ViewTrapRender } from "./components/viewtrap";
+import { ViewTrapRender } from "./components/viewtrap";
 import { useUser } from "./contexts/userContext";
 import { LoginView } from "./views/Login";
 import { Users } from "./views/Users";
@@ -28,17 +28,21 @@ import { StudyProgrammeDetail } from "./views/StudyProgrammeDetail";
 import { StudyProgrammeAdd } from "./views/StudyProgrammeAdd";
 import { StudyProgrammeEdit } from "./views/StudyProgrammeEdit";
 import { useApp } from "./contexts/appContext";
-import { Alert, AlertTitle, Snackbar } from "@mui/material";
+import { Alert, AlertTitle, Slide, Snackbar } from "@mui/material";
 
 function App() {
   const [hasAccess, setAccess] = useState(null);
   const user = useUser();
-  const { error, setError } = useApp();
+  const { error, setError, warning, setWarning } = useApp();
   const token = user.getToken();
 
   const handleErrorClose = useCallback(() => {
     setError("");
   }, [setError]);
+
+  const handleWarningClose = useCallback(() => {
+    setWarning("");
+  }, [setWarning]);
 
   useEffect(() => {
     const token = user.getToken();
@@ -51,6 +55,9 @@ function App() {
         const data = await validateUser();
         user.setUser(data.user);
         setAccess(true);
+        if (data.user?.resetPassword) {
+          setWarning("In your profile settings, change your password");
+        }
       } catch (error) {
         setAccess(false);
       }
@@ -127,10 +134,24 @@ function App() {
             open={!!error}
             autoHideDuration={6000}
             onClose={handleErrorClose}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            TransitionComponent={Slide}
           >
             <Alert onClose={handleErrorClose} severity="error">
               <AlertTitle>Error</AlertTitle>
               {error}
+            </Alert>
+          </Snackbar>
+          <Snackbar
+            open={!!warning && !error}
+            autoHideDuration={6000}
+            onClose={handleWarningClose}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            TransitionComponent={Slide}
+          >
+            <Alert onClose={handleWarningClose} severity="warning">
+              <AlertTitle>Warning</AlertTitle>
+              {warning}
             </Alert>
           </Snackbar>
           <ViewTrapRender />
