@@ -43,7 +43,7 @@ export const ControlPanel = ({
           )}
           {rolesDelete.some((role) => userRoles.includes(role)) && (
             <Grid item>
-              <IconButton onClick={handleDelete()}>
+              <IconButton onClick={handleDelete}>
                 <DeleteIcon fontSize="inherit" />
               </IconButton>
             </Grid>
