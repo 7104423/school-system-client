@@ -9,17 +9,6 @@ import { useUser } from "../contexts/userContext";
 import { login } from "../utils/api";
 
 export const LoginView = () => {
-  const userContext = useUser();
-  const navigate = useNavigate();
-
-  if (userContext.getToken()) {
-    navigate("/app/subjects");
-  }
-
-  return <>{!userContext.getToken() && <Login />}</>;
-};
-
-const Login = () => {
   const { control, handleSubmit } = useForm();
   const [errorMessage, setErrorMessage] = useState("");
   const userContext = useUser();
