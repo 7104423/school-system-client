@@ -1,4 +1,11 @@
-import { Button, Grid, Typography } from "@mui/material";
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  Grid,
+  Typography,
+} from "@mui/material";
 import { useCallback, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ViewTrap } from "../components/viewtrap";
@@ -6,7 +13,7 @@ import { Layout } from "../containers/Layout";
 import { WholePageLoader } from "../containers/WholePageLoader";
 import { withRole } from "../containers/withRole";
 import { useContent, useEditContent } from "../hooks/useContent";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { ControlledTextField } from "../components/fields/input/ControlledTextField";
 import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
 import { useUser } from "../contexts/userContext";
@@ -87,7 +94,7 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
         style={{ paddingTop: "2rem", paddingBottom: "2rem" }}
         noValidate
       >
-        <Grid justifyContent={"end"} container spacing={2}>
+        <Grid justifyContent={"start"} container spacing={2}>
           <Grid item xs={6}>
             <ControlledTextField
               control={control}
@@ -138,12 +145,28 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
                 },
               }}
               label="Email"
+              disabled={!hasAdmin}
               variant="outlined"
               fullWidth
             />
           </Grid>
 
-          <Grid item xs={6}></Grid>
+          {hasAdmin && (
+            <Grid item xs={6}>
+              <Controller
+                control={control}
+                name="resetPassword"
+                render={({ field }) => (
+                  <FormGroup>
+                    <FormControlLabel
+                      control={<Checkbox {...field} />}
+                      label="Request user to change password"
+                    />
+                  </FormGroup>
+                )}
+              />
+            </Grid>
+          )}
 
           <Grid item xs={12}>
             <Button type="submit" variant="contained">
