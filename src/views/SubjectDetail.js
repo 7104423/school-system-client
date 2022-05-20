@@ -6,11 +6,11 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Layout } from "../containers/Layout";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
-import { useContent } from "../hooks/useContent";
+import { useContent, useDeleteContent } from "../hooks/useContent";
 import { ViewTrap } from "../components/viewtrap";
 import { WholePageLoader } from "../containers/WholePageLoader";
 import { ContentCard } from "../components/card/ContentCard";
@@ -30,6 +30,8 @@ export const SubjectDetail = () => {
     "subjectContents",
     id
   );
+
+  const remove = useDeleteContent("subject", id);
 
   const isLoaded = isSubjectLoaded && isTopicsLoaded && isContentsLoaded;
 
@@ -54,7 +56,14 @@ export const SubjectDetail = () => {
     fetchSubject();
     fetchTopic();
     fetchContents();
-  }, [id]);
+  }, [contentID, fetchContents, fetchSubject, fetchTopic, id]);
+
+  const handleDelete = useCallback(async () => {
+    await remove();
+    fetchSubject();
+    fetchContents();
+    fetchTopic();
+  }, [fetchContents, fetchSubject, fetchTopic, remove]);
 
   return (
     <>
@@ -66,6 +75,7 @@ export const SubjectDetail = () => {
           page={"subject"}
           rolesDelete={["ADMIN"]}
           rolesEdit={["ADMIN", "TEACHER"]}
+          onDelete={handleDelete}
         />
         <Grid justifyContent={"end"} container spacing={2}>
           <Grid item xs={12}>

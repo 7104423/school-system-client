@@ -3,8 +3,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Link } from "react-router-dom";
 import { useUser } from "../../contexts/userContext";
-import { useCallback } from "react";
-import { fetchJSON, url } from "../../utils/api";
 
 export const ControlPanel = ({
   title,
@@ -12,18 +10,10 @@ export const ControlPanel = ({
   page,
   rolesEdit = [],
   rolesDelete = [],
+  onDelete = () => {},
 }) => {
   const user = useUser();
   const userRoles = user.getRoles();
-
-  const handleDelete = useCallback(() => {
-    if (window.confirm("Are you sure you want to delete this item?")) {
-      fetchJSON(`${url}/api/${page}/delete`, {
-        method: "POST",
-        body: JSON.stringify({ id }),
-      });
-    }
-  }, [id, page]);
 
   return (
     <Grid container alignItems={"center"} spacing={"0.25rem"}>
@@ -43,7 +33,7 @@ export const ControlPanel = ({
           )}
           {rolesDelete.some((role) => userRoles.includes(role)) && (
             <Grid item>
-              <IconButton onClick={handleDelete}>
+              <IconButton onClick={onDelete}>
                 <DeleteIcon fontSize="inherit" />
               </IconButton>
             </Grid>

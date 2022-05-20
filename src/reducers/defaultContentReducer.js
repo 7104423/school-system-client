@@ -26,4 +26,3 @@ export const defaultInitialState = {
   data: [],
   error: null,
 };
-

@@ -17,8 +17,6 @@ export const DigitalContentDetail = () => {
     fetch();
   }, []);
 
-  console.log(data);
-
   return (
     <Layout active="digital-contents">
       <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>

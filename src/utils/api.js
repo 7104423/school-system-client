@@ -97,3 +97,38 @@ export const fetchStudyProgramme = async (id) => {
 export const fetchUser = async (id) => {
   return await fetchJSON(`${url}/api/user/${id}`);
 };
+
+export const deleteSubject = async (body) => {
+  return await fetchJSON(`${url}/api/subject/delete`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
+
+export const deleteTopic = async (body) => {
+  return await fetchJSON(`${url}/api/topic/delete`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
+
+export const deleteDigitalContent = async (body) => {
+  return await fetchJSON(`${url}/api/content/delete`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
+
+export const deleteStudyProgramme = async (body) => {
+  return await fetchJSON(`${url}/api/study-programme/delete`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
+
+export const deleteUser = async (body) => {
+  return await fetchJSON(`${url}/api/user/delete`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
