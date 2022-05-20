@@ -41,7 +41,7 @@ export const UserDetail = () => {
         <Grid xs={6}>
           <strong>Role:</strong>
         </Grid>
-        <Grid xs={6}>{data?.groups.map(({ name }) => name).join(", ")}</Grid>
+        <Grid xs={6}>{data?.groups?.map(({ name }) => name).join(", ")}</Grid>
       </Grid>
       <Grid container>
         <Grid xs={6}>
