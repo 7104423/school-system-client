@@ -56,7 +56,7 @@ function App() {
         user.setUser(data.user);
         setAccess(true);
         if (data.user?.resetPassword) {
-          setWarning("In your profile settings, change your password");
+          setWarning("Change your password, nn your profile settings.");
         }
       } catch (error) {
         setAccess(false);
