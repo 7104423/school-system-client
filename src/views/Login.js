@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/fields/button";
@@ -9,6 +9,20 @@ import { useUser } from "../contexts/userContext";
 import { login } from "../utils/api";
 
 export const LoginView = () => {
+  const userContext = useUser();
+  const navigate = useNavigate();
+  const token = userContext.getToken();
+
+  useEffect(() => {
+    if (token) {
+      navigate("/app/subjects");
+    }
+  }, [token, navigate]);
+
+  return <>{!userContext.getToken() && <Login />}</>;
+};
+
+export const Login = () => {
   const { control, handleSubmit } = useForm();
   const [errorMessage, setErrorMessage] = useState("");
   const userContext = useUser();
