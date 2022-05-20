@@ -13,7 +13,6 @@ export const StudyProgrammeDetail = () => {
   const [isLoaded, data, fetch] = useContent("studyProgramme", id);
 
   useEffect(() => {
-    if (isLoaded) return;
     fetch();
   }, []);
 
