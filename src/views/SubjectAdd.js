@@ -1,4 +1,4 @@
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, MenuItem } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { Layout } from "../containers/Layout";
 import { withRole } from "../containers/withRole";
@@ -55,7 +55,6 @@ export const SubjectAdd = withRole(["ADMIN"], () => {
               name="name"
               control={control}
               rules={{ required: "This field is required" }}
-              id="outlined-basic"
               label="Subject name"
               variant="outlined"
               fullWidth
@@ -65,7 +64,6 @@ export const SubjectAdd = withRole(["ADMIN"], () => {
             <ControlledTextField
               name="goal"
               control={control}
-              id="outlined-basic"
               label="Subject goal"
               variant="outlined"
               fullWidth
@@ -110,6 +108,20 @@ export const SubjectAdd = withRole(["ADMIN"], () => {
                 option?.name ? `${option?.name}` : ""
               }
             />
+          </Grid>
+          <Grid item xs={6}>
+            <ControlledTextField
+              name="language"
+              control={control}
+              rules={{ required: "This field is required" }}
+              label="Language"
+              variant="outlined"
+              fullWidth
+              select
+            >
+              <MenuItem value="cs">Czech</MenuItem>
+              <MenuItem value="en">English</MenuItem>
+            </ControlledTextField>
           </Grid>
           <Grid item xs={12}>
             <Button type="submit" variant="contained">

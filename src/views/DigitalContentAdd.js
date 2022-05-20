@@ -53,7 +53,6 @@ export const DigitalContentAdd = withRole(["ADMIN", "TEACHER"], () => {
                 formState,
               }) => (
                 <TextField
-                  id="outlined-basic"
                   label="Link to new Digital Content"
                   variant="outlined"
                   fullWidth

@@ -10,16 +10,10 @@ export const TopicEdit = withRole(["TEACHER", "ADMIN"], () => {
       <form style={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
         <Grid justifyContent={"end"} container spacing={2}>
           <Grid item xs={12}>
-            <TextField
-              id="outlined-basic"
-              label="Topic name"
-              variant="outlined"
-              fullWidth
-            />
+            <TextField label="Topic name" variant="outlined" fullWidth />
           </Grid>
           <Grid item xs={12}>
             <TextField
-              id="outlined-basic"
               label="Topic description"
               variant="outlined"
               fullWidth

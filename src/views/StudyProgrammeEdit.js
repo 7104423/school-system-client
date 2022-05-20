@@ -10,7 +10,6 @@ export const StudyProgrammeEdit = withRole(["ADMIN"], () => {
         <Grid justifyContent={"end"} container spacing={2}>
           <Grid item xs={12}>
             <TextField
-              id="outlined-basic"
               label="Study programme name"
               variant="outlined"
               fullWidth
@@ -19,7 +18,6 @@ export const StudyProgrammeEdit = withRole(["ADMIN"], () => {
 
           <Grid item xs={12}>
             <TextField
-              id="outlined-basic"
               label="Study programme description"
               variant="outlined"
               fullWidth

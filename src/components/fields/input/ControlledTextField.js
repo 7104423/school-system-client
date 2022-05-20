@@ -19,7 +19,6 @@ export const ControlledTextField = ({
       render={({ field, fieldState }) => {
         return (
           <TextField
-            id="outlined-basic"
             label={label}
             variant="outlined"
             fullWidth

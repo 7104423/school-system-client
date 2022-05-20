@@ -27,7 +27,6 @@ export const StudyProgrammeAdd = withRole(["ADMIN"], () => {
                 formState,
               }) => (
                 <TextField
-                  id="outlined-basic"
                   label="Study programme name"
                   variant="outlined"
                   fullWidth
@@ -50,7 +49,6 @@ export const StudyProgrammeAdd = withRole(["ADMIN"], () => {
                 formState,
               }) => (
                 <TextField
-                  id="outlined-basic"
                   label="Study programme description"
                   variant="outlined"
                   fullWidth

@@ -28,7 +28,6 @@ export const TopicAdd = withRole(["TEACHER", "ADMIN"], () => {
                 formState,
               }) => (
                 <TextField
-                  id="outlined-basic"
                   label="Topic name"
                   variant="outlined"
                   fullWidth
@@ -50,7 +49,6 @@ export const TopicAdd = withRole(["TEACHER", "ADMIN"], () => {
                 formState,
               }) => (
                 <TextField
-                  id="outlined-basic"
                   label="Topic description"
                   variant="outlined"
                   fullWidth

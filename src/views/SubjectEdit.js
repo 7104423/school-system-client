@@ -1,4 +1,4 @@
-import { Button, Divider, Grid } from "@mui/material";
+import { Button, Divider, Grid, MenuItem } from "@mui/material";
 import { Table } from "../components/table";
 import { topicColumns } from "../config/columns/topics";
 import { subjectMockup } from "../mockups/subjects.mockup";
@@ -66,7 +66,6 @@ export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
               name="name"
               control={control}
               rules={{ required: "This field is required" }}
-              id="outlined-basic"
               label="Subject name"
               variant="outlined"
               fullWidth
@@ -76,7 +75,6 @@ export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
             <ControlledTextField
               name="goal"
               control={control}
-              id="outlined-basic"
               label="Subject goal"
               variant="outlined"
               fullWidth
@@ -121,6 +119,20 @@ export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
                 option?.name ? `${option?.name}` : ""
               }
             />
+          </Grid>
+          <Grid item xs={6}>
+            <ControlledTextField
+              name="language"
+              control={control}
+              rules={{ required: "This field is required" }}
+              label="Language"
+              variant="outlined"
+              fullWidth
+              select
+            >
+              <MenuItem value="cs">Czech</MenuItem>
+              <MenuItem value="en">English</MenuItem>
+            </ControlledTextField>
           </Grid>
           <Grid item xs={12}>
             <Button type="submit" variant="contained">

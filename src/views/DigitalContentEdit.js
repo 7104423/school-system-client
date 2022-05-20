@@ -18,7 +18,6 @@ export const DigitalContentEdit = withRole(["ADMIN", "TEACHER"], () => {
 
           <Grid item xs={12}>
             <TextField
-              id="outlined-basic"
               label="Link to Digital Content"
               variant="outlined"
               fullWidth

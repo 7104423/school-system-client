@@ -57,7 +57,6 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
               control={control}
               name="name"
               rules={{ required: "This field is required" }}
-              id="outlined-basic"
               label="Name"
               variant="outlined"
               fullWidth
@@ -69,7 +68,6 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
               control={control}
               name="surname"
               rules={{ required: "This field is required" }}
-              id="outlined-basic"
               label="Surname"
               variant="outlined"
               fullWidth
@@ -103,7 +101,6 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
                   message: "Entered value does not match email format",
                 },
               }}
-              id="outlined-basic"
               label="Email"
               variant="outlined"
               fullWidth
