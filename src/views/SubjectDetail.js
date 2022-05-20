@@ -200,7 +200,7 @@ export const SubjectDetail = () => {
             </Typography>
           </Grid>
           <Grid width={"100%"} item>
-            <Grid gap={3} container>
+            <Grid spacing={3} container>
               {contentMap["Unicorn University link"]?.map((content) => (
                 <Grid xs={4} item>
                   <ContentCard {...content} />
@@ -214,7 +214,7 @@ export const SubjectDetail = () => {
             </Typography>
           </Grid>
           <Grid xs={12} width={"100%"} item>
-            <Grid width={"100%"} gap={3} container>
+            <Grid width={"100%"} spacing={3} container>
               {contentMap["YouTube link"]?.map((content) => (
                 <Grid xs={4} item>
                   <ContentCard {...content} />
