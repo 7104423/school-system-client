@@ -2,18 +2,74 @@ import { Autocomplete, Button, Grid, MenuItem, TextField } from "@mui/material";
 import { top100Films } from "../mockups/top100films.mockup";
 import { Layout } from "../containers/Layout";
 import { withRole } from "../containers/withRole";
+import { useCallback, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useContent, useEditContent } from "../hooks/useContent";
+import { useNavigate, useParams } from "react-router-dom";
+import { ControlledTextField } from "../components/fields/input/ControlledTextField";
+import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
+import { ViewTrap } from "../components/viewtrap";
+import { WholePageLoader } from "../containers/WholePageLoader";
 
 export const TopicEdit = withRole(["TEACHER", "ADMIN"], () => {
+  const { id } = useParams();
+  const { control, handleSubmit, reset } = useForm();
+  const [isLoadedContent, data, fetch] = useContent("topic", id);
+  const [, , fetchTopics] = useContent("topics");
+  const [isSubjectLoaded, subjects, fetchSubjects] = useContent("subjects");
+  const update = useEditContent("topic", id);
+  const navigate = useNavigate();
+
+  const isLoaded = isLoadedContent && isSubjectLoaded;
+
+  const onSubmit = useCallback(
+    async (data) => {
+      const parsedData = {
+        ...data,
+        subject: data.subject?.id,
+      };
+      await update(parsedData);
+      await fetchTopics();
+      navigate("/app/topics");
+    },
+    [fetchTopics, navigate, update]
+  );
+
+  useEffect(() => {
+    fetch();
+    fetchSubjects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    reset(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
   return (
     <Layout active="topics">
+      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <h2 className="view-heading">Edit Topic</h2>
-      <form style={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
+      <form
+        noValidate
+        onSubmit={handleSubmit(onSubmit)}
+        style={{ paddingTop: "2rem", paddingBottom: "2rem" }}
+      >
         <Grid justifyContent={"end"} container spacing={2}>
           <Grid item xs={12}>
-            <TextField label="Topic name" variant="outlined" fullWidth />
+            <ControlledTextField
+              control={control}
+              name="name"
+              label="Topic name"
+              rules={{ required: "This field is required" }}
+              variant="outlined"
+              fullWidth
+            />
           </Grid>
           <Grid item xs={12}>
-            <TextField
+            <ControlledTextField
+              control={control}
+              name="description"
               label="Topic description"
               variant="outlined"
               fullWidth
@@ -21,25 +77,22 @@ export const TopicEdit = withRole(["TEACHER", "ADMIN"], () => {
               rows={4}
             />
           </Grid>
-          <Grid item xs={6}>
-            <Autocomplete
-              disablePortal
-              options={top100Films}
-              fullWidth
-              renderInput={(params) => (
-                <TextField fullWidth {...params} label="Subject" />
-              )}
+          <Grid item xs={12}>
+            <ControlledAutocomplete
+              control={control}
+              label="Subject"
+              name="subject"
+              options={subjects}
+              getOptionLabel={(option) =>
+                option?.name ? `${option?.name || ""}` : ""
+              }
             />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField fullWidth label="Language" value="20" select>
-              <MenuItem value="CS">Czech</MenuItem>
-              <MenuItem value="EN">English</MenuItem>
-            </TextField>
           </Grid>
 
           <Grid item xs={12}>
-            <Button variant="contained">Submit</Button>
+            <Button type="submit" variant="contained">
+              Submit
+            </Button>
           </Grid>
         </Grid>
       </form>

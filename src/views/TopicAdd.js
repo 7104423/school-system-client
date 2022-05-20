@@ -1,113 +1,82 @@
-import { Autocomplete, Button, Grid, MenuItem, TextField } from "@mui/material";
-import { top100Films } from "../mockups/top100films.mockup";
+import { Button, Grid } from "@mui/material";
 import { Layout } from "../containers/Layout";
 import { withRole } from "../containers/withRole";
-import { React } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useCallback, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useAddContent, useContent } from "../hooks/useContent";
+import { useNavigate } from "react-router-dom";
+import { ControlledTextField } from "../components/fields/input/ControlledTextField";
+import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
+import { ViewTrap } from "../components/viewtrap";
+import { WholePageLoader } from "../containers/WholePageLoader";
 
 export const TopicAdd = withRole(["TEACHER", "ADMIN"], () => {
-  const { handleSubmit, errors, control } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const { control, handleSubmit } = useForm();
+  const [, , fetchTopics] = useContent("topics");
+  const [isSubjectLoaded, subjects, fetchSubjects] = useContent("subjects");
+  const add = useAddContent("topic");
+  const navigate = useNavigate();
+
+  const isLoaded = isSubjectLoaded;
+
+  const onSubmit = useCallback(
+    async (data) => {
+      const parsedData = {
+        ...data,
+        subject: data.subject?.id,
+      };
+      await add(parsedData);
+      await fetchTopics();
+      navigate("/app/topics");
+    },
+    [add, fetchTopics, navigate]
+  );
+
+  useEffect(() => {
+    fetchSubjects();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <Layout active="topics">
-      <h2 className="view-heading">Add Topic</h2>
+      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
+      <h2 className="view-heading">Edit Topic</h2>
       <form
+        noValidate
         onSubmit={handleSubmit(onSubmit)}
         style={{ paddingTop: "2rem", paddingBottom: "2rem" }}
       >
         <Grid justifyContent={"end"} container spacing={2}>
           <Grid item xs={12}>
-            <Controller
+            <ControlledTextField
               control={control}
-              name="topname"
-              render={({
-                field: { onChange, onBlur, value, name, ref },
-                fieldState: { isTouched, isDirty, error },
-                formState,
-              }) => (
-                <TextField
-                  label="Topic name"
-                  variant="outlined"
-                  fullWidth
-                  onBlur={onBlur} // notify when input is touched
-                  onChange={onChange} // send value to hook form
-                  checked={value || ""}
-                  inputRef={ref}
-                />
-              )}
+              name="name"
+              label="Topic name"
+              variant="outlined"
+              rules={{ required: "This field is required" }}
+              fullWidth
             />
           </Grid>
           <Grid item xs={12}>
-            <Controller
+            <ControlledTextField
               control={control}
-              name="topdesc"
-              render={({
-                field: { onChange, onBlur, value, name, ref },
-                fieldState: { isTouched, isDirty, error },
-                formState,
-              }) => (
-                <TextField
-                  label="Topic description"
-                  variant="outlined"
-                  fullWidth
-                  onBlur={onBlur} // notify when input is touched
-                  onChange={onChange} // send value to hook form
-                  checked={value || ""}
-                  inputRef={ref}
-                  multiline
-                  rows={4}
-                />
-              )}
+              name="description"
+              label="Topic description"
+              variant="outlined"
+              fullWidth
+              multiline
+              rows={4}
             />
           </Grid>
-          <Grid item xs={6}>
-            <Controller
+          <Grid item xs={12}>
+            <ControlledAutocomplete
               control={control}
+              label="Subject"
               name="subject"
-              render={({
-                field: { onChange, onBlur, value, name, ref },
-                fieldState: { isTouched, isDirty, error },
-                formState,
-              }) => (
-                <Autocomplete
-                  disablePortal
-                  options={top100Films}
-                  fullWidth
-                  onBlur={onBlur} // notify when input is touched
-                  onChange={onChange} // send value to hook form
-                  checked={value || ""}
-                  inputRef={ref}
-                  renderInput={(params) => (
-                    <TextField fullWidth {...params} label="Subject" />
-                  )}
-                />
-              )}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <Controller
-              control={control}
-              name="lang"
-              render={({
-                field: { onChange, onBlur, value, name, ref },
-                fieldState: { isTouched, isDirty, error },
-                formState,
-              }) => (
-                <TextField
-                  fullWidth
-                  label="Language"
-                  select
-                  onBlur={onBlur} // notify when input is touched
-                  onChange={onChange} // send value to hook form
-                  value={value || ""}
-                  inputRef={ref}
-                >
-                  <MenuItem value="CS">Czech</MenuItem>
-                  <MenuItem value="EN">English</MenuItem>
-                </TextField>
-              )}
+              options={subjects}
+              getOptionLabel={(option) =>
+                option?.name ? `${option?.name || ""}` : ""
+              }
             />
           </Grid>
 
