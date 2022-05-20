@@ -115,20 +115,7 @@ export const SubjectDetail = () => {
               ))}
           </Grid>
           <Grid item xs={6}>
-            <strong>Students</strong>:{" "}
-            {subjectData?.studyProgramme &&
-              subjectData?.studyProgramme?.students?.map((s, index, arr) => (
-                <>
-                  {s.name && (
-                    <>
-                      <Link
-                        to={`/app/user/${s._id}`}
-                      >{`${s.name} ${s.surname}`}</Link>
-                      {index !== arr.length - 1 && ", "}
-                    </>
-                  )}
-                </>
-              ))}
+            <strong>Credits</strong>: {subjectData?.credits}
           </Grid>
           <Grid item xs={6}>
             <strong>Study degree</strong>: {subjectData?.studyProgramme?.degree}
@@ -143,6 +130,22 @@ export const SubjectDetail = () => {
             >
               {subjectData?.studyProgramme?.name}
             </Link>
+          </Grid>
+          <Grid item xs={12}>
+            <strong>Students</strong>:{" "}
+            {subjectData?.studyProgramme &&
+              subjectData?.studyProgramme?.students?.map((s, index, arr) => (
+                <>
+                  {s.name && (
+                    <>
+                      <Link
+                        to={`/app/user/${s._id}`}
+                      >{`${s.name} ${s.surname}`}</Link>
+                      {index !== arr.length - 1 && ", "}
+                    </>
+                  )}
+                </>
+              ))}
           </Grid>
         </Grid>
         <Box mt={"1rem"} spacing={"1rem"}>

@@ -99,6 +99,17 @@ export const SubjectAdd = withRole(["ADMIN"], () => {
             />
           </Grid>
           <Grid item xs={6}>
+            <ControlledTextField
+              type="number"
+              name="credits"
+              control={control}
+              rules={{ required: "This field is required" }}
+              label="Number of credits"
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={6}>
             <ControlledAutocomplete
               control={control}
               name="studyProgramme"

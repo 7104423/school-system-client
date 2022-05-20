@@ -17,6 +17,10 @@ export const subjectColumns = [
       `${params.row.supervisor?.name} ${params.row.supervisor?.surname}`,
   },
   {
+    field: "credits",
+    headerName: "Credits",
+  },
+  {
     field: "degree",
     headerName: "Degree",
     valueGetter: (params) => params.row.studyProgramme?.degree,
