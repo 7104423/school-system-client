@@ -169,8 +169,43 @@ export const updateStudyProgramme = async (body) => {
   });
 };
 
-export const updateUser = async (body) => {
+export const createUser = async (body) => {
   return await fetchJSON(`${url}/api/user/update`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
+
+export const createSubject = async (body) => {
+  return await fetchJSON(`${url}/api/subject/create`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
+
+export const createTopic = async (body) => {
+  return await fetchJSON(`${url}/api/topic/create`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
+
+export const createDigitalContent = async (body) => {
+  return await fetchJSON(`${url}/api/content/create`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
+
+export const createStudyProgramme = async (body) => {
+  return await fetchJSON(`${url}/api/study-programme/create`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
+
+export const updateUser = async (body) => {
+  return await fetchJSON(`${url}/api/user/create`, {
     method: "POST",
     body: JSON.stringify(body),
   });

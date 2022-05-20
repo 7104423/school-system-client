@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { useApp } from "../contexts/appContext";
 import {
   fetchSubjects,
@@ -26,6 +26,11 @@ import {
   updateDigitalContent,
   updateStudyProgramme,
   updateUser,
+  createSubject,
+  createTopic,
+  createDigitalContent,
+  createStudyProgramme,
+  createUser,
 } from "../utils/api";
 
 const contentMap = {
@@ -63,11 +68,11 @@ const editContentMap = {
 };
 
 const addContentMap = {
-  subject: fetchSubject,
-  topic: fetchTopic,
-  digitalContent: fetchDigitalContent,
-  studyProgramme: fetchStudyProgramme,
-  user: fetchUser,
+  subject: createSubject,
+  topic: createTopic,
+  digitalContent: createDigitalContent,
+  studyProgramme: createStudyProgramme,
+  user: createUser,
 };
 
 export const useContent = (contentName, id) => {
@@ -155,42 +160,45 @@ export const useDeleteContent = (contentName, id) => {
   return remove;
 };
 
-export const useAddContent = (contentName, body) => {
+export const useAddContent = (contentName) => {
   const { dispatch, setError } = useApp();
 
-  const remove = useCallback(async () => {
-    dispatch({
-      type: "loading",
-      target: contentName,
-    });
-    try {
-      if (!addContentMap[contentName]) {
-        throw new Error();
+  const add = useCallback(
+    async (body) => {
+      dispatch({
+        type: "loading",
+        target: contentName,
+      });
+      try {
+        if (!addContentMap[contentName]) {
+          throw new Error();
+        }
+        const content = await addContentMap[contentName]?.(body);
+        dispatch({
+          type: "finished",
+          target: contentName,
+          payload: {
+            data: content,
+            id: body.id,
+          },
+        });
+      } catch (error) {
+        dispatch({
+          type: "failed",
+          target: contentName,
+          payload: {
+            message: "Unable to add a record",
+            code: error.status,
+            data: body,
+          },
+        });
+        setError("Unable to add a record");
       }
-      const content = await addContentMap[contentName]?.(body);
-      dispatch({
-        type: "finished",
-        target: contentName,
-        payload: {
-          data: content,
-          id: body.id,
-        },
-      });
-    } catch (error) {
-      dispatch({
-        type: "failed",
-        target: contentName,
-        payload: {
-          message: "Unable to remove a record",
-          code: error.status,
-          data: body,
-        },
-      });
-      setError("Unable to remove a record");
-    }
-  }, [body, contentName, dispatch, setError]);
+    },
+    [contentName, dispatch, setError]
+  );
 
-  return remove;
+  return add;
 };
 
 export const useEditContent = (contentName) => {

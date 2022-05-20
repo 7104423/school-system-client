@@ -117,7 +117,9 @@ export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
               name="studyProgramme"
               label={"Study Programme"}
               options={studyProgrammes}
-              getOptionLabel={(option) => `${option?.name}`}
+              getOptionLabel={(option) =>
+                option?.name ? `${option?.name}` : ""
+              }
             />
           </Grid>
           <Grid item xs={12}>

@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Layout } from "../containers/Layout";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
 import { useContent, useDeleteContent } from "../hooks/useContent";
@@ -22,6 +22,7 @@ export const SubjectDetail = () => {
     "subject",
     id
   );
+  const [, , fetchSubjects] = useContent("subjects");
   const [isTopicsLoaded, topicData, fetchTopic] = useContent(
     "subjectTopics",
     id
@@ -40,6 +41,7 @@ export const SubjectDetail = () => {
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
+  const navigate = useNavigate();
 
   const contentMap = useMemo(() => {
     return contentData.reduce((acc, content) => {
@@ -55,14 +57,24 @@ export const SubjectDetail = () => {
     fetchSubject();
     fetchTopic();
     fetchContents();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleDelete = useCallback(async () => {
     await remove();
-    fetchSubject();
-    fetchContents();
-    fetchTopic();
-  }, [fetchContents, fetchSubject, fetchTopic, remove]);
+    await fetchSubjects();
+    await fetchSubject();
+    await fetchContents();
+    await fetchTopic();
+    navigate("/app/subjects");
+  }, [
+    fetchContents,
+    fetchSubject,
+    fetchSubjects,
+    fetchTopic,
+    navigate,
+    remove,
+  ]);
 
   return (
     <>
