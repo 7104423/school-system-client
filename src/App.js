@@ -33,7 +33,7 @@ import { Alert, AlertTitle, Slide, Snackbar } from "@mui/material";
 function App() {
   const [hasAccess, setAccess] = useState(null);
   const user = useUser();
-  const { error, setError, warning, setWarning } = useApp();
+  const { error, setError, warning, setWarning, isLoading } = useApp();
   const token = user.getToken();
 
   const handleErrorClose = useCallback(() => {
@@ -154,7 +154,13 @@ function App() {
               {warning}
             </Alert>
           </Snackbar>
-          <ViewTrapRender />
+          {isLoading && (
+            <div style={{ position: "fixed", top: 0, left: 0 }}>
+              <div style={{ position: "relative" }}>
+                <WholePageLoader />
+              </div>
+            </div>
+          )}
         </>
       )}
     </div>

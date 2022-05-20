@@ -15,17 +15,12 @@ export const StudyProgrammeEdit = withRole(["ADMIN"], () => {
   const { id } = useParams();
   const { control, handleSubmit, reset } = useForm();
 
-  const [isLoadedStudyProgramme, data, fetch] = useContent(
-    "studyProgramme",
-    id
-  );
-  const [isTeacherLoaded, teachers, fetchTeachers] = useContent("teacherEnum");
-  const [isStudentLoaded, students, fetchStudents] = useContent("studentEnum");
-  const [, , fetchStudyProgrammes] = useContent("studyProgrammes");
+  const [data, fetch] = useContent("studyProgramme", id);
+  const [teachers, fetchTeachers] = useContent("teacherEnum");
+  const [students, fetchStudents] = useContent("studentEnum");
+  const [, fetchStudyProgrammes] = useContent("studyProgrammes");
   const update = useEditContent("studyProgramme", id);
   const navigate = useNavigate();
-
-  const isLoaded = isLoadedStudyProgramme && isTeacherLoaded && isStudentLoaded;
 
   useEffect(() => {
     fetch();
@@ -54,7 +49,6 @@ export const StudyProgrammeEdit = withRole(["ADMIN"], () => {
 
   return (
     <Layout active="study-programmes">
-      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate

@@ -11,19 +11,17 @@ import { WholePageLoader } from "../containers/WholePageLoader";
 import { useUser } from "../contexts/userContext";
 
 export const DigitalContents = () => {
-  const [isLoaded, data, fetch] = useContent("digitalContents");
+  const [data, fetch] = useContent("digitalContents");
   const user = useUser();
   const userRoles = user.getRoles();
 
   useEffect(() => {
-    if (isLoaded) return;
     fetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <Layout active="digital-contents">
         <h2 className="view-heading">Digital Contents</h2>
         <Box mt={3}>

@@ -9,11 +9,10 @@ import { WholePageLoader } from "../containers/WholePageLoader";
 
 export const UserDetail = () => {
   const { id } = useParams();
-  const [isLoadedUser, data, fetch] = useContent("user", id);
-  const [isLoadedUsers, , fetchUsers] = useContent("users");
+  const [data, fetch] = useContent("user", id);
+  const [, fetchUsers] = useContent("users");
   const remove = useDeleteContent("user", id);
   const navigate = useNavigate();
-  const isLoaded = isLoadedUser && isLoadedUsers;
 
   useEffect(() => {
     fetch();
@@ -28,7 +27,6 @@ export const UserDetail = () => {
 
   return (
     <Layout active="users">
-      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <ControlPanel
         title={"User Detail"}
         id={id}

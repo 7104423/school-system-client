@@ -13,13 +13,11 @@ import { ControlledAutocomplete } from "../components/fields/input/ControlledAut
 
 export const DigitalContentAdd = withRole(["ADMIN", "TEACHER"], () => {
   const { control, handleSubmit } = useForm();
-  const [, , fetchDigitalContents] = useContent("digitalContents");
-  const [isSubjectLoaded, subjects, fetchSubjects] = useContent("subjects");
-  const [isTopicsLoaded, topics, fetchTopics] = useContent("topics");
+  const [, fetchDigitalContents] = useContent("digitalContents");
+  const [subjects, fetchSubjects] = useContent("subjects");
+  const [topics, fetchTopics] = useContent("topics");
   const update = useAddContent("digitalContent");
   const navigate = useNavigate();
-
-  const isLoaded = isSubjectLoaded && isTopicsLoaded;
 
   const onSubmit = useCallback(
     async (data) => {
@@ -43,7 +41,6 @@ export const DigitalContentAdd = withRole(["ADMIN", "TEACHER"], () => {
 
   return (
     <Layout onSubmit={handleSubmit(onSubmit)} active="digital-contents">
-      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate

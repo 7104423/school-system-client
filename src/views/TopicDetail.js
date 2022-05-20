@@ -79,20 +79,11 @@ export function MediaControlCard() {
 // Page Content
 export const TopicDetail = () => {
   const { id } = useParams();
-  const [isLoadedTopic, dataTopic, fetchTopic, topicContentID] = useContent(
-    "topic",
-    id
-  );
+  const [dataTopic, fetchTopic] = useContent("topic", id);
 
-  const [isLoadedContent, dataContent, fetchContent] = useContent(
-    "topicContents",
-    id
-  );
-
-  const isLoaded = isLoadedTopic && isLoadedContent;
+  const [dataContent, fetchContent] = useContent("topicContents", id);
 
   useEffect(() => {
-    if (topicContentID === id) return;
     fetchTopic();
     fetchContent();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -108,7 +99,7 @@ export const TopicDetail = () => {
     }, {});
   }, [dataContent]);
 
-  const [, , download] = useContent("topics");
+  const [, download] = useContent("topics");
   const remove = useDeleteContent("topic", id);
   const navigate = useNavigate();
   const handleDelete = useCallback(async () => {
@@ -120,7 +111,6 @@ export const TopicDetail = () => {
   // TopicDetail Data Grid
   return (
     <Layout active="topics">
-      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <ControlPanel
         title={dataTopic?.name}
         id={id}

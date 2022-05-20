@@ -17,7 +17,7 @@ export const ROLES = [
 export const UserAdd = withRole(["ADMIN"], () => {
   const { control, handleSubmit } = useForm();
   const add = useAddContent("user");
-  const [, , fetch] = useContent("users");
+  const [, fetch] = useContent("users");
   const navigate = useNavigate();
 
   const onSubmit = useCallback(

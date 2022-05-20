@@ -10,15 +10,14 @@ import { useContent, useDeleteContent } from "../hooks/useContent";
 export const DigitalContentDetail = () => {
   const { id } = useParams();
 
-  const [isLoaded, data, fetch] = useContent("digitalContent", id);
+  const [data, fetch] = useContent("digitalContent", id);
 
   useEffect(() => {
-    if (isLoaded) return;
     fetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [, , download] = useContent("digitalContents");
+  const [, download] = useContent("digitalContents");
   const remove = useDeleteContent("digitalContent", id);
   const navigate = useNavigate();
   const handleDelete = useCallback(async () => {
@@ -29,7 +28,6 @@ export const DigitalContentDetail = () => {
 
   return (
     <Layout active="digital-contents">
-      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <ControlPanel
         title={"Digital Content Detail"}
         id={id}

@@ -16,12 +16,10 @@ import { ControlledTextField } from "../components/fields/input/ControlledTextFi
 
 export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
   const { id } = useParams();
-  const [, , fetchSubjects] = useContent("subjects");
-  const [isSubjectLoaded, data, fetch] = useContent("subject", id);
-  const [isTeacherLoaded, teachers, fetchTeachers] = useContent("teacherEnum");
-  const [isStudyProgrammeLoaded, studyProgrammes, fetchStudyProgrammes] =
-    useContent("studyProgrammes");
-  const isLoaded = isSubjectLoaded && isTeacherLoaded && isStudyProgrammeLoaded;
+  const [, fetchSubjects] = useContent("subjects");
+  const [data, fetch] = useContent("subject", id);
+  const [teachers, fetchTeachers] = useContent("teacherEnum");
+  const [studyProgrammes, fetchStudyProgrammes] = useContent("studyProgrammes");
   const { control, reset, handleSubmit } = useForm();
   const update = useEditContent("subject");
   const navigate = useNavigate();
@@ -54,7 +52,6 @@ export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
 
   return (
     <Layout active="subjects">
-      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <form
         onSubmit={handleSubmit(onSubmit)}
         style={{ paddingTop: "2rem", paddingBottom: "2rem" }}

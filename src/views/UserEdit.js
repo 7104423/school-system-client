@@ -26,8 +26,8 @@ export const ROLES = [
 
 export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
   const { id } = useParams();
-  const [isLoaded, data, fetch] = useContent("user", id);
-  const [, , fetchUsers] = useContent("users");
+  const [data, fetch] = useContent("user", id);
+  const [, fetchUsers] = useContent("users");
   const update = useEditContent("user");
   const { control, handleSubmit, reset } = useForm();
   const password = useRef({});
@@ -88,7 +88,6 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
 
   return (
     <Layout active="users">
-      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <form
         onSubmit={handleSubmit(onSubmit)}
         style={{ paddingTop: "2rem", paddingBottom: "2rem" }}

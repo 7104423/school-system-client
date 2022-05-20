@@ -12,12 +12,10 @@ import { WholePageLoader } from "../containers/WholePageLoader";
 
 export const TopicAdd = withRole(["TEACHER", "ADMIN"], () => {
   const { control, handleSubmit } = useForm();
-  const [, , fetchTopics] = useContent("topics");
-  const [isSubjectLoaded, subjects, fetchSubjects] = useContent("subjects");
+  const [, fetchTopics] = useContent("topics");
+  const [subjects, fetchSubjects] = useContent("subjects");
   const add = useAddContent("topic");
   const navigate = useNavigate();
-
-  const isLoaded = isSubjectLoaded;
 
   const onSubmit = useCallback(
     async (data) => {
@@ -39,7 +37,6 @@ export const TopicAdd = withRole(["TEACHER", "ADMIN"], () => {
 
   return (
     <Layout active="topics">
-      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <h2 className="view-heading">Edit Topic</h2>
       <form
         noValidate

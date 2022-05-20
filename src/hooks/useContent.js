@@ -80,7 +80,7 @@ const addContentMap = {
 export const useContent = (contentName, id) => {
   const {
     state: {
-      [contentName]: { isLoaded, data, contentID },
+      [contentName]: { data },
     },
     dispatch,
     setError,
@@ -101,7 +101,6 @@ export const useContent = (contentName, id) => {
         target: contentName,
         payload: {
           data: content,
-          id,
         },
       });
     } catch (error) {
@@ -118,7 +117,7 @@ export const useContent = (contentName, id) => {
     }
   }, [dispatch, contentName, id, setError]);
 
-  return [isLoaded, data, fetch, contentID];
+  return [data, fetch];
 };
 
 export const useDeleteContent = (contentName, id) => {

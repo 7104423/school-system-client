@@ -18,23 +18,12 @@ import { ContentCard } from "../components/card/ContentCard";
 export const SubjectDetail = () => {
   const { id } = useParams();
 
-  const [isSubjectLoaded, subjectData, fetchSubject] = useContent(
-    "subject",
-    id
-  );
-  const [, , fetchSubjects] = useContent("subjects");
-  const [isTopicsLoaded, topicData, fetchTopic] = useContent(
-    "subjectTopics",
-    id
-  );
-  const [isContentsLoaded, contentData, fetchContents] = useContent(
-    "subjectContents",
-    id
-  );
+  const [subjectData, fetchSubject] = useContent("subject", id);
+  const [, fetchSubjects] = useContent("subjects");
+  const [topicData, fetchTopic] = useContent("subjectTopics", id);
+  const [contentData, fetchContents] = useContent("subjectContents", id);
 
   const remove = useDeleteContent("subject", id);
-
-  const isLoaded = isSubjectLoaded && isTopicsLoaded && isContentsLoaded;
 
   const [expanded, setExpanded] = useState(false);
 
@@ -80,7 +69,6 @@ export const SubjectDetail = () => {
 
   return (
     <>
-      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <Layout active="subjects">
         <ControlPanel
           title={subjectData?.name}

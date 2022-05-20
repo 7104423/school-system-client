@@ -11,19 +11,17 @@ import { WholePageLoader } from "../containers/WholePageLoader";
 import { useUser } from "../contexts/userContext";
 
 export const Topics = () => {
-  const [isLoaded, data, fetch] = useContent("topics");
+  const [data, fetch] = useContent("topics");
   const user = useUser();
   const userRoles = user.getRoles();
 
   useEffect(() => {
-    if (isLoaded) return;
     fetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
-      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <Layout active="topics">
         <h2 className="view-heading">Topics</h2>
         <Box mt={3}>

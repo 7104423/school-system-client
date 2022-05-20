@@ -13,13 +13,11 @@ import { useCallback, useEffect } from "react";
 export const StudyProgrammeAdd = withRole(["ADMIN"], () => {
   const { control, handleSubmit } = useForm();
 
-  const [isTeacherLoaded, teachers, fetchTeachers] = useContent("teacherEnum");
-  const [isStudentLoaded, students, fetchStudents] = useContent("studentEnum");
-  const [, , fetchStudyProgrammes] = useContent("studyProgrammes");
+  const [teachers, fetchTeachers] = useContent("teacherEnum");
+  const [students, fetchStudents] = useContent("studentEnum");
+  const [, fetchStudyProgrammes] = useContent("studyProgrammes");
   const add = useAddContent("studyProgramme");
   const navigate = useNavigate();
-
-  const isLoaded = isTeacherLoaded && isStudentLoaded;
 
   useEffect(() => {
     fetchTeachers();
@@ -43,7 +41,6 @@ export const StudyProgrammeAdd = withRole(["ADMIN"], () => {
 
   return (
     <Layout active="study-programmes">
-      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate

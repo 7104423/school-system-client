@@ -10,14 +10,14 @@ import { useContent, useDeleteContent } from "../hooks/useContent";
 export const StudyProgrammeDetail = () => {
   const { id } = useParams();
 
-  const [isLoaded, data, fetch] = useContent("studyProgramme", id);
+  const [data, fetch] = useContent("studyProgramme", id);
 
   useEffect(() => {
     fetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [, , downloadProgrammes] = useContent("studyProgrammes");
+  const [, downloadProgrammes] = useContent("studyProgrammes");
   const remove = useDeleteContent("studyProgramme", id);
   const navigate = useNavigate();
   const handleDelete = useCallback(async () => {
@@ -28,7 +28,6 @@ export const StudyProgrammeDetail = () => {
 
   return (
     <Layout active="study-programmes">
-      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <ControlPanel
         title={data?.name}
         id={id}

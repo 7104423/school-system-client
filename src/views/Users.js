@@ -12,12 +12,9 @@ export const Users = () => {
   const user = useUser();
   const userRoles = user.getRoles();
 
-  const [isLoaded, data, fetch] = useContent("users");
+  const [data, fetch] = useContent("users");
 
   useEffect(() => {
-    if (isLoaded) {
-      return;
-    }
     fetch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

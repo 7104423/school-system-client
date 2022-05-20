@@ -1,17 +1,17 @@
 export const defaultContentReducer = (state, action) => {
   switch (action.type) {
     case "loading":
-      return { ...state, isLoaded: false };
+      return { ...state, isLoading: true };
     case "finished":
       return {
         data: action.payload.data,
         contentID: action.payload.id,
-        isLoaded: true,
+        isLoading: false,
       };
     case "failed":
       return {
         data: [],
-        isLoaded: true,
+        isLoading: false,
         error: action.payload.data,
         contentID: action.payload.id,
       };
@@ -21,21 +21,21 @@ export const defaultContentReducer = (state, action) => {
 };
 
 export const defaultInitialState = {
-  isLoaded: false,
+  isLoading: false,
   contentID: null,
   data: [],
   error: null,
 };
 
 export const defaultInitialObject = {
-  isLoaded: false,
+  isLoading: false,
   contentID: null,
   data: [],
   error: null,
 };
 
 export const subjectInitialObject = {
-  isLoaded: false,
+  isLoading: false,
   contentID: null,
   data: {
     id: "",
