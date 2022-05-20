@@ -41,14 +41,18 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
       groups:
         data.groups
           ?.map(({ name }) => ROLES.find(({ value }) => value === name))
-          .filter((e) => e) ?? [],
+          .filter((e) => e) ?? [].map(({ value }) => value),
     };
     reset(parsedData);
   }, [data, reset]);
 
   const onSubmit = useCallback(
     async (data) => {
-      await update(data);
+      const parsedData = {
+        ...data,
+        groups: data?.groups?.map(({ value }) => value) ?? [],
+      };
+      await update(parsedData);
       await fetch();
       await fetchUsers();
       navigate("/app/users");
