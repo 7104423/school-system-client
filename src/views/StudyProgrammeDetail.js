@@ -1,11 +1,11 @@
 import { Grid } from "@mui/material";
-import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useCallback, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
 import { ViewTrap } from "../components/viewtrap";
 import { Layout } from "../containers/Layout";
 import { WholePageLoader } from "../containers/WholePageLoader";
-import { useContent } from "../hooks/useContent";
+import { useContent, useDeleteContent } from "../hooks/useContent";
 
 export const StudyProgrammeDetail = () => {
   const { id } = useParams();
@@ -14,7 +14,17 @@ export const StudyProgrammeDetail = () => {
 
   useEffect(() => {
     fetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const [, , downloadProgrammes] = useContent("studyProgrammes");
+  const remove = useDeleteContent("studyProgramme", id);
+  const navigate = useNavigate();
+  const handleDelete = useCallback(async () => {
+    await remove();
+    await downloadProgrammes();
+    navigate("/app/study-programmes");
+  }, [downloadProgrammes, navigate, remove]);
 
   return (
     <Layout active="study-programmes">
@@ -24,6 +34,7 @@ export const StudyProgrammeDetail = () => {
         id={id}
         page={"study-programme"}
         rolesDelete={["ADMIN"]}
+        onDelete={handleDelete}
         rolesEdit={["ADMIN"]}
       />
 

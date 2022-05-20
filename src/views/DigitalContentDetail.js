@@ -1,11 +1,11 @@
 import { Grid } from "@mui/material";
-import { useContext, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useCallback, useContext, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
 import { ViewTrap } from "../components/viewtrap";
 import { Layout } from "../containers/Layout";
 import { WholePageLoader } from "../containers/WholePageLoader";
-import { useContent } from "../hooks/useContent";
+import { useContent, useDeleteContent } from "../hooks/useContent";
 
 export const DigitalContentDetail = () => {
   const { id } = useParams();
@@ -15,7 +15,17 @@ export const DigitalContentDetail = () => {
   useEffect(() => {
     if (isLoaded) return;
     fetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const [, , download] = useContent("digitalContents");
+  const remove = useDeleteContent("digitalContent", id);
+  const navigate = useNavigate();
+  const handleDelete = useCallback(async () => {
+    await remove();
+    await download();
+    navigate("/app/digital-contents");
+  }, [download, navigate, remove]);
 
   return (
     <Layout active="digital-contents">
@@ -26,6 +36,7 @@ export const DigitalContentDetail = () => {
         page={"digital-content"}
         rolesDelete={["ADMIN", "TEACHER"]}
         rolesEdit={["ADMIN", "TEACHER"]}
+        onDelete={handleDelete}
       />
       <Grid justifyContent={"end"} container spacing={2}>
         <Grid item xs={6}>

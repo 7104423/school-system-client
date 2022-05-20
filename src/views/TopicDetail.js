@@ -1,5 +1,5 @@
 // MUI > Card > Media Control Card
-import React, { useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useTheme } from "@mui/material/styles";
 import CardMedia from "@mui/material/CardMedia";
 import IconButton from "@mui/material/IconButton";
@@ -19,10 +19,10 @@ import {
   // Typography,
 } from "@mui/material";
 
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
 import { Layout } from "../containers/Layout";
-import { useContent } from "../hooks/useContent";
+import { useContent, useDeleteContent } from "../hooks/useContent";
 import { ViewTrap } from "../components/viewtrap";
 import { WholePageLoader } from "../containers/WholePageLoader";
 import { ContentCard } from "../components/card/ContentCard";
@@ -108,6 +108,15 @@ export const TopicDetail = () => {
     }, {});
   }, [dataContent]);
 
+  const [, , download] = useContent("topics");
+  const remove = useDeleteContent("topic", id);
+  const navigate = useNavigate();
+  const handleDelete = useCallback(async () => {
+    await remove();
+    await download();
+    navigate("/app/topics");
+  }, [download, navigate, remove]);
+
   // TopicDetail Data Grid
   return (
     <Layout active="topics">
@@ -118,6 +127,7 @@ export const TopicDetail = () => {
         page={"topic"}
         rolesDelete={["ADMIN", "TEACHER"]}
         rolesEdit={["ADMIN", "TEACHER"]}
+        onDelete={handleDelete}
       />
 
       <Grid justifyContent={"end"} container spacing={2}>
