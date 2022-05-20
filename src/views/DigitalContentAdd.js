@@ -2,124 +2,104 @@ import { Autocomplete, Button, Grid, MenuItem, TextField } from "@mui/material";
 import { top100Films } from "../mockups/top100films.mockup";
 import { Layout } from "../containers/Layout";
 import { withRole } from "../containers/withRole";
-import { React } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { useAddContent, useContent, useEditContent } from "../hooks/useContent";
+import { useNavigate, useParams } from "react-router-dom";
+import { useCallback, useEffect } from "react";
+import { ViewTrap } from "../components/viewtrap";
+import { WholePageLoader } from "../containers/WholePageLoader";
+import { ControlledTextField } from "../components/fields/input/ControlledTextField";
+import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
 
 export const DigitalContentAdd = withRole(["ADMIN", "TEACHER"], () => {
-  const { handleSubmit, errors, control } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const { control, handleSubmit } = useForm();
+  const [, , fetchDigitalContents] = useContent("digitalContents");
+  const [isSubjectLoaded, subjects, fetchSubjects] = useContent("subjects");
+  const [isTopicsLoaded, topics, fetchTopics] = useContent("topics");
+  const update = useAddContent("digitalContent");
+  const navigate = useNavigate();
+
+  const isLoaded = isSubjectLoaded && isTopicsLoaded;
+
+  const onSubmit = useCallback(
+    async (data) => {
+      const parsedData = {
+        ...data,
+        subject: data.subject?.id,
+        topic: data.topic?._id,
+      };
+      await update(parsedData);
+      await fetchDigitalContents();
+      navigate("/app/digital-contents");
+    },
+    [fetchDigitalContents, navigate, update]
+  );
+
+  useEffect(() => {
+    fetchSubjects();
+    fetchTopics();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-    <Layout active="digital-contents">
+    <Layout onSubmit={handleSubmit(onSubmit)} active="digital-contents">
+      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
       <form
         onSubmit={handleSubmit(onSubmit)}
+        noValidate
         style={{ paddingTop: "2rem", paddingBottom: "2rem" }}
       >
-        <Grid justifyContent={"end"} container spacing={2}>
+        <Grid justifyContent={"start"} container spacing={2}>
           <Grid item xs={12}>
-            <Controller
+            <ControlledTextField
               control={control}
               name="type"
-              render={({
-                field: { onChange, onBlur, value, name, ref },
-                fieldState: { isTouched, isDirty, error },
-                formState,
-              }) => (
-                <TextField
-                  fullWidth
-                  label="Digital Content Type"
-                  select
-                  onBlur={onBlur} // notify when input is touched
-                  onChange={onChange} // send value to hook form
-                  value={value || ""}
-                  inputRef={ref}
-                >
-                  <MenuItem value="Book">Book</MenuItem>
-                  <MenuItem value="Video">Video</MenuItem>
-                  <MenuItem value="Course">Course</MenuItem>
-                </TextField>
-              )}
+              fullWidth
+              rules={{ required: "This field is required" }}
+              label="Digital Content Type"
+              select
+            >
+              <MenuItem value="Unicorn University link">
+                Unicorn University link
+              </MenuItem>
+              <MenuItem value="YouTube link">YouTube link</MenuItem>
+            </ControlledTextField>
+          </Grid>
+
+          <Grid item xs={12}>
+            <ControlledTextField
+              control={control}
+              name="content"
+              rules={{ required: "This field is required" }}
+              label="Link to Digital Content"
+              variant="outlined"
+              fullWidth
             />
           </Grid>
 
           <Grid item xs={12}>
-            <Controller
+            <ControlledAutocomplete
               control={control}
-              name="link"
-              render={({
-                field: { onChange, onBlur, value, name, ref },
-                fieldState: { isTouched, isDirty, error },
-                formState,
-              }) => (
-                <TextField
-                  label="Link to new Digital Content"
-                  variant="outlined"
-                  fullWidth
-                  onBlur={onBlur} // notify when input is touched
-                  onChange={onChange} // send value to hook form
-                  checked={value || ""}
-                  inputRef={ref}
-                />
-              )}
-            />
-          </Grid>
-
-          <Grid item xs={12}>
-            <Controller
-              control={control}
+              label="Subject"
               name="subject"
-              render={({
-                field: { onChange, onBlur, value, name, ref },
-                fieldState: { isTouched, isDirty, error },
-                formState,
-              }) => (
-                <Autocomplete
-                  disablePortal
-                  multiple
-                  size="big"
-                  options={top100Films}
-                  fullWidth
-                  onBlur={onBlur} // notify when input is touched
-                  onChange={onChange} // send value to hook form
-                  checked={value || ""}
-                  inputRef={ref}
-                  renderInput={(params) => (
-                    <TextField {...params} label="Subject" />
-                  )}
-                />
-              )}
+              options={subjects}
+              getOptionLabel={(option) =>
+                option?.name ? `${option?.name || ""}` : ""
+              }
             />
           </Grid>
 
           <Grid item xs={12}>
-            <Controller
+            <ControlledAutocomplete
               control={control}
+              label="Topic"
               name="topic"
-              render={({
-                field: { onChange, onBlur, value, name, ref },
-                fieldState: { isTouched, isDirty, error },
-                formState,
-              }) => (
-                <Autocomplete
-                  disablePortal
-                  multiple
-                  size="big"
-                  options={top100Films}
-                  fullWidth
-                  onBlur={onBlur} // notify when input is touched
-                  onChange={onChange} // send value to hook form
-                  checked={value || ""}
-                  inputRef={ref}
-                  renderInput={(params) => (
-                    <TextField {...params} label="Topic" />
-                  )}
-                />
-              )}
+              options={topics}
+              getOptionLabel={(option) =>
+                option?.name ? `${option?.name || ""}` : ""
+              }
             />
           </Grid>
-
-          <Grid item xs={6}></Grid>
 
           <Grid item xs={12}>
             <Button type="submit" variant="contained">
