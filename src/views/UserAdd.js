@@ -1,117 +1,100 @@
-import { Button, Grid, MenuItem, TextField } from "@mui/material";
+import { Button, Grid } from "@mui/material";
+import { useCallback } from "react";
 import { Layout } from "../containers/Layout";
 import { withRole } from "../containers/withRole";
-import { React } from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import { ControlledTextField } from "../components/fields/input/ControlledTextField";
+import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
+
+export const ROLES = [
+  { name: "Student", value: "STUDENT" },
+  { name: "Admin", value: "ADMIN" },
+  { name: "Teacher", value: "TEACHER" },
+];
 
 export const UserAdd = withRole(["ADMIN"], () => {
-  const { handleSubmit, errors, control } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-  };
+  const { control, handleSubmit } = useForm();
+
+  const onSubmit = useCallback((data) => {}, []);
+
   return (
     <Layout active="users">
       <form
         onSubmit={handleSubmit(onSubmit)}
         style={{ paddingTop: "2rem", paddingBottom: "2rem" }}
+        noValidate
       >
-        <Grid justifyContent={"end"} container spacing={2}>
+        <Grid justifyContent={"start"} container spacing={2}>
           <Grid item xs={6}>
-            <Controller
+            <ControlledTextField
               control={control}
               name="name"
-              render={({
-                field: { onChange, onBlur, value, name, ref },
-                fieldState: { isTouched, isDirty, error },
-                formState,
-              }) => (
-                <TextField
-                  id="outlined-basic"
-                  label="Name"
-                  variant="outlined"
-                  fullWidth
-                  onBlur={onBlur} // notify when input is touched
-                  onChange={onChange} // send value to hook form
-                  checked={value || ""}
-                  inputRef={ref}
-                />
-              )}
+              rules={{ required: "This field is required" }}
+              label="Name"
+              variant="outlined"
+              fullWidth
             />
           </Grid>
 
           <Grid item xs={6}>
-            <Controller
+            <ControlledTextField
               control={control}
-              name="surename"
-              render={({
-                field: { onChange, onBlur, value, name, ref },
-                fieldState: { isTouched, isDirty, error },
-                formState,
-              }) => (
-                <TextField
-                  id="outlined-basic"
-                  label="Surname"
-                  variant="outlined"
-                  fullWidth
-                  onBlur={onBlur} // notify when input is touched
-                  onChange={onChange} // send value to hook form
-                  checked={value || ""}
-                  inputRef={ref}
-                />
-              )}
+              name="surname"
+              rules={{ required: "This field is required" }}
+              label="Surname"
+              variant="outlined"
+              fullWidth
             />
           </Grid>
 
           <Grid item xs={6}>
-            <Controller
+            <ControlledAutocomplete
               control={control}
-              name="role"
-              render={({
-                field: { onChange, onBlur, value, name, ref },
-                fieldState: { isTouched, isDirty, error },
-                formState,
-              }) => (
-                <TextField
-                  fullWidth
-                  label="Role"
-                  select
-                  onBlur={onBlur} // notify when input is touched
-                  onChange={onChange} // send value to hook form
-                  value={value || ""}
-                  inputRef={ref}
-                >
-                  <MenuItem value="admin">Admin</MenuItem>
-                  <MenuItem value="student">Student</MenuItem>
-                  <MenuItem value="teacher">Teacher</MenuItem>
-                </TextField>
-              )}
+              multiple
+              rules={{ required: "This field is required" }}
+              label="Role"
+              name="groups"
+              options={ROLES}
+              getOptionLabel={(option) =>
+                option?.name ? `${option.name}` : ""
+              }
             />
           </Grid>
 
           <Grid item xs={6}>
-            <Controller
+            <ControlledTextField
               control={control}
-              name="email"
-              render={({
-                field: { onChange, onBlur, value, name, ref },
-                fieldState: { isTouched, isDirty, error },
-                formState,
-              }) => (
-                <TextField
-                  id="outlined-basic"
-                  label="Email"
-                  variant="outlined"
-                  fullWidth
-                  onBlur={onBlur} // notify when input is touched
-                  onChange={onChange} // send value to hook form
-                  checked={value || ""}
-                  inputRef={ref}
-                />
-              )}
+              name={"email"}
+              rules={{
+                required: "This field is required",
+                pattern: {
+                  value: /\S+@\S+\.\S+/,
+                  message: "Entered value does not match email format",
+                },
+              }}
+              label="Email"
+              variant="outlined"
+              fullWidth
             />
           </Grid>
 
-          <Grid item xs={6}></Grid>
+          <Grid item xs={6}>
+            <ControlledTextField
+              control={control}
+              name={"password"}
+              rules={{
+                required: "This field is required",
+                minLength: {
+                  value: 5,
+                  message: "Minimal password length is 5 characters",
+                },
+              }}
+              label="Password"
+              type="password"
+              variant="outlined"
+              fullWidth
+            />
+          </Grid>
 
           <Grid item xs={12}>
             <Button type="submit" variant="contained">
