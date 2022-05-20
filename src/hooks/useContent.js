@@ -19,6 +19,13 @@ import {
   deleteDigitalContent,
   deleteStudyProgramme,
   deleteUser,
+  fetchStudentEnum,
+  fetchTeacherEnum,
+  updateSubject,
+  updateTopic,
+  updateDigitalContent,
+  updateStudyProgramme,
+  updateUser,
 } from "../utils/api";
 
 const contentMap = {
@@ -35,6 +42,8 @@ const contentMap = {
   digitalContent: fetchDigitalContent,
   studyProgramme: fetchStudyProgramme,
   user: fetchUser,
+  studentEnum: fetchStudentEnum,
+  teacherEnum: fetchTeacherEnum,
 };
 
 const deleteContentMap = {
@@ -46,11 +55,11 @@ const deleteContentMap = {
 };
 
 const editContentMap = {
-  subject: fetchSubject,
-  topic: fetchTopic,
-  digitalContent: fetchDigitalContent,
-  studyProgramme: fetchStudyProgramme,
-  user: fetchUser,
+  subject: updateSubject,
+  topic: updateTopic,
+  digitalContent: updateDigitalContent,
+  studyProgramme: updateStudyProgramme,
+  user: updateUser,
 };
 
 const addContentMap = {
@@ -184,42 +193,42 @@ export const useAddContent = (contentName, body) => {
   return remove;
 };
 
-export const useEditContent = (contentName, body) => {
+export const useEditContent = (contentName) => {
   const { dispatch, setError } = useApp();
 
-  const remove = useCallback(async () => {
-    if (!window.confirm("Are you sure you want to delete this item?")) {
-      return;
-    }
-    dispatch({
-      type: "loading",
-      target: contentName,
-    });
-    try {
-      if (!editContentMap[contentName]) {
-        throw new Error();
+  const edit = useCallback(
+    async (body) => {
+      dispatch({
+        type: "loading",
+        target: contentName,
+      });
+      try {
+        if (!editContentMap[contentName]) {
+          throw new Error();
+        }
+        const content = await editContentMap[contentName]?.(body);
+        dispatch({
+          type: "finished",
+          target: contentName,
+          payload: {
+            data: content,
+            id: body.id,
+          },
+        });
+      } catch (error) {
+        dispatch({
+          type: "failed",
+          target: contentName,
+          payload: {
+            message: "Unable to update record",
+            code: error.status,
+          },
+        });
+        setError("Unable to update record");
       }
-      const content = await editContentMap[contentName]?.({ body });
-      dispatch({
-        type: "finished",
-        target: contentName,
-        payload: {
-          data: content,
-          id: body.id,
-        },
-      });
-    } catch (error) {
-      dispatch({
-        type: "failed",
-        target: contentName,
-        payload: {
-          message: "Unable to remove a record",
-          code: error.status,
-        },
-      });
-      setError("Unable to remove a record");
-    }
-  }, [body, contentName, dispatch, setError]);
+    },
+    [contentName, dispatch, setError]
+  );
 
-  return remove;
+  return edit;
 };

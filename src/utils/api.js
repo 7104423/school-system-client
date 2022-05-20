@@ -82,6 +82,14 @@ export const fetchUsers = async () => {
   return await fetchJSON(`${url}/api/user/list`);
 };
 
+export const fetchStudentEnum = async () => {
+  return await fetchJSON(`${url}/api/user/enum/students`);
+};
+
+export const fetchTeacherEnum = async () => {
+  return await fetchJSON(`${url}/api/user/enum/teachers`);
+};
+
 export const fetchTopic = async (id) => {
   return await fetchJSON(`${url}/api/topic/${id}`);
 };
@@ -128,6 +136,41 @@ export const deleteStudyProgramme = async (body) => {
 
 export const deleteUser = async (body) => {
   return await fetchJSON(`${url}/api/user/delete`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
+
+export const updateSubject = async (body) => {
+  return await fetchJSON(`${url}/api/subject/update`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
+
+export const updateTopic = async (body) => {
+  return await fetchJSON(`${url}/api/topic/update`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
+
+export const updateDigitalContent = async (body) => {
+  return await fetchJSON(`${url}/api/content/update`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
+
+export const updateStudyProgramme = async (body) => {
+  return await fetchJSON(`${url}/api/study-programme/update`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
+
+export const updateUser = async (body) => {
+  return await fetchJSON(`${url}/api/user/update`, {
     method: "POST",
     body: JSON.stringify(body),
   });

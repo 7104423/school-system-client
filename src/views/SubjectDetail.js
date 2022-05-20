@@ -18,7 +18,7 @@ import { ContentCard } from "../components/card/ContentCard";
 export const SubjectDetail = () => {
   const { id } = useParams();
 
-  const [isSubjectLoaded, subjectData, fetchSubject, contentID] = useContent(
+  const [isSubjectLoaded, subjectData, fetchSubject] = useContent(
     "subject",
     id
   );
@@ -52,11 +52,10 @@ export const SubjectDetail = () => {
   }, [contentData]);
 
   useEffect(() => {
-    if (contentID === id) return;
     fetchSubject();
     fetchTopic();
     fetchContents();
-  }, [contentID, fetchContents, fetchSubject, fetchTopic, id]);
+  }, [id]);
 
   const handleDelete = useCallback(async () => {
     await remove();

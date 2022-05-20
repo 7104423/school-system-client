@@ -1,28 +1,71 @@
-import {
-  Autocomplete,
-  Button,
-  Divider,
-  Grid,
-  MenuItem,
-  TextField,
-} from "@mui/material";
+import { Button, Divider, Grid } from "@mui/material";
 import { Table } from "../components/table";
-import { digitalContentColumns } from "../config/columns/digitalContents";
 import { topicColumns } from "../config/columns/topics";
 import { subjectMockup } from "../mockups/subjects.mockup";
-import { top100Films } from "../mockups/top100films.mockup";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Layout } from "../containers/Layout";
 import { withRole } from "../containers/withRole";
+import { useContent, useEditContent } from "../hooks/useContent";
+import { ViewTrap } from "../components/viewtrap";
+import { WholePageLoader } from "../containers/WholePageLoader";
+import { useCallback, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
+import { ControlledTextField } from "../components/fields/input/ControlledTextField";
 
 export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
+  const { id } = useParams();
+  const [, , fetchSubjects] = useContent("subjects");
+  const [isSubjectLoaded, data, fetch] = useContent("subject", id);
+  const [isTeacherLoaded, teachers, fetchTeachers] = useContent("teacherEnum");
+  const [isStudyProgrammeLoaded, studyProgrammes, fetchStudyProgrammes] =
+    useContent("studyProgrammes");
+  const isLoaded = isSubjectLoaded && isTeacherLoaded && isStudyProgrammeLoaded;
+  const { control, reset, handleSubmit } = useForm();
+  const update = useEditContent("subject");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch();
+    fetchTeachers();
+    fetchStudyProgrammes();
+  }, [fetch, fetchStudyProgrammes, fetchTeachers, id]);
+
+  useEffect(() => {
+    reset(data);
+  }, [data, reset]);
+
+  const onSubmit = useCallback(
+    async (data) => {
+      const formatedData = {
+        ...data,
+        studyProgramme: data.studyProgramme?._id,
+        supervisor: data.supervisor?._id,
+        teachers: data.teachers.map((teacher) => teacher._id),
+      };
+      await update(formatedData);
+      await fetch();
+      await fetchSubjects();
+      navigate("/app/subjects");
+    },
+    [update, fetch, fetchSubjects, navigate]
+  );
+
   return (
     <Layout active="subjects">
-      <form style={{ paddingTop: "2rem", paddingBottom: "2rem" }}>
-        <Grid justifyContent={"end"} container spacing={2}>
+      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        style={{ paddingTop: "2rem", paddingBottom: "2rem" }}
+        noValidate
+      >
+        <Grid justifyContent={"start"} container spacing={2}>
           <Grid item xs={12}>
-            <TextField
+            <ControlledTextField
+              name="name"
+              control={control}
+              rules={{ required: "This field is required" }}
               id="outlined-basic"
               label="Subject name"
               variant="outlined"
@@ -30,69 +73,57 @@ export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <TextField
+            <ControlledTextField
+              name="goal"
+              control={control}
               id="outlined-basic"
               label="Subject goal"
               variant="outlined"
               fullWidth
               multiline
-              rows={2}
+              rows={4}
             />
           </Grid>
           <Grid item xs={6}>
-            <Autocomplete
-              disablePortal
-              options={top100Films}
-              fullWidth
-              renderInput={(params) => (
-                <TextField fullWidth {...params} label="Supervisor" />
-              )}
+            <ControlledAutocomplete
+              control={control}
+              rules={{ required: "This field is required" }}
+              label="Supervisor"
+              name="supervisor"
+              options={teachers}
+              getOptionLabel={(option) =>
+                option?.name
+                  ? `${option?.name || ""} ${option?.surname || ""}`
+                  : ""
+              }
             />
           </Grid>
+
           <Grid item xs={6}>
-            <Autocomplete
-              disablePortal
+            <ControlledAutocomplete
+              control={control}
+              name="teachers"
+              rules={{ required: "This field is required" }}
+              label={"Teachers"}
               multiple
-              options={top100Films}
+              options={teachers}
+              getOptionLabel={(option) => `${option?.name} ${option?.surname}`}
               fullWidth
-              renderInput={(params) => (
-                <TextField {...params} label="Teachers" />
-              )}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <ControlledAutocomplete
+              control={control}
+              name="studyProgramme"
+              label={"Study Programme"}
+              options={studyProgrammes}
+              getOptionLabel={(option) => `${option?.name}`}
             />
           </Grid>
           <Grid item xs={12}>
-            <Autocomplete
-              disablePortal
-              multiple
-              size="big"
-              options={top100Films}
-              fullWidth
-              renderInput={(params) => (
-                <TextField {...params} label="Students" />
-              )}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField fullWidth label="Degree" value="20" select>
-              <MenuItem value="BACHELOR">Bachelor</MenuItem>
-              <MenuItem value="MASTER">Master</MenuItem>
-            </TextField>
-          </Grid>
-          <Grid item xs={6}>
-            <TextField fullWidth label="Language" value="20" select>
-              <MenuItem value="cs">Czech</MenuItem>
-              <MenuItem value="en">English</MenuItem>
-            </TextField>
-          </Grid>
-          <Grid item xs={6}>
-            <TextField fullWidth label="Study programme" value="20" select>
-              <MenuItem value="cs">Software development</MenuItem>
-              <MenuItem value="en">Business management</MenuItem>
-            </TextField>
-          </Grid>
-          <Grid item xs={6}></Grid>
-          <Grid item xs={12}>
-            <Button variant="contained">Submit</Button>
+            <Button type="submit" variant="contained">
+              Submit
+            </Button>
           </Grid>
         </Grid>
       </form>
@@ -127,7 +158,7 @@ export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
           </Link>
         </Grid>
         <Grid height={500} xs={12} item>
-          <Table columns={digitalContentColumns} rows={subjectMockup} />
+          <Table columns={topicColumns} rows={subjectMockup} />
         </Grid>
       </Grid>
     </Layout>

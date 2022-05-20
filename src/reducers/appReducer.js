@@ -1,6 +1,8 @@
 import {
   defaultInitialState,
   defaultContentReducer,
+  subjectInitialObject,
+  defaultInitialObject,
 } from "./defaultContentReducer";
 
 const reducer = (actionTarget, state, action) => ({
@@ -13,8 +15,8 @@ export const appReducer = (state, action) => {
 };
 
 export const appInitialState = {
-  subjects: defaultInitialState,
-  subject: defaultInitialState,
+  subjects: defaultInitialObject,
+  subject: subjectInitialObject,
   subjectTopics: defaultInitialState,
   subjectContents: defaultInitialState,
   topics: defaultInitialState,
@@ -24,6 +26,8 @@ export const appInitialState = {
   topic: defaultInitialState,
   digitalContent: defaultInitialState,
   studyProgramme: defaultInitialState,
-  user: defaultInitialState,
+  user: defaultInitialObject,
   users: defaultInitialState,
+  studentEnum: defaultInitialState,
+  teacherEnum: defaultInitialState,
 };
