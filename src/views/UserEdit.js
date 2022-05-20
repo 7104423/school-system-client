@@ -1,11 +1,11 @@
 import { Button, Grid, MenuItem, TextField } from "@mui/material";
 import { useCallback, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ViewTrap } from "../components/viewtrap";
 import { Layout } from "../containers/Layout";
 import { WholePageLoader } from "../containers/WholePageLoader";
 import { withRole } from "../containers/withRole";
-import { useContent } from "../hooks/useContent";
+import { useContent, useEditContent } from "../hooks/useContent";
 import { useForm } from "react-hook-form";
 import { ControlledTextField } from "../components/fields/input/ControlledTextField";
 import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
@@ -20,11 +20,15 @@ export const ROLES = [
 export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
   const { id } = useParams();
   const [isLoaded, data, fetch] = useContent("user", id);
+  const [, , fetchUsers] = useContent("users");
+  const update = useEditContent("user");
   const { control, handleSubmit, reset } = useForm();
 
   const user = useUser();
   const userRoles = user.getRoles();
   const hasAdmin = userRoles.includes("ADMIN");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch();
@@ -33,6 +37,7 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
   useEffect(() => {
     const parsedData = {
       ...data,
+      password: undefined,
       groups:
         data.groups
           ?.map(({ name }) => ROLES.find(({ value }) => value === name))
@@ -41,7 +46,15 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
     reset(parsedData);
   }, [data, reset]);
 
-  const onSubmit = useCallback((data) => {}, []);
+  const onSubmit = useCallback(
+    async (data) => {
+      await update(data);
+      await fetch();
+      await fetchUsers();
+      navigate("/app/users");
+    },
+    [fetch, fetchUsers, navigate, update]
+  );
 
   return (
     <Layout active="users">

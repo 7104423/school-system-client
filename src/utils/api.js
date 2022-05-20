@@ -170,7 +170,7 @@ export const updateStudyProgramme = async (body) => {
 };
 
 export const createUser = async (body) => {
-  return await fetchJSON(`${url}/api/user/update`, {
+  return await fetchJSON(`${url}/api/user/create`, {
     method: "POST",
     body: JSON.stringify(body),
   });
@@ -205,7 +205,7 @@ export const createStudyProgramme = async (body) => {
 };
 
 export const updateUser = async (body) => {
-  return await fetchJSON(`${url}/api/user/create`, {
+  return await fetchJSON(`${url}/api/user/update`, {
     method: "POST",
     body: JSON.stringify(body),
   });
