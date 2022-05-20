@@ -22,15 +22,17 @@ export const ControlledAutocomplete = ({
             options={options}
             getOptionLabel={getOptionLabel}
             renderOption={renderOption}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                required={rules?.required}
-                label={label}
-                error={!!fieldState.error}
-                helperText={fieldState.error?.message}
-              />
-            )}
+            renderInput={(params) => {
+              return (
+                <TextField
+                  {...params}
+                  required={rules?.required}
+                  label={label}
+                  error={!!fieldState.error}
+                  helperText={fieldState.error?.message}
+                />
+              );
+            }}
             {...field}
             value={value || []}
             onChange={(e, data) => field.onChange(data)}
