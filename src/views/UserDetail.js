@@ -1,19 +1,30 @@
 import { Grid } from "@mui/material";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useCallback, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
 import { Layout } from "../containers/Layout";
-import { useContent } from "../hooks/useContent";
+import { useContent, useDeleteContent } from "../hooks/useContent";
 import { ViewTrap } from "../components/viewtrap";
 import { WholePageLoader } from "../containers/WholePageLoader";
 
 export const UserDetail = () => {
   const { id } = useParams();
-  const [isLoaded, data, fetch] = useContent("user", id);
+  const [isLoadedUser, data, fetch] = useContent("user", id);
+  const [isLoadedUsers, , fetchUsers] = useContent("users");
+  const remove = useDeleteContent("user", id);
+  const navigate = useNavigate();
+  const isLoaded = isLoadedUser && isLoadedUsers;
 
   useEffect(() => {
     fetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
+
+  const handleDelete = useCallback(async () => {
+    await remove();
+    await fetchUsers();
+    navigate("/app/users");
+  }, [fetchUsers, navigate, remove]);
 
   return (
     <Layout active="users">
@@ -23,6 +34,7 @@ export const UserDetail = () => {
         id={id}
         page={"user"}
         rolesDelete={["ADMIN"]}
+        onDelete={handleDelete}
         rolesEdit={["ADMIN"]}
       />
       <Grid container>

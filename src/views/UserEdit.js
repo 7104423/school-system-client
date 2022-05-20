@@ -1,5 +1,5 @@
-import { Button, Grid, MenuItem, TextField } from "@mui/material";
-import { useCallback, useEffect } from "react";
+import { Button, Grid, Typography } from "@mui/material";
+import { useCallback, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ViewTrap } from "../components/viewtrap";
 import { Layout } from "../containers/Layout";
@@ -23,10 +23,20 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
   const [, , fetchUsers] = useContent("users");
   const update = useEditContent("user");
   const { control, handleSubmit, reset } = useForm();
+  const password = useRef({});
+  const {
+    control: controlPassword,
+    handleSubmit: onSubmitPassword,
+    watch,
+  } = useForm();
+
+  password.current = watch("password", "");
 
   const user = useUser();
   const userRoles = user.getRoles();
   const hasAdmin = userRoles.includes("ADMIN");
+  const isSameUser = user.getUser()?.id === id;
+  const updatePassword = useEditContent("userPassword");
 
   const navigate = useNavigate();
 
@@ -58,6 +68,15 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
       navigate("/app/users");
     },
     [fetch, fetchUsers, navigate, update]
+  );
+
+  const handlePasswordChange = useCallback(
+    (data) => {
+      const { password } = data;
+      updatePassword({ password, id });
+      navigate("/app/users");
+    },
+    [id, navigate, updatePassword]
   );
 
   return (
@@ -133,6 +152,53 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
           </Grid>
         </Grid>
       </form>
+      {(isSameUser || hasAdmin) && (
+        <form onSubmit={onSubmitPassword(handlePasswordChange)} noValidate>
+          <Grid spacing={2} container>
+            <Grid pb={2} xs={12} item>
+              <hr />
+              <Typography variant="h5">Password change</Typography>
+            </Grid>
+            <Grid xs={6} item>
+              <ControlledTextField
+                control={controlPassword}
+                name={"password"}
+                rules={{
+                  required: "This field is required",
+                  minLength: 5,
+                }}
+                type="password"
+                label="New password"
+                variant="outlined"
+                fullWidth
+              />
+            </Grid>
+            <Grid xs={6} item>
+              <ControlledTextField
+                control={controlPassword}
+                name={"repeat-password"}
+                rules={{
+                  required: "This field is required",
+                  validate: (value) => {
+                    return (
+                      value === password.current || "The passwords do not match"
+                    );
+                  },
+                }}
+                type="password"
+                label="Confirm password"
+                variant="outlined"
+                fullWidth
+              />
+            </Grid>
+            <Grid xs={12} item>
+              <Button type="submit" variant="contained">
+                Change password
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      )}
     </Layout>
   );
 });

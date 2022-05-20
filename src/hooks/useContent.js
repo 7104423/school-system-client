@@ -31,6 +31,7 @@ import {
   createDigitalContent,
   createStudyProgramme,
   createUser,
+  updateUserPassword,
 } from "../utils/api";
 
 const contentMap = {
@@ -65,6 +66,7 @@ const editContentMap = {
   digitalContent: updateDigitalContent,
   studyProgramme: updateStudyProgramme,
   user: updateUser,
+  userPassword: updateUserPassword,
 };
 
 const addContentMap = {

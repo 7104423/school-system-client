@@ -210,3 +210,10 @@ export const updateUser = async (body) => {
     body: JSON.stringify(body),
   });
 };
+
+export const updateUserPassword = async (body) => {
+  return await fetchJSON(`${url}/api/user/update/password`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  });
+};
