@@ -5,6 +5,8 @@ import { withRole } from "../containers/withRole";
 import { useForm } from "react-hook-form";
 import { ControlledTextField } from "../components/fields/input/ControlledTextField";
 import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
+import { useAddContent, useContent } from "../hooks/useContent";
+import { useNavigate } from "react-router-dom";
 
 export const ROLES = [
   { name: "Student", value: "STUDENT" },
@@ -14,8 +16,22 @@ export const ROLES = [
 
 export const UserAdd = withRole(["ADMIN"], () => {
   const { control, handleSubmit } = useForm();
+  const add = useAddContent("user");
+  const [, , fetch] = useContent("users");
+  const navigate = useNavigate();
 
-  const onSubmit = useCallback((data) => {}, []);
+  const onSubmit = useCallback(
+    async (data) => {
+      const parsedData = {
+        ...data,
+        groups: data?.groups?.map(({ value }) => value) ?? [],
+      };
+      await add(parsedData);
+      await fetch();
+      navigate("/app/users");
+    },
+    [add, fetch, navigate]
+  );
 
   return (
     <Layout active="users">
