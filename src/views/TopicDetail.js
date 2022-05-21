@@ -136,7 +136,7 @@ export const TopicDetail = () => {
 
       <br />
       {/* Studijní materiály */}
-      <Grid mt={"1rem"} container flexDirection={"column"} spacing={"1rem"}>
+      <Grid mt={"1rem"} container flexDirection={"column"} spacing={2}>
         <Grid item>
           <Typography align="left" variant="h3">
             Studijní materiály k tématu
@@ -148,47 +148,37 @@ export const TopicDetail = () => {
             Zde naleznete seznam studijních materiálů pro dané téma
           </Typography>
         </Grid>
-
-        <Grid
-          mt={"1rem"}
-          container
-          flexDirection={"column"}
-          alignItems={"start"}
-          justifyContent={"start"}
-          spacing={"1rem"}
-        >
-          <Grid item>
-            <Typography align="center" variant="h3">
-              Studijní materiály
-            </Typography>
+        <Grid item>
+          <Typography align="center" variant="h3">
+            Studijní materiály
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Typography align="center" variant="h4">
+            Online knihy
+          </Typography>
+        </Grid>
+        <Grid width={"100%"} item>
+          <Grid gap={3} container>
+            {contentMap["Unicorn University link"]?.map((content) => (
+              <Grid xs={4} item>
+                <ContentCard {...content} />
+              </Grid>
+            ))}
           </Grid>
-          <Grid item>
-            <Typography align="center" variant="h4">
-              Online knihy
-            </Typography>
-          </Grid>
-          <Grid width={"100%"} item>
-            <Grid gap={3} container>
-              {contentMap["Unicorn University link"]?.map((content) => (
-                <Grid xs={4} item>
-                  <ContentCard {...content} />
-                </Grid>
-              ))}
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Typography align="center" variant="h4">
-              Výuková videa
-            </Typography>
-          </Grid>
-          <Grid xs={12} width={"100%"} item>
-            <Grid width={"100%"} spacing={3} container>
-              {contentMap["YouTube link"]?.map((content) => (
-                <Grid xs={3} item>
-                  <ContentCard {...content} />
-                </Grid>
-              ))}
-            </Grid>
+        </Grid>
+        <Grid item>
+          <Typography align="center" variant="h4">
+            Výuková videa
+          </Typography>
+        </Grid>
+        <Grid xs={12} width={"100%"} item>
+          <Grid width={"100%"} spacing={3} container>
+            {contentMap["YouTube link"]?.map((content) => (
+              <Grid xs={3} item>
+                <ContentCard {...content} />
+              </Grid>
+            ))}
           </Grid>
         </Grid>
       </Grid>
