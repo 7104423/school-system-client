@@ -1,18 +1,20 @@
 import { Button, Grid } from "@mui/material";
 import { Layout } from "../containers/Layout";
 import { withRole } from "../containers/withRole";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { useContent, useEditContent } from "../hooks/useContent";
 import { useNavigate, useParams } from "react-router-dom";
 import { ControlledTextField } from "../components/fields/input/ControlledTextField";
 import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
+import { TopicContentEdit } from "../components/table/TopicContentEdit";
 
 export const TopicEdit = withRole(["TEACHER", "ADMIN"], () => {
   const { id } = useParams();
-  const { control, handleSubmit, reset } = useForm();
+  const { control, handleSubmit, reset, watch } = useForm();
+  const sub = useRef({});
+  sub.current = watch("subject");
   const [data, fetch] = useContent("topic", id);
-  const [, fetchTopics] = useContent("topics");
   const [subjects, fetchSubjects] = useContent("subjects");
   const update = useEditContent("topic", id);
   const navigate = useNavigate();
@@ -21,13 +23,13 @@ export const TopicEdit = withRole(["TEACHER", "ADMIN"], () => {
     async (data) => {
       const parsedData = {
         ...data,
-        subject: data.subject?.id,
+        subject: data.subject?._id,
+        contents: undefined,
       };
       await update(parsedData);
-      await fetchTopics();
       navigate("/app/topics");
     },
-    [fetchTopics, navigate, update]
+    [navigate, update]
   );
 
   useEffect(() => {
@@ -90,6 +92,7 @@ export const TopicEdit = withRole(["TEACHER", "ADMIN"], () => {
           </Grid>
         </Grid>
       </form>
+      <TopicContentEdit id={id} subject={sub.current} />
     </Layout>
   );
 });

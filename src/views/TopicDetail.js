@@ -97,14 +97,12 @@ export const TopicDetail = () => {
     }, {});
   }, [dataContent]);
 
-  const [, download] = useContent("topics");
   const remove = useDeleteContent("topic", id);
   const navigate = useNavigate();
   const handleDelete = useCallback(async () => {
     await remove();
-    await download();
     navigate("/app/topics");
-  }, [download, navigate, remove]);
+  }, [navigate, remove]);
 
   // TopicDetail Data Grid
   return (

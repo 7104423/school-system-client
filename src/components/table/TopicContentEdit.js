@@ -25,7 +25,7 @@ export const columns = [
     field: "type",
     headerName: "Digital Content Type",
     renderCell: ({ row: { type, id } }) => (
-      <Link to={`/app/topic/${id}`}>{type}</Link>
+      <Link to={`/app/digital-content/${id}`}>{type}</Link>
     ),
     flex: 1,
   },
@@ -36,11 +36,11 @@ export const columns = [
   },
 ];
 
-export const SubjectContentEdit = ({ id }) => {
+export const TopicContentEdit = ({ id, subject }) => {
   const [open, setOpen] = useState(false);
   const { control, handleSubmit } = useForm();
   const add = useAddContent("digitalContent");
-  const [contents, fetchContents] = useContent("subjectContents", id);
+  const [contents, fetchContents] = useContent("topicContents", id);
 
   const handleClose = useCallback(() => {
     setOpen(false);
@@ -50,13 +50,14 @@ export const SubjectContentEdit = ({ id }) => {
     async (data) => {
       const parsedData = {
         ...data,
-        subject: id,
+        topic: id,
+        subject: subject?._id,
       };
       await add(parsedData);
       await fetchContents();
       handleClose();
     },
-    [add, fetchContents, handleClose, id]
+    [add, fetchContents, handleClose, id, subject]
   );
 
   const handleOpen = useCallback(() => {

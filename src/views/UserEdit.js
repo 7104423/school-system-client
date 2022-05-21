@@ -151,7 +151,7 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
               <Controller
                 control={control}
                 name="resetPassword"
-                render={({ field: { value, field } }) => (
+                render={({ field: { value, ...field } }) => (
                   <FormGroup>
                     <FormControlLabel
                       control={<Checkbox {...field} checked={value || false} />}
