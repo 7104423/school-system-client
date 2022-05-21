@@ -62,6 +62,7 @@ export const SubjectAdd = withRole([ADMIN], () => {
               name="goal"
               control={control}
               label="Subject goal"
+              rules={{ required: "This field is required" }}
               variant="outlined"
               fullWidth
               multiline

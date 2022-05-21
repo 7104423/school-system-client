@@ -13,6 +13,7 @@ export const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, appInitialState);
   const [error, setError] = useState("");
   const [warning, setWarning] = useState("");
+  const [success, setSuccess] = useState("");
 
   const isLoading = useMemo(
     () =>
@@ -28,9 +29,11 @@ export const AppProvider = ({ children }) => {
         error,
         warning,
         state,
+        success,
         dispatch,
         setError,
         setWarning,
+        setSuccess,
         isLoading,
       }}
     >

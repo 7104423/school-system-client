@@ -121,7 +121,7 @@ export const useContent = (contentName, id) => {
 };
 
 export const useDeleteContent = (contentName, id) => {
-  const { dispatch, setError } = useApp();
+  const { dispatch, setError, setSuccess } = useApp();
 
   const remove = useCallback(async () => {
     if (!window.confirm("Are you sure you want to delete this item?")) {
@@ -144,6 +144,7 @@ export const useDeleteContent = (contentName, id) => {
           id,
         },
       });
+      setSuccess(`Record is successfuly deleted`);
       return true;
     } catch (error) {
       dispatch({
@@ -158,13 +159,13 @@ export const useDeleteContent = (contentName, id) => {
       setError("Unable to remove a record");
       return false;
     }
-  }, [contentName, dispatch, id, setError]);
+  }, [contentName, dispatch, id, setError, setSuccess]);
 
   return remove;
 };
 
-export const useAddContent = (contentName) => {
-  const { dispatch, setError } = useApp();
+export const useAddContent = (contentName, options) => {
+  const { dispatch, setError, setSuccess } = useApp();
 
   const add = useCallback(
     async (body) => {
@@ -185,6 +186,8 @@ export const useAddContent = (contentName) => {
             id: body.id,
           },
         });
+        setSuccess(`Record is successfuly created`);
+        return true;
       } catch (error) {
         dispatch({
           type: "failed",
@@ -196,16 +199,17 @@ export const useAddContent = (contentName) => {
           },
         });
         setError("Unable to add a record");
+        return false;
       }
     },
-    [contentName, dispatch, setError]
+    [contentName, dispatch, setError, setSuccess]
   );
 
   return add;
 };
 
 export const useEditContent = (contentName) => {
-  const { dispatch, setError } = useApp();
+  const { dispatch, setError, setSuccess } = useApp();
 
   const edit = useCallback(
     async (body) => {
@@ -226,6 +230,8 @@ export const useEditContent = (contentName) => {
             id: body.id,
           },
         });
+        setSuccess(`Record is successfuly updated`);
+        return true;
       } catch (error) {
         dispatch({
           type: "failed",
@@ -236,9 +242,10 @@ export const useEditContent = (contentName) => {
           },
         });
         setError("Unable to update record");
+        return false;
       }
     },
-    [contentName, dispatch, setError]
+    [contentName, dispatch, setError, setSuccess]
   );
 
   return edit;

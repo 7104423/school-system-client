@@ -4,7 +4,6 @@ import { Routes, Route } from "react-router-dom";
 import "./assets/style.css";
 import { validateUser } from "./utils/api";
 import { WholePageLoader } from "./containers/WholePageLoader";
-import { ViewTrapRender } from "./components/viewtrap";
 import { useUser } from "./contexts/userContext";
 import { LoginView } from "./views/Login";
 import { Users } from "./views/Users";
@@ -33,7 +32,15 @@ import { Alert, AlertTitle, Slide, Snackbar } from "@mui/material";
 function App() {
   const [hasAccess, setAccess] = useState(null);
   const user = useUser();
-  const { error, setError, warning, setWarning, isLoading } = useApp();
+  const {
+    error,
+    setError,
+    warning,
+    setWarning,
+    success,
+    setSuccess,
+    isLoading,
+  } = useApp();
   const token = user.getToken();
 
   const handleErrorClose = useCallback(() => {
@@ -43,6 +50,10 @@ function App() {
   const handleWarningClose = useCallback(() => {
     setWarning("");
   }, [setWarning]);
+
+  const handleSuccessClose = useCallback(() => {
+    setSuccess("");
+  }, [setSuccess]);
 
   useEffect(() => {
     const token = user.getToken();
@@ -134,7 +145,7 @@ function App() {
             open={!!error}
             autoHideDuration={6000}
             onClose={handleErrorClose}
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
             TransitionComponent={Slide}
           >
             <Alert onClose={handleErrorClose} severity="error">
@@ -146,12 +157,24 @@ function App() {
             open={!!warning && !error}
             autoHideDuration={6000}
             onClose={handleWarningClose}
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
             TransitionComponent={Slide}
           >
             <Alert onClose={handleWarningClose} severity="warning">
               <AlertTitle>Warning</AlertTitle>
               {warning}
+            </Alert>
+          </Snackbar>
+          <Snackbar
+            open={!!success && !error && !warning}
+            autoHideDuration={6000}
+            onClose={handleSuccessClose}
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            TransitionComponent={Slide}
+          >
+            <Alert onClose={handleSuccessClose} severity="success">
+              <AlertTitle>Success</AlertTitle>
+              {success}
             </Alert>
           </Snackbar>
           {isLoading && (
