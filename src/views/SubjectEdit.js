@@ -108,7 +108,11 @@ export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
               type="number"
               name="credits"
               control={control}
-              rules={{ required: "This field is required" }}
+              rules={{
+                required: "This field is required",
+                min: { value: 1, message: "Minimum is 1" },
+                max: { value: 30, message: "Maximum is 30" },
+              }}
               label="Number of credits"
               variant="outlined"
               fullWidth
