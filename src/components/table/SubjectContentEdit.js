@@ -41,6 +41,7 @@ export const SubjectContentEdit = ({ id }) => {
   const { control, handleSubmit } = useForm();
   const add = useAddContent("digitalContent");
   const [contents, fetchContents] = useContent("subjectContents", id);
+  const [topics] = useContent("subjectTopics", id);
 
   const handleClose = useCallback(() => {
     setOpen(false);
@@ -51,6 +52,7 @@ export const SubjectContentEdit = ({ id }) => {
       const parsedData = {
         ...data,
         subject: id,
+        topic: data.topic?._id || data.topic?.id,
       };
       await add(parsedData);
       await fetchContents();
@@ -119,6 +121,17 @@ export const SubjectContentEdit = ({ id }) => {
                   label="Link to Digital Content"
                   variant="outlined"
                   fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <ControlledAutocomplete
+                  control={control}
+                  label="Topic"
+                  name="topic"
+                  options={topics}
+                  getOptionLabel={(option) =>
+                    option?.name ? `${option?.name || ""}` : ""
+                  }
                 />
               </Grid>
 

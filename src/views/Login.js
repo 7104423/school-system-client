@@ -43,7 +43,7 @@ export const Login = () => {
     if (error?.error === "idpiframe_initialization_failed") {
       return;
     }
-    setErrorMessage(String(error));
+    setErrorMessage(String(JSON.parse(error.message).message));
     setIsLoaded(true);
   }, []);
 
@@ -60,11 +60,11 @@ export const Login = () => {
         } catch (error) {
           message = error;
         }
-        errorHandler(message);
+        setErrorMessage(message);
         setIsLoaded(true);
       }
     },
-    [loginHandler, errorHandler]
+    [loginHandler]
   );
 
   return (
