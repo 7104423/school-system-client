@@ -108,12 +108,12 @@ export const useContent = (contentName, id) => {
         type: "failed",
         target: contentName,
         payload: {
-          message: error?.message?.message || "Failed to download data",
+          message: error?.message || "Failed to download data",
           code: error.status,
           id,
         },
       });
-      setError(error?.message?.message || "Failed to download data");
+      setError(error?.message || "Failed to download data");
     }
   }, [dispatch, contentName, id, setError]);
 
@@ -151,12 +151,12 @@ export const useDeleteContent = (contentName, id) => {
         type: "failed",
         target: contentName,
         payload: {
-          message: error?.message?.message || "Unable to remove a record",
+          message: error?.message || "Unable to remove a record",
           code: error.status,
           id,
         },
       });
-      setError(error?.message?.message || "Unable to remove a record");
+      setError(error?.message || "Unable to remove a record");
       return false;
     }
   }, [contentName, dispatch, id, setError, setSuccess]);
@@ -237,11 +237,11 @@ export const useEditContent = (contentName) => {
           type: "failed",
           target: contentName,
           payload: {
-            message: "Unable to update record",
+            message: error?.message || "Unable to update record",
             code: error.status,
           },
         });
-        setError("Unable to update record");
+        setError(error?.message || "Unable to update record");
         return false;
       }
     },
