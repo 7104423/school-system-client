@@ -11,18 +11,18 @@ export const fetchJSON = async (url, optionProp) => {
     },
   };
   const data = await fetch(url, option);
+  let err;
   if (!data.ok) {
     try {
       const { message } = await data.clone().json();
-      const err = new Error(message);
+      err = new Error(message);
       err.status = data.status;
-      throw err;
     } catch (e) {
       const message = await data.clone().text();
-      const err = new Error(message);
+      err = new Error(message);
       err.status = data.status;
-      throw err;
     }
+    throw err;
   }
   const dataJson = await data.json();
   return await dataJson;

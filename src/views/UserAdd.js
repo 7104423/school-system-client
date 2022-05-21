@@ -29,7 +29,6 @@ export const BOOLEAN = [
 export const UserAdd = withRole([ADMIN], () => {
   const { control, handleSubmit, watch } = useForm();
   const add = useAddContent("user");
-  const [, fetch] = useContent("users");
   const navigate = useNavigate();
 
   const thirdParty = watch("thirdPartyIdentity");
@@ -40,11 +39,11 @@ export const UserAdd = withRole([ADMIN], () => {
         ...data,
         groups: data?.groups?.map(({ value }) => value) ?? [],
       };
-      await add(parsedData);
-      await fetch();
-      navigate("/app/users");
+      if (await add(parsedData)) {
+        navigate("/app/users");
+      }
     },
-    [add, fetch, navigate]
+    [add, navigate]
   );
 
   return (
@@ -98,7 +97,7 @@ export const UserAdd = withRole([ADMIN], () => {
               rules={{
                 required: "This field is required",
                 pattern: {
-                  value: /\S+@\S+\.\S+/,
+                  value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/,
                   message: "Entered value does not match email format",
                 },
               }}
@@ -129,9 +128,11 @@ export const UserAdd = withRole([ADMIN], () => {
                   name={"password"}
                   rules={{
                     required: "This field is required",
-                    minLength: {
-                      value: 5,
-                      message: "Minimal password length is 5 characters",
+                    pattern: {
+                      value:
+                        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{5,}$/,
+                      message:
+                        "Bad password format (min 5 characters, min 1 capital letter, min 1 small letter, min 1 digit).",
                     },
                   }}
                   label="Password"
