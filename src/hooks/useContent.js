@@ -125,7 +125,7 @@ export const useDeleteContent = (contentName, id) => {
 
   const remove = useCallback(async () => {
     if (!window.confirm("Are you sure you want to delete this item?")) {
-      return;
+      return false;
     }
     dispatch({
       type: "loading",
@@ -144,6 +144,7 @@ export const useDeleteContent = (contentName, id) => {
           id,
         },
       });
+      return true;
     } catch (error) {
       dispatch({
         type: "failed",
@@ -155,6 +156,7 @@ export const useDeleteContent = (contentName, id) => {
         },
       });
       setError("Unable to remove a record");
+      return false;
     }
   }, [contentName, dispatch, id, setError]);
 

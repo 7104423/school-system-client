@@ -17,14 +17,12 @@ export const StudyProgrammeDetail = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [, downloadProgrammes] = useContent("studyProgrammes");
   const remove = useDeleteContent("studyProgramme", id);
   const navigate = useNavigate();
   const handleDelete = useCallback(async () => {
     await remove();
-    await downloadProgrammes();
     navigate("/app/study-programmes");
-  }, [downloadProgrammes, navigate, remove]);
+  }, [navigate, remove]);
 
   return (
     <Layout active="study-programmes">

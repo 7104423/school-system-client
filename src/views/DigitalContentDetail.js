@@ -1,11 +1,9 @@
-import { Box, Divider, Grid } from "@mui/material";
-import { useCallback, useContext, useEffect } from "react";
+import { Divider, Grid } from "@mui/material";
+import { useCallback, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ContentCard } from "../components/card/ContentCard";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
-import { ViewTrap } from "../components/viewtrap";
 import { Layout } from "../containers/Layout";
-import { WholePageLoader } from "../containers/WholePageLoader";
 import { useContent, useDeleteContent } from "../hooks/useContent";
 
 export const DigitalContentDetail = () => {
@@ -21,7 +19,7 @@ export const DigitalContentDetail = () => {
   const remove = useDeleteContent("digitalContent", id);
   const navigate = useNavigate();
   const handleDelete = useCallback(async () => {
-    await remove();
+    if (!(await remove())) return;
     navigate("/app/digital-contents");
   }, [navigate, remove]);
 

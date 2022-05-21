@@ -20,10 +20,9 @@ export const UserDetail = () => {
   }, [id]);
 
   const handleDelete = useCallback(async () => {
-    await remove();
-    await fetchUsers();
+    if (!(await remove())) return;
     navigate("/app/users");
-  }, [fetchUsers, navigate, remove]);
+  }, [navigate, remove]);
 
   return (
     <Layout active="users">

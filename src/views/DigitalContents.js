@@ -5,9 +5,7 @@ import { Layout } from "../containers/Layout";
 import { Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Add } from "@mui/icons-material";
-import { useContent, useDeleteContent } from "../hooks/useContent";
-import { ViewTrap } from "../components/viewtrap";
-import { WholePageLoader } from "../containers/WholePageLoader";
+import { useContent } from "../hooks/useContent";
 import { useUser } from "../contexts/userContext";
 
 export const DigitalContents = () => {

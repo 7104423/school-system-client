@@ -48,22 +48,9 @@ export const SubjectDetail = () => {
   }, [id]);
 
   const handleDelete = useCallback(async () => {
-    await remove();
-    await Promise.all([
-      fetchSubjects(),
-      fetchSubject(),
-      fetchContents(),
-      fetchTopic(),
-    ]);
+    if (!(await remove())) return;
     navigate("/app/subjects");
-  }, [
-    fetchContents,
-    fetchSubject,
-    fetchSubjects,
-    fetchTopic,
-    navigate,
-    remove,
-  ]);
+  }, [navigate, remove]);
 
   return (
     <>

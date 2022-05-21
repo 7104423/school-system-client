@@ -100,7 +100,7 @@ export const TopicDetail = () => {
   const remove = useDeleteContent("topic", id);
   const navigate = useNavigate();
   const handleDelete = useCallback(async () => {
-    await remove();
+    if (!(await remove())) return;
     navigate("/app/topics");
   }, [navigate, remove]);
 
