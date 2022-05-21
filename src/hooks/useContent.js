@@ -144,7 +144,7 @@ export const useDeleteContent = (contentName, id) => {
           id,
         },
       });
-      setSuccess(`Record is successfuly deleted`);
+      setSuccess(`Record has been deleted`);
       return true;
     } catch (error) {
       dispatch({
@@ -186,7 +186,7 @@ export const useAddContent = (contentName, options) => {
             id: body.id,
           },
         });
-        setSuccess(`Record is successfuly created`);
+        setSuccess(`Record has been created`);
         return true;
       } catch (error) {
         console.log(error.message);
@@ -230,7 +230,7 @@ export const useEditContent = (contentName) => {
             id: body.id,
           },
         });
-        setSuccess(`Record is successfuly updated`);
+        setSuccess(`Record has been updated`);
         return true;
       } catch (error) {
         dispatch({
