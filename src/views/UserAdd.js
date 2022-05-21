@@ -14,6 +14,11 @@ export const ROLES = [
   { name: "Teacher", value: "TEACHER" },
 ];
 
+export const BOOLEAN = [
+  { name: "true", value: true },
+  { name: "false", value: false },
+];
+
 export const UserAdd = withRole(["ADMIN"], () => {
   const { control, handleSubmit } = useForm();
   const add = useAddContent("user");
@@ -25,6 +30,7 @@ export const UserAdd = withRole(["ADMIN"], () => {
       const parsedData = {
         ...data,
         groups: data?.groups?.map(({ value }) => value) ?? [],
+        thirdPartyIdentity: data.thirdPartyIdentity?.value,
       };
       await add(parsedData);
       await fetch();
@@ -71,6 +77,19 @@ export const UserAdd = withRole(["ADMIN"], () => {
               label="Role"
               name="groups"
               options={ROLES}
+              getOptionLabel={(option) =>
+                option?.name ? `${option.name}` : ""
+              }
+            />
+          </Grid>
+
+          <Grid item xs={6}>
+            <ControlledAutocomplete
+              control={control}
+              rules={{ required: "This field is required" }}
+              label="3rd party identity"
+              name="thirdPartyIdentity"
+              options={BOOLEAN}
               getOptionLabel={(option) =>
                 option?.name ? `${option.name}` : ""
               }
