@@ -6,6 +6,7 @@ import { Layout } from "../containers/Layout";
 import { useContent, useDeleteContent } from "../hooks/useContent";
 import { ViewTrap } from "../components/viewtrap";
 import { WholePageLoader } from "../containers/WholePageLoader";
+import { ADMIN } from "../config/roles";
 
 export const UserDetail = () => {
   const { id } = useParams();
@@ -30,9 +31,9 @@ export const UserDetail = () => {
         title={"User Detail"}
         id={id}
         page={"user"}
-        rolesDelete={["ADMIN"]}
+        rolesDelete={[ADMIN]}
         onDelete={handleDelete}
-        rolesEdit={["ADMIN"]}
+        rolesEdit={[ADMIN]}
       />
       <Grid container>
         <Grid xs={6}>

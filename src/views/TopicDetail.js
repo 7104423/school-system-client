@@ -24,6 +24,7 @@ import { ControlPanel } from "../components/control-panel/ControlPanel";
 import { Layout } from "../containers/Layout";
 import { useContent, useDeleteContent } from "../hooks/useContent";
 import { ContentCard } from "../components/card/ContentCard";
+import { ADMIN, TEACHER } from "../config/roles";
 
 // MUI > Card > Media Control Card
 export function MediaControlCard() {
@@ -111,8 +112,8 @@ export const TopicDetail = () => {
         title={dataTopic?.name}
         id={id}
         page={"topic"}
-        rolesDelete={["ADMIN", "TEACHER"]}
-        rolesEdit={["ADMIN", "TEACHER"]}
+        rolesDelete={[ADMIN, TEACHER]}
+        rolesEdit={[ADMIN, TEACHER]}
         onDelete={handleDelete}
       />
 

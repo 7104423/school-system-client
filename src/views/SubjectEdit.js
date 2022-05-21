@@ -9,8 +9,9 @@ import { ControlledAutocomplete } from "../components/fields/input/ControlledAut
 import { ControlledTextField } from "../components/fields/input/ControlledTextField";
 import { TopicEdit } from "../components/table/TopicEdit";
 import { SubjectContentEdit } from "../components/table/SubjectContentEdit";
+import { ADMIN, TEACHER } from "../config/roles";
 
-export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
+export const SubjectEdit = withRole([ADMIN, TEACHER], () => {
   const { id } = useParams();
   const [, fetchSubjects] = useContent("subjects");
   const [data, fetch] = useContent("subject", id);

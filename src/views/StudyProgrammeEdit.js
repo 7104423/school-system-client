@@ -1,5 +1,4 @@
-import { Autocomplete, Button, Grid, MenuItem, TextField } from "@mui/material";
-import { top100Films } from "../mockups/top100films.mockup";
+import { Button, Grid, MenuItem } from "@mui/material";
 import { Layout } from "../containers/Layout";
 import { withRole } from "../containers/withRole";
 import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
@@ -7,11 +6,10 @@ import { ControlledTextField } from "../components/fields/input/ControlledTextFi
 import { useForm } from "react-hook-form";
 import { useContent, useEditContent } from "../hooks/useContent";
 import { useNavigate, useParams } from "react-router-dom";
-import { ViewTrap } from "../components/viewtrap";
-import { WholePageLoader } from "../containers/WholePageLoader";
 import { useCallback, useEffect } from "react";
+import { ADMIN } from "../config/roles";
 
-export const StudyProgrammeEdit = withRole(["ADMIN"], () => {
+export const StudyProgrammeEdit = withRole([ADMIN], () => {
   const { id } = useParams();
   const { control, handleSubmit, reset } = useForm();
 

@@ -13,11 +13,12 @@ import { ControlledTextField } from "../components/fields/input/ControlledTextFi
 import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
 import { useAddContent, useContent } from "../hooks/useContent";
 import { useNavigate } from "react-router-dom";
+import { ADMIN, STUDENT, TEACHER } from "../config/roles";
 
 export const ROLES = [
-  { name: "Student", value: "STUDENT" },
-  { name: "Admin", value: "ADMIN" },
-  { name: "Teacher", value: "TEACHER" },
+  { name: "Student", value: STUDENT },
+  { name: "Admin", value: ADMIN },
+  { name: "Teacher", value: TEACHER },
 ];
 
 export const BOOLEAN = [
@@ -25,7 +26,7 @@ export const BOOLEAN = [
   { name: "false", value: false },
 ];
 
-export const UserAdd = withRole(["ADMIN"], () => {
+export const UserAdd = withRole([ADMIN], () => {
   const { control, handleSubmit, watch } = useForm();
   const add = useAddContent("user");
   const [, fetch] = useContent("users");

@@ -6,11 +6,10 @@ import { ControlledTextField } from "../components/fields/input/ControlledTextFi
 import { useForm } from "react-hook-form";
 import { useAddContent, useContent } from "../hooks/useContent";
 import { useNavigate } from "react-router-dom";
-import { ViewTrap } from "../components/viewtrap";
-import { WholePageLoader } from "../containers/WholePageLoader";
 import { useCallback, useEffect } from "react";
+import { ADMIN } from "../config/roles";
 
-export const StudyProgrammeAdd = withRole(["ADMIN"], () => {
+export const StudyProgrammeAdd = withRole([ADMIN], () => {
   const { control, handleSubmit } = useForm();
 
   const [teachers, fetchTeachers] = useContent("teacherEnum");

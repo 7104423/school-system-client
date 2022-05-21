@@ -15,11 +15,12 @@ import { Controller, useForm } from "react-hook-form";
 import { ControlledTextField } from "../components/fields/input/ControlledTextField";
 import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
 import { useUser } from "../contexts/userContext";
+import { ADMIN, SELF, STUDENT, TEACHER } from "../config/roles";
 
 export const ROLES = [
-  { name: "Student", value: "STUDENT" },
-  { name: "Admin", value: "ADMIN" },
-  { name: "Teacher", value: "TEACHER" },
+  { name: "Student", value: STUDENT },
+  { name: "Admin", value: ADMIN },
+  { name: "Teacher", value: TEACHER },
 ];
 
 export const BOOLEAN = [
@@ -27,7 +28,7 @@ export const BOOLEAN = [
   { name: "false", value: false },
 ];
 
-export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
+export const UserEdit = withRole([ADMIN, SELF], () => {
   const { id } = useParams();
   const [data, fetch] = useContent("user", id);
   const update = useEditContent("user");
@@ -44,7 +45,7 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
 
   const user = useUser();
   const userRoles = user.getRoles();
-  const hasAdmin = userRoles.includes("ADMIN");
+  const hasAdmin = userRoles.includes(ADMIN);
   const isSameUser = user.getUser()?.id === id;
   const updatePassword = useEditContent("userPassword");
 

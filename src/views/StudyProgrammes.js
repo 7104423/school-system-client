@@ -9,6 +9,7 @@ import { useContent } from "../hooks/useContent";
 import { ViewTrap } from "../components/viewtrap";
 import { WholePageLoader } from "../containers/WholePageLoader";
 import { useUser } from "../contexts/userContext";
+import { ADMIN } from "../config/roles";
 
 export const StudyProgrammes = () => {
   const [data, fetch] = useContent("studyProgrammes");
@@ -25,7 +26,7 @@ export const StudyProgrammes = () => {
       <Layout active="study-programmes">
         <h2 className="view-heading">Study Programmes</h2>
         <Box mt={3}>
-          {["ADMIN"].some((role) => userRoles.includes(role)) && (
+          {[ADMIN].some((role) => userRoles.includes(role)) && (
             <Link to="/app/study-programme/add">
               <Button variant="outlined" startIcon={<Add fontSize="small" />}>
                 Add study programme

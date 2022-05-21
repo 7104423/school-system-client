@@ -3,14 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Layout } from "../containers/Layout";
 import { withRole } from "../containers/withRole";
 import { useAddContent, useContent } from "../hooks/useContent";
-import { ViewTrap } from "../components/viewtrap";
-import { WholePageLoader } from "../containers/WholePageLoader";
 import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
 import { ControlledTextField } from "../components/fields/input/ControlledTextField";
+import { ADMIN } from "../config/roles";
 
-export const SubjectAdd = withRole(["ADMIN"], () => {
+export const SubjectAdd = withRole([ADMIN], () => {
   const { id } = useParams();
   const [, fetchSubjects] = useContent("subjects");
   const [teachers, fetchTeachers] = useContent("teacherEnum");

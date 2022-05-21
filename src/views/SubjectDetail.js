@@ -12,12 +12,12 @@ import { Layout } from "../containers/Layout";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
 import { useContent, useDeleteContent } from "../hooks/useContent";
 import { ContentCard } from "../components/card/ContentCard";
+import { ADMIN, TEACHER } from "../config/roles";
 
 export const SubjectDetail = () => {
   const { id } = useParams();
 
   const [subjectData, fetchSubject] = useContent("subject", id);
-  const [, fetchSubjects] = useContent("subjects");
   const [topicData, fetchTopic] = useContent("subjectTopics", id);
   const [contentData, fetchContents] = useContent("subjectContents", id);
 
@@ -59,8 +59,8 @@ export const SubjectDetail = () => {
           title={subjectData?.name}
           id={id}
           page={"subject"}
-          rolesDelete={["ADMIN"]}
-          rolesEdit={["ADMIN", "TEACHER"]}
+          rolesDelete={[ADMIN]}
+          rolesEdit={[ADMIN, TEACHER]}
           onDelete={handleDelete}
         />
         <Grid justifyContent={"end"} container spacing={2}>

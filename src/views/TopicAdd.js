@@ -7,8 +7,9 @@ import { useAddContent, useContent } from "../hooks/useContent";
 import { useNavigate } from "react-router-dom";
 import { ControlledTextField } from "../components/fields/input/ControlledTextField";
 import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
+import { ADMIN, TEACHER } from "../config/roles";
 
-export const TopicAdd = withRole(["TEACHER", "ADMIN"], () => {
+export const TopicAdd = withRole([ADMIN, TEACHER], () => {
   const { control, handleSubmit } = useForm();
   const [, fetchTopics] = useContent("topics");
   const [subjects, fetchSubjects] = useContent("subjects");

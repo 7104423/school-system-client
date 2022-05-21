@@ -2,9 +2,8 @@ import { Grid } from "@mui/material";
 import { useCallback, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
-import { ViewTrap } from "../components/viewtrap";
+import { ADMIN } from "../config/roles";
 import { Layout } from "../containers/Layout";
-import { WholePageLoader } from "../containers/WholePageLoader";
 import { useContent, useDeleteContent } from "../hooks/useContent";
 
 export const StudyProgrammeDetail = () => {
@@ -30,9 +29,9 @@ export const StudyProgrammeDetail = () => {
         title={data?.name}
         id={id}
         page={"study-programme"}
-        rolesDelete={["ADMIN"]}
+        rolesDelete={[ADMIN]}
         onDelete={handleDelete}
-        rolesEdit={["ADMIN"]}
+        rolesEdit={[ADMIN]}
       />
 
       <Grid justifyContent={"end"} container spacing={2}>

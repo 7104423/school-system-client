@@ -8,8 +8,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ControlledTextField } from "../components/fields/input/ControlledTextField";
 import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
 import { TopicContentEdit } from "../components/table/TopicContentEdit";
+import { ADMIN, TEACHER } from "../config/roles";
 
-export const TopicEdit = withRole(["TEACHER", "ADMIN"], () => {
+export const TopicEdit = withRole([ADMIN, TEACHER], () => {
   const { id } = useParams();
   const { control, handleSubmit, reset, watch } = useForm();
   const sub = useRef({});

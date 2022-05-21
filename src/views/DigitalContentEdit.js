@@ -1,17 +1,15 @@
-import { Autocomplete, Button, Grid, MenuItem, TextField } from "@mui/material";
-import { top100Films } from "../mockups/top100films.mockup";
+import { Button, Grid, MenuItem } from "@mui/material";
 import { Layout } from "../containers/Layout";
 import { withRole } from "../containers/withRole";
 import { useForm } from "react-hook-form";
 import { useContent, useEditContent } from "../hooks/useContent";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCallback, useEffect } from "react";
-import { ViewTrap } from "../components/viewtrap";
-import { WholePageLoader } from "../containers/WholePageLoader";
 import { ControlledTextField } from "../components/fields/input/ControlledTextField";
 import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
+import { ADMIN, TEACHER } from "../config/roles";
 
-export const DigitalContentEdit = withRole(["ADMIN", "TEACHER"], () => {
+export const DigitalContentEdit = withRole([ADMIN, TEACHER], () => {
   const { id } = useParams();
   const { control, handleSubmit, reset } = useForm();
   const [data, fetch] = useContent("digitalContent", id);

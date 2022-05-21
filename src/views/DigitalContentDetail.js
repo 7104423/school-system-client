@@ -3,6 +3,7 @@ import { useCallback, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ContentCard } from "../components/card/ContentCard";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
+import { ADMIN, TEACHER } from "../config/roles";
 import { Layout } from "../containers/Layout";
 import { useContent, useDeleteContent } from "../hooks/useContent";
 
@@ -29,8 +30,8 @@ export const DigitalContentDetail = () => {
         title={"Digital Content Detail"}
         id={id}
         page={"digital-content"}
-        rolesDelete={["ADMIN", "TEACHER"]}
-        rolesEdit={["ADMIN", "TEACHER"]}
+        rolesDelete={[ADMIN, TEACHER]}
+        rolesEdit={[ADMIN, TEACHER]}
         onDelete={handleDelete}
       />
       <Grid justifyContent={"end"} container spacing={2}>
