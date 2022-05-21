@@ -8,9 +8,7 @@ import {
 } from "@mui/material";
 import { useCallback, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { ViewTrap } from "../components/viewtrap";
 import { Layout } from "../containers/Layout";
-import { WholePageLoader } from "../containers/WholePageLoader";
 import { withRole } from "../containers/withRole";
 import { useContent, useEditContent } from "../hooks/useContent";
 import { Controller, useForm } from "react-hook-form";
@@ -27,7 +25,6 @@ export const ROLES = [
 export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
   const { id } = useParams();
   const [data, fetch] = useContent("user", id);
-  const [, fetchUsers] = useContent("users");
   const update = useEditContent("user");
   const { control, handleSubmit, reset } = useForm();
   const password = useRef({});
@@ -71,10 +68,9 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
       };
       await update(parsedData);
       await fetch();
-      await fetchUsers();
       navigate("/app/users");
     },
-    [fetch, fetchUsers, navigate, update]
+    [fetch, navigate, update]
   );
 
   const handlePasswordChange = useCallback(
@@ -155,10 +151,10 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
               <Controller
                 control={control}
                 name="resetPassword"
-                render={({ field }) => (
+                render={({ field: { value, field } }) => (
                   <FormGroup>
                     <FormControlLabel
-                      control={<Checkbox {...field} />}
+                      control={<Checkbox {...field} checked={value || false} />}
                       label="Request user to change password"
                     />
                   </FormGroup>
