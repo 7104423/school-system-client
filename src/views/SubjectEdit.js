@@ -1,9 +1,5 @@
-import { Button, Divider, Grid, MenuItem } from "@mui/material";
-import { Table } from "../components/table";
-import { topicColumns } from "../config/columns/topics";
-import { subjectMockup } from "../mockups/subjects.mockup";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Button, Grid, MenuItem } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
 import { Layout } from "../containers/Layout";
 import { withRole } from "../containers/withRole";
 import { useContent, useEditContent } from "../hooks/useContent";
@@ -11,6 +7,7 @@ import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
 import { ControlledTextField } from "../components/fields/input/ControlledTextField";
+import { EditTable } from "../components/table/EditTable";
 
 export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
   const { id } = useParams();
@@ -39,6 +36,7 @@ export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
         studyProgramme: data.studyProgramme?._id,
         supervisor: data.supervisor?._id,
         teachers: data.teachers.map((teacher) => teacher._id),
+        credits: Number(data.credits) || 0,
       };
       await update(formatedData);
       await fetch();
@@ -147,40 +145,7 @@ export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
           </Grid>
         </Grid>
       </form>
-      <Grid container>
-        <Grid xs={12} item>
-          <Divider variant="middle">Topics</Divider>
-        </Grid>
-        <Grid xs={6} item>
-          <Link target="_blank" to="/app/topic/add">
-            <Button
-              variant="outlined"
-              endIcon={<OpenInNewIcon fontSize="small" />}
-            >
-              Create Topic
-            </Button>
-          </Link>
-        </Grid>
-        <Grid height={500} xs={12} item>
-          <Table columns={topicColumns} rows={subjectMockup} />
-        </Grid>
-        <Grid xs={12} item>
-          <Divider variant="middle">Digital contents</Divider>
-        </Grid>
-        <Grid xs={6} item>
-          <Link target="_blank" to="/app/digital-content/add">
-            <Button
-              variant="outlined"
-              endIcon={<OpenInNewIcon fontSize="small" />}
-            >
-              Create Digital content
-            </Button>
-          </Link>
-        </Grid>
-        <Grid height={500} xs={12} item>
-          <Table columns={topicColumns} rows={subjectMockup} />
-        </Grid>
-      </Grid>
+      <EditTable id={id} />
     </Layout>
   );
 });

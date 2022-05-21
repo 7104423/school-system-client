@@ -31,6 +31,7 @@ export const SubjectAdd = withRole(["ADMIN"], () => {
         studyProgramme: data.studyProgramme?.id,
         supervisor: data.supervisor?.id,
         teachers: data.teachers.map((teacher) => teacher.id),
+        credits: Number(data.credits) || 0,
       };
       await add(formatedData);
       await fetchSubjects();

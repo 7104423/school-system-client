@@ -7,8 +7,6 @@ import { useAddContent, useContent } from "../hooks/useContent";
 import { useNavigate } from "react-router-dom";
 import { ControlledTextField } from "../components/fields/input/ControlledTextField";
 import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
-import { ViewTrap } from "../components/viewtrap";
-import { WholePageLoader } from "../containers/WholePageLoader";
 
 export const TopicAdd = withRole(["TEACHER", "ADMIN"], () => {
   const { control, handleSubmit } = useForm();
@@ -37,7 +35,7 @@ export const TopicAdd = withRole(["TEACHER", "ADMIN"], () => {
 
   return (
     <Layout active="topics">
-      <h2 className="view-heading">Edit Topic</h2>
+      <h2 className="view-heading">Add Topic</h2>
       <form
         noValidate
         onSubmit={handleSubmit(onSubmit)}
