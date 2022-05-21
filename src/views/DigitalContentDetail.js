@@ -1,6 +1,7 @@
-import { Grid } from "@mui/material";
+import { Box, Divider, Grid } from "@mui/material";
 import { useCallback, useContext, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { ContentCard } from "../components/card/ContentCard";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
 import { ViewTrap } from "../components/viewtrap";
 import { Layout } from "../containers/Layout";
@@ -17,14 +18,12 @@ export const DigitalContentDetail = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const [, download] = useContent("digitalContents");
   const remove = useDeleteContent("digitalContent", id);
   const navigate = useNavigate();
   const handleDelete = useCallback(async () => {
     await remove();
-    await download();
     navigate("/app/digital-contents");
-  }, [download, navigate, remove]);
+  }, [navigate, remove]);
 
   return (
     <Layout active="digital-contents">
@@ -73,6 +72,16 @@ export const DigitalContentDetail = () => {
               {data?.topic?.name}
             </Link>
           )}
+        </Grid>
+      </Grid>
+      <Grid p={3} container>
+        <Grid xs={12} item>
+          <Divider variant="middle">Preview</Divider>
+        </Grid>
+        <Grid xs={12} item>
+          <Grid m="auto" p={3} maxWidth={300}>
+            <ContentCard {...data} />
+          </Grid>
         </Grid>
       </Grid>
     </Layout>
