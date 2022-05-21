@@ -3,7 +3,6 @@ import { useForm, Controller } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/fields/button";
 import { Input } from "../components/fields/input";
-import { ViewTrap } from "../components/viewtrap";
 import { WholePageLoader } from "../containers/WholePageLoader";
 import { useUser } from "../contexts/userContext";
 import { login } from "../utils/api";
@@ -55,7 +54,13 @@ export const Login = () => {
         const response = await login(email, password);
         loginHandler(response);
       } catch (error) {
-        errorHandler(error);
+        let message;
+        try {
+          message = JSON.parse(error.message).message;
+        } catch (error) {
+          message = error;
+        }
+        errorHandler(message);
         setIsLoaded(true);
       }
     },
@@ -64,7 +69,13 @@ export const Login = () => {
 
   return (
     <>
-      <ViewTrap>{!isLoaded && <WholePageLoader />}</ViewTrap>
+      {!isLoaded && (
+        <div style={{ position: "fixed", top: 0, left: 0, zIndex: 100 }}>
+          <div style={{ position: "relative" }}>
+            <WholePageLoader />
+          </div>
+        </div>
+      )}
       <form
         className="login-container-wrapper"
         onSubmit={handleSubmit(formHandler)}
