@@ -10,15 +10,15 @@ export const studyProgrammeColumns = [
     flex: 1,
   },
   {
+    field: "degree",
+    headerName: "Degree",
+    flex: 1,
+  },
+  {
     field: "supervisor",
     headerName: "Supervisor",
     flex: 1,
     valueGetter: ({ row }) =>
       `${row?.supervisor?.name} ${row?.supervisor?.surname}`,
-  },
-  {
-    field: "description",
-    headerName: "Description",
-    flex: 1,
   },
 ];
