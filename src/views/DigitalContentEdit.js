@@ -25,8 +25,8 @@ export const DigitalContentEdit = withRole(["ADMIN", "TEACHER"], () => {
     async (data) => {
       const parsedData = {
         ...data,
-        subject: data.subject?.id,
-        topic: data.topic?._id,
+        subject: data.subject?.id || data.subject?._id,
+        topic: data.topic?.id || data.topic?._id,
       };
       await update(parsedData);
       await fetch();
