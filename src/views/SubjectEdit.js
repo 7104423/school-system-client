@@ -34,9 +34,9 @@ export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
     async (data) => {
       const formatedData = {
         ...data,
-        studyProgramme: data.studyProgramme?._id,
-        supervisor: data.supervisor?._id,
-        teachers: data.teachers.map((teacher) => teacher._id),
+        studyProgramme: data.studyProgramme?._id || data.studyProgramme?.id,
+        supervisor: data.supervisor?._id || data.supervisor?.id,
+        teachers: data.teachers.map((teacher) => teacher._id || teacher.id),
         credits: Number(data.credits) || 0,
       };
       await update(formatedData);
