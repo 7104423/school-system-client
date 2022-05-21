@@ -6,8 +6,6 @@ import { Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Add } from "@mui/icons-material";
 import { useContent } from "../hooks/useContent";
-import { ViewTrap } from "../components/viewtrap";
-import { WholePageLoader } from "../containers/WholePageLoader";
 import { useUser } from "../contexts/userContext";
 import { ADMIN } from "../config/roles";
 

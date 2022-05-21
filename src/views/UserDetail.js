@@ -4,14 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
 import { Layout } from "../containers/Layout";
 import { useContent, useDeleteContent } from "../hooks/useContent";
-import { ViewTrap } from "../components/viewtrap";
-import { WholePageLoader } from "../containers/WholePageLoader";
 import { ADMIN } from "../config/roles";
 
 export const UserDetail = () => {
   const { id } = useParams();
   const [data, fetch] = useContent("user", id);
-  const [, fetchUsers] = useContent("users");
   const remove = useDeleteContent("user", id);
   const navigate = useNavigate();
 
