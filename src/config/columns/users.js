@@ -12,6 +12,9 @@ export const userColumns = [
   {
     field: "surname",
     headerName: "Surname",
+    renderCell: ({ row: { surname, id } }) => (
+      <Link to={`/app/user/${id}`}>{surname}</Link>
+    ),
     flex: 1,
   },
   {
