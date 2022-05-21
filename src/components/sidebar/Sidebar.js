@@ -3,6 +3,7 @@ import React, { useCallback, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../../contexts/userContext";
 import { useNavigate } from "react-router-dom";
+import { Typography } from "@mui/material";
 
 export const Sidebar = (props) => {
   const { active } = props;
@@ -75,7 +76,7 @@ export const Sidebar = (props) => {
 
 const UserProfileView = () => {
   const user = useUser();
-
+  const roles = user.getRoles();
   const fullName = useMemo(
     () => `${user.getUser()?.name ?? ""} ${user.getUser()?.surname ?? ""}`,
     [user]
@@ -91,6 +92,7 @@ const UserProfileView = () => {
         />
       </Link>
       <h3 id="display-name">{fullName}</h3>
+      <Typography variant="subtitle2">{roles.join(", ")}</Typography>
     </div>
   );
 };
