@@ -14,4 +14,14 @@ export const userColumns = [
     headerName: "Surname",
     flex: 1,
   },
+  {
+    field: "groups",
+    headerName: "Roles",
+    flex: 1,
+    valueGetter: (params) => {
+      let groups = [];
+      params.row.groups.forEach( (item) => groups.push(item.name) );
+      return groups.join(", ");
+    },
+  }
 ];
