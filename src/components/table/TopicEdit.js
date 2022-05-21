@@ -1,12 +1,11 @@
 import { Button, Divider, Grid, Modal } from "@mui/material";
 import { Box } from "@mui/system";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { topicColumns } from "../../config/columns/topics";
-import { useAddContent } from "../../hooks/useContent";
-import { subjectMockup } from "../../mockups/subjects.mockup";
+import { Link } from "react-router-dom";
+import { useAddContent, useContent } from "../../hooks/useContent";
 import { ControlledTextField } from "../fields/input/ControlledTextField";
-import { Table } from "../table/table";
+import { Table } from "./table";
 
 const style = {
   position: "absolute",
@@ -20,10 +19,27 @@ const style = {
   p: 4,
 };
 
-export const EditTable = ({ id }) => {
+export const topicColumns = [
+  {
+    field: "name",
+    headerName: "Topic name",
+    renderCell: ({ row: { name, id } }) => (
+      <Link to={`/app/topic/${id}`}>{name}</Link>
+    ),
+    flex: 1,
+  },
+  {
+    field: "description",
+    headerName: "Description",
+    flex: 1,
+  },
+];
+
+export const TopicEdit = ({ id }) => {
   const [open, setOpen] = useState(false);
   const { control, handleSubmit } = useForm();
   const add = useAddContent("topic");
+  const [topics, fetchTopics] = useContent("subjectTopics", id);
 
   const handleClose = useCallback(() => {
     setOpen(false);
@@ -36,13 +52,19 @@ export const EditTable = ({ id }) => {
         subject: id,
       };
       await add(parsedData);
+      await fetchTopics();
       handleClose();
     },
-    [add, handleClose, id]
+    [add, fetchTopics, handleClose, id]
   );
 
   const handleOpen = useCallback(() => {
     setOpen(true);
+  }, []);
+
+  useEffect(() => {
+    fetchTopics();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -57,7 +79,7 @@ export const EditTable = ({ id }) => {
           </Button>
         </Grid>
         <Grid height={500} xs={12} item>
-          <Table columns={topicColumns} rows={subjectMockup} />
+          <Table columns={topicColumns} rows={topics} />
         </Grid>
       </Grid>
       <Modal

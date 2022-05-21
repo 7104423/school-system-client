@@ -7,7 +7,8 @@ import { useCallback, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { ControlledAutocomplete } from "../components/fields/input/ControlledAutocomplete";
 import { ControlledTextField } from "../components/fields/input/ControlledTextField";
-import { EditTable } from "../components/table/EditTable";
+import { TopicEdit } from "../components/table/TopicEdit";
+import { SubjectContentEdit } from "../components/table/SubjectContentEdit";
 
 export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
   const { id } = useParams();
@@ -145,7 +146,8 @@ export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
           </Grid>
         </Grid>
       </form>
-      <EditTable id={id} />
+      <TopicEdit id={id} />
+      <SubjectContentEdit id={id} />
     </Layout>
   );
 });
