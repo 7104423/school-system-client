@@ -13,6 +13,7 @@ import { ControlPanel } from "../components/control-panel/ControlPanel";
 import { useContent, useDeleteContent } from "../hooks/useContent";
 import { ContentCard } from "../components/card/ContentCard";
 import { ADMIN, TEACHER } from "../config/roles";
+import { degrees, languages } from "../config/constants";
 
 export const SubjectDetail = () => {
   const { id } = useParams();
@@ -91,10 +92,11 @@ export const SubjectDetail = () => {
             <strong>Credits</strong>: {subjectData?.credits}
           </Grid>
           <Grid item xs={6}>
-            <strong>Study degree</strong>: {subjectData?.studyProgramme?.degree}
+            <strong>Study degree</strong>:{" "}
+            {degrees[subjectData?.studyProgramme?.degree] || ""}
           </Grid>
           <Grid item xs={6}>
-            <strong>Language</strong>: {subjectData?.language}
+            <strong>Language</strong>: {languages[subjectData?.language] || ""}
           </Grid>
           <Grid item xs={6}>
             <strong>Study programme</strong>:{" "}

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { degrees } from "../constants";
 
 export const studyProgrammeColumns = [
   {
@@ -13,6 +14,7 @@ export const studyProgrammeColumns = [
     field: "degree",
     headerName: "Degree",
     flex: 1,
+    valueGetter: ({ row }) => degrees[row.degree] || "",
   },
   {
     field: "supervisor",

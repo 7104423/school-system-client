@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { degrees, languages } from "../constants";
 
 export const subjectColumns = [
   {
@@ -23,11 +24,12 @@ export const subjectColumns = [
   {
     field: "degree",
     headerName: "Degree",
-    valueGetter: (params) => params.row.studyProgramme?.degree,
+    valueGetter: ({ row }) => degrees[row?.studyProgramme?.degree] || "",
   },
   {
     field: "language",
     headerName: "Language",
+    valueGetter: ({ row }) => languages[row?.language] || "",
   },
   {
     field: "studyProgramme",
