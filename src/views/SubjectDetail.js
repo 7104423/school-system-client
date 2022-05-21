@@ -11,8 +11,6 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { Layout } from "../containers/Layout";
 import { ControlPanel } from "../components/control-panel/ControlPanel";
 import { useContent, useDeleteContent } from "../hooks/useContent";
-import { ViewTrap } from "../components/viewtrap";
-import { WholePageLoader } from "../containers/WholePageLoader";
 import { ContentCard } from "../components/card/ContentCard";
 
 export const SubjectDetail = () => {
@@ -204,7 +202,7 @@ export const SubjectDetail = () => {
           <Grid xs={12} width={"100%"} item>
             <Grid width={"100%"} spacing={3} container>
               {contentMap["YouTube link"]?.map((content) => (
-                <Grid xs={4} item>
+                <Grid xs={3} item>
                   <ContentCard {...content} />
                 </Grid>
               ))}
