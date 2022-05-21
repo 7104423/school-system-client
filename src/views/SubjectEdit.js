@@ -122,6 +122,7 @@ export const SubjectEdit = withRole(["ADMIN", "TEACHER"], () => {
             <ControlledAutocomplete
               control={control}
               name="studyProgramme"
+              rules={{ required: "This field is required" }}
               label={"Study Programme"}
               options={studyProgrammes}
               getOptionLabel={(option) =>

@@ -112,6 +112,7 @@ export const SubjectAdd = withRole(["ADMIN"], () => {
               control={control}
               name="studyProgramme"
               label={"Study Programme"}
+              rules={{ required: "This field is required" }}
               options={studyProgrammes}
               getOptionLabel={(option) =>
                 option?.name ? `${option?.name}` : ""
