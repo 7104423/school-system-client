@@ -25,7 +25,7 @@ export const columns = [
     field: "type",
     headerName: "Digital Content Type",
     renderCell: ({ row: { type, id } }) => (
-      <Link to={`/app/topic/${id}`}>{type}</Link>
+      <Link to={`/app/digital-content/${id}`}>{type}</Link>
     ),
     flex: 1,
   },
