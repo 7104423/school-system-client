@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useAddContent, useContent } from "../../hooks/useContent";
-import { ControlledAutocomplete } from "../fields/input/ControlledAutocomplete";
 import { ControlledTextField } from "../fields/input/ControlledTextField";
 import { Table } from "./table";
 
