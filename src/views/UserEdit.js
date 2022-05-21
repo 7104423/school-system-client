@@ -31,7 +31,7 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
   const { id } = useParams();
   const [data, fetch] = useContent("user", id);
   const update = useEditContent("user");
-  const { control, handleSubmit, reset } = useForm();
+  const { control, handleSubmit, reset, watch: watchForm } = useForm();
   const password = useRef({});
   const {
     control: controlPassword,
@@ -40,6 +40,7 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
   } = useForm();
 
   password.current = watch("password", "");
+  const thirdParty = watchForm("thirdPartyIdentity", false);
 
   const user = useUser();
   const userRoles = user.getRoles();
@@ -169,22 +170,24 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
                   )}
                 />
               </Grid>
-              <Grid item xs={6}>
-                <Controller
-                  control={control}
-                  name="resetPassword"
-                  render={({ field: { value, ...field } }) => (
-                    <FormGroup>
-                      <FormControlLabel
-                        control={
-                          <Checkbox {...field} checked={value || false} />
-                        }
-                        label="Request user to change password"
-                      />
-                    </FormGroup>
-                  )}
-                />
-              </Grid>
+              {!thirdParty && (
+                <Grid item xs={6}>
+                  <Controller
+                    control={control}
+                    name="resetPassword"
+                    render={({ field: { value, ...field } }) => (
+                      <FormGroup>
+                        <FormControlLabel
+                          control={
+                            <Checkbox {...field} checked={value || false} />
+                          }
+                          label="Request user to change password"
+                        />
+                      </FormGroup>
+                    )}
+                  />
+                </Grid>
+              )}
             </>
           )}
 
@@ -195,7 +198,7 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
           </Grid>
         </Grid>
       </form>
-      {(isSameUser || hasAdmin) && (
+      {(isSameUser || hasAdmin) && !thirdParty && (
         <form onSubmit={onSubmitPassword(handlePasswordChange)} noValidate>
           <Grid spacing={2} container>
             <Grid pb={2} xs={12} item>
