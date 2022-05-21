@@ -70,7 +70,6 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
       const parsedData = {
         ...data,
         groups: data?.groups?.map(({ value }) => value) ?? [],
-        thirdPartyIdentity: data.thirdPartyIdentity?.value,
       };
       await update(parsedData);
       await fetch();
@@ -135,19 +134,6 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
           )}
 
           <Grid item xs={6}>
-            <ControlledAutocomplete
-              control={control}
-              rules={{ required: "This field is required" }}
-              label="3rd party identity"
-              name="thirdPartyIdentity"
-              options={BOOLEAN}
-              getOptionLabel={(option) =>
-                option?.name ? `${option.name}` : ""
-              }
-            />
-          </Grid>
-
-          <Grid item xs={6}>
             <ControlledTextField
               control={control}
               name={"email"}
@@ -166,20 +152,40 @@ export const UserEdit = withRole(["ADMIN", "$CURRENT_USER"], () => {
           </Grid>
 
           {hasAdmin && (
-            <Grid item xs={6}>
-              <Controller
-                control={control}
-                name="resetPassword"
-                render={({ field: { value, ...field } }) => (
-                  <FormGroup>
-                    <FormControlLabel
-                      control={<Checkbox {...field} checked={value || false} />}
-                      label="Request user to change password"
-                    />
-                  </FormGroup>
-                )}
-              />
-            </Grid>
+            <>
+              <Grid item xs={12}>
+                <Controller
+                  control={control}
+                  name="thirdPartyIdentity"
+                  render={({ field: { value, ...field } }) => (
+                    <FormGroup>
+                      <FormControlLabel
+                        control={
+                          <Checkbox {...field} checked={value || false} />
+                        }
+                        label="3rd party identity"
+                      />
+                    </FormGroup>
+                  )}
+                />
+              </Grid>
+              <Grid item xs={6}>
+                <Controller
+                  control={control}
+                  name="resetPassword"
+                  render={({ field: { value, ...field } }) => (
+                    <FormGroup>
+                      <FormControlLabel
+                        control={
+                          <Checkbox {...field} checked={value || false} />
+                        }
+                        label="Request user to change password"
+                      />
+                    </FormGroup>
+                  )}
+                />
+              </Grid>
+            </>
           )}
 
           <Grid item xs={12}>

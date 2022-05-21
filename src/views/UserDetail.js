@@ -62,12 +62,6 @@ export const UserDetail = () => {
           <a href={`mailto:${data?.email}`}>{data?.email}</a>
         </Grid>
       </Grid>
-      <Grid container>
-        <Grid xs={6}>
-          <strong>3rd party identity:</strong>
-        </Grid>
-        <Grid xs={6}>{data?.thirdPartyIdentity ? "true" : "false"}</Grid>
-      </Grid>
     </Layout>
   );
 };
