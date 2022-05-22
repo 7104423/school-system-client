@@ -16,7 +16,6 @@ export const StudyProgrammeEdit = withRole([ADMIN], () => {
   const [data, fetch] = useContent("studyProgramme", id);
   const [teachers, fetchTeachers] = useContent("teacherEnum");
   const [students, fetchStudents] = useContent("studentEnum");
-  const [, fetchStudyProgrammes] = useContent("studyProgrammes");
   const update = useEditContent("studyProgramme", id);
   const navigate = useNavigate();
 
@@ -38,11 +37,10 @@ export const StudyProgrammeEdit = withRole([ADMIN], () => {
         students: data.students?.map(({ _id }) => _id),
         supervisor: data.supervisor?._id,
       };
-      await update(parsedData);
-      await fetchStudyProgrammes();
+      if (!(await update(parsedData))) return;
       navigate("/app/study-programmes");
     },
-    [fetchStudyProgrammes, navigate, update]
+    [navigate, update]
   );
 
   return (

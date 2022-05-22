@@ -27,7 +27,7 @@ export const TopicEdit = withRole([ADMIN, TEACHER], () => {
         subject: data.subject?._id,
         contents: undefined,
       };
-      await update(parsedData);
+      if (!(await update(parsedData))) return;
       navigate("/app/topics");
     },
     [navigate, update]
@@ -79,6 +79,7 @@ export const TopicEdit = withRole([ADMIN, TEACHER], () => {
               control={control}
               label="Subject"
               name="subject"
+              rules={{ required: "This field is required" }}
               options={subjects}
               getOptionLabel={(option) =>
                 option?.name ? `${option?.name || ""}` : ""

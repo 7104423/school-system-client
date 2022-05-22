@@ -11,7 +11,6 @@ import { ADMIN, TEACHER } from "../config/roles";
 
 export const DigitalContentAdd = withRole([ADMIN, TEACHER], () => {
   const { control, handleSubmit } = useForm();
-  const [, fetchDigitalContents] = useContent("digitalContents");
   const [subjects, fetchSubjects] = useContent("subjects");
   const [topics, fetchTopics] = useContent("topics");
   const update = useAddContent("digitalContent");
@@ -24,11 +23,10 @@ export const DigitalContentAdd = withRole([ADMIN, TEACHER], () => {
         subject: data.subject?.id || data.subject?._id,
         topic: data.topic?.id || data.topic?._id,
       };
-      await update(parsedData);
-      await fetchDigitalContents();
+      if (!(await update(parsedData))) return;
       navigate("/app/digital-contents");
     },
-    [fetchDigitalContents, navigate, update]
+    [navigate, update]
   );
 
   useEffect(() => {
@@ -77,6 +75,7 @@ export const DigitalContentAdd = withRole([ADMIN, TEACHER], () => {
               control={control}
               label="Subject"
               name="subject"
+              rules={{ required: "This field is required" }}
               options={subjects}
               getOptionLabel={(option) =>
                 option?.name ? `${option?.name || ""}` : ""

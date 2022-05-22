@@ -13,7 +13,6 @@ import { ADMIN, TEACHER } from "../config/roles";
 
 export const SubjectEdit = withRole([ADMIN, TEACHER], () => {
   const { id } = useParams();
-  const [, fetchSubjects] = useContent("subjects");
   const [data, fetch] = useContent("subject", id);
   const [teachers, fetchTeachers] = useContent("teacherEnum");
   const [studyProgrammes, fetchStudyProgrammes] = useContent("studyProgrammes");
@@ -40,12 +39,10 @@ export const SubjectEdit = withRole([ADMIN, TEACHER], () => {
         teachers: data.teachers.map((teacher) => teacher._id || teacher.id),
         credits: Number(data.credits) || 0,
       };
-      await update(formatedData);
-      await fetch();
-      await fetchSubjects();
+      if (!(await update(formatedData))) return;
       navigate("/app/subjects");
     },
-    [update, fetch, fetchSubjects, navigate]
+    [update, navigate]
   );
 
   return (

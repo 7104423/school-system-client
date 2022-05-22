@@ -73,11 +73,10 @@ export const UserEdit = withRole([ADMIN, SELF], () => {
         ...data,
         groups: data?.groups?.map(({ value }) => value) ?? [],
       };
-      await update(parsedData);
-      await fetch();
+      if (!(await update(parsedData))) return;
       navigate("/app/users");
     },
-    [fetch, navigate, update]
+    [navigate, update]
   );
 
   const handlePasswordChange = useCallback(

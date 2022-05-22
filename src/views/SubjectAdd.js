@@ -11,7 +11,6 @@ import { ADMIN } from "../config/roles";
 
 export const SubjectAdd = withRole([ADMIN], () => {
   const { id } = useParams();
-  const [, fetchSubjects] = useContent("subjects");
   const [teachers, fetchTeachers] = useContent("teacherEnum");
   const [studyProgrammes, fetchStudyProgrammes] = useContent("studyProgrammes");
   const { control, handleSubmit } = useForm();
@@ -32,11 +31,10 @@ export const SubjectAdd = withRole([ADMIN], () => {
         teachers: data.teachers.map((teacher) => teacher.id),
         credits: Number(data.credits) || 0,
       };
-      await add(formatedData);
-      await fetchSubjects();
+      if (!(await add(formatedData))) return;
       navigate("/app/subjects");
     },
-    [add, fetchSubjects, navigate]
+    [add, navigate]
   );
 
   return (

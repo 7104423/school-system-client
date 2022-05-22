@@ -11,7 +11,6 @@ import { ADMIN, TEACHER } from "../config/roles";
 
 export const TopicAdd = withRole([ADMIN, TEACHER], () => {
   const { control, handleSubmit } = useForm();
-  const [, fetchTopics] = useContent("topics");
   const [subjects, fetchSubjects] = useContent("subjects");
   const add = useAddContent("topic");
   const navigate = useNavigate();
@@ -22,11 +21,10 @@ export const TopicAdd = withRole([ADMIN, TEACHER], () => {
         ...data,
         subject: data.subject?.id,
       };
-      await add(parsedData);
-      await fetchTopics();
+      if (!(await add(parsedData))) return;
       navigate("/app/topics");
     },
-    [add, fetchTopics, navigate]
+    [add, navigate]
   );
 
   useEffect(() => {
@@ -69,6 +67,7 @@ export const TopicAdd = withRole([ADMIN, TEACHER], () => {
               control={control}
               label="Subject"
               name="subject"
+              rules={{ required: "This field is required" }}
               options={subjects}
               getOptionLabel={(option) =>
                 option?.name ? `${option?.name || ""}` : ""
