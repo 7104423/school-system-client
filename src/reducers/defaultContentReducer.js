@@ -10,7 +10,7 @@ export const defaultContentReducer = (state, action) => {
       };
     case "failed":
       return {
-        data: [],
+        ...state,
         isLoading: false,
         error: action.payload.data,
         contentID: action.payload.id,
