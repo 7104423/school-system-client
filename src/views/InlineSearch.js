@@ -4,7 +4,9 @@ import { data } from "../config/db/data";
 
 export const InlineSearch = () => {
   const [value, setValue] = useState("");
-  const filteredData = data.filter((el) => el.task.indexOf(value) !== -1);
+  const filteredData = data.filter(
+    (el) => el.task.toLowerCase().indexOf(value.toLowerCase()) !== -1
+  );
 
   return (
     <Grid width={"100%"} p={3} container spacing={2}>
