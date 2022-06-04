@@ -1,0 +1,533 @@
+[
+  {
+    "task": "Co je specifické pro relační databáze?",
+    "answerList": ["Ukládání dat do tabulek."]
+  },
+  {
+    "task": "Co je to relační klíč?",
+    "answerList": [
+      "Vztah mezi záznamy různých tabulek implementovanými odpovídajícími hodnotami."
+    ]
+  },
+  {
+    "task": "Co je primární a cizí klíč?",
+    "answerList": [
+      ["Primární klíč", "Je ve zdrojové tabulce", "Vložení dat je první"],
+      ["Cizí klíč", "Je v cílové tabulce", "Vložení dat je druhé v pořadí"]
+    ]
+  },
+  {
+    "task": "Které kardinality používá relační databáze?",
+    "answerList": [
+      [
+        "<UU5.Bricks.Strong>1:1</UU5.Bricks.Strong>",
+        "Jedno auto musí řídit právě jeden řidič na služební cestě."
+      ],
+      ["1:N", "Jedna matka může mít 0 - N dětí."],
+      ["M:N", "Různí lidé jsou přihlášeni na různé hobby kurzy."]
+    ]
+  },
+  {
+    "task": "Co nesouvisí s referenční integritou?",
+    "answerList": ["Dotaz na počet odeslaných objednávek."]
+  },
+  {
+    "task": "Co je NOT NULL?",
+    "answerList": ["Je nutné zadat povinnou hodnotu atributu."]
+  },
+  {
+    "task": "Proč se používá referenční integrita?",
+    "answerList": [
+      "Pro zachování konzistence dat.",
+      "Pro propojení hodnot PK a FK v tabulkách."
+    ]
+  },
+  {
+    "task": "Která pravidla omezení se vztahují na primární klíč?",
+    "answerList": ["UNIQUE", "NOT NULL"]
+  },
+  {
+    "task": "Které skutečnosti jsou charakteristické pro normalizaci?",
+    "answerList": [
+      "Malá redundance dat.",
+      "Vložení každého faktu pouze jednou."
+    ]
+  },
+  {
+    "task": "Je některá normální forma povinná při návrhu relační DB?",
+    "answer": false
+  },
+  {
+    "task": "Propojte NF a jejich popisy",
+    "answerList": [
+      [
+        "1 NF",
+        "Všechny atributy jsou v jedné tabulce  - informace o osobě, adrese i vzdělání."
+      ],
+      [
+        "3 NF",
+        "Atributy, které nejsou klíčové, nemají v tabulce žádné závislosti - info o osobách a adresách jsou ve vlastních tabulkách."
+      ],
+      ["5 NF", "Každá tabulka má pouze ID a jeden atribut s hodnotou."]
+    ]
+  },
+  {
+    "task": "Co musí mít tabulka ve 3 NF?",
+    "answerList": [
+      "Atributy, které nejsou klíčové, nemají v tabulce žádné závislosti - info o osobách a adresách jsou ve vlastních tabulkách.",
+      "Redundantní hodnoty jsou v číselnících (například názvy měst v adrese)."
+    ]
+  },
+  {
+    "task": "Která NF se vyznačuje rozdělením tabulky do více tabulek přidáním jakéhokoli nového atributu? Tabulky v této NF mají typicky dva sloupce: ID a hodnota.",
+    "answerList": ["5 NF"]
+  },
+  {
+    "task": "K čemu slouží denormalizace?",
+    "answerList": ["Ke snížení zátěže databáze při spojování tabulek."]
+  },
+  {
+    "task": "Která normální forma je typická?",
+    "answerList": ["3 NF / BCNF"]
+  },
+  {
+    "task": "Proč se 5 NF nepoužívá často?",
+    "answerList": ["Je zde příliš mnoho tabulek."]
+  },
+  {
+    "task": "Může být databáze nenormalizovaná, v 0 NF?",
+    "answerList": ["Ano, databáze nemají kontrolu úrovně normalizace."]
+  },
+  {
+    "task": "Používají se příkazy SQL (Structured Query Language) pro management databáze a pro dotazování do databáze?",
+    "answer": true
+  },
+  {
+    "task": "Proč se používá Query Optimizer?",
+    "answerList": [
+      "Rychlejší vyhledávání.",
+      "Přizpůsobení vyhledávacích kritérií.",
+      "Použití datového slovníku k identifikaci všech příslušných indexů."
+    ]
+  },
+  {
+    "task": "Lze optimalizátor dotazů vypnout?",
+    "answerList": ["Ne, ale lze použít index přímo."]
+  },
+  {
+    "task": "Propojte základní kategorie příkazů.",
+    "answerList": [
+      ["DDL", "Příkazy, které vytvářejí a udržují databázové objekty."],
+      ["DML", "Příkazy, které se používají k načítání a údržbě dat."]
+    ]
+  },
+  {
+    "task": "Co umožňují operace DDL?",
+    "answerList": ["Vytvářejí a udržují databázové objekty."]
+  },
+  {
+    "task": "Spojte DDL příkazy.",
+    "answerList": [
+      ["CREATE", "nový objekt"],
+      ["ALTER", "změna objektu"],
+      ["DROP", "zrušení objektu"]
+    ]
+  },
+  {
+    "task": "Zkombinujte ukázková data s vhodnými datovými typy.",
+    "answerList": [
+      ["FLOAT / DECIMAL / MONEY", "prodejní cena"],
+      ["TEXT / VARCHAR", "popis zboží"],
+      ["DATE", "očekávaná doba doručení"],
+      ["BLOB", "obrázek produktu"]
+    ]
+  },
+  {
+    "task": "Používají se příkazy DDL přímo k vkládání dat?",
+    "answer": false
+  },
+  {
+    "task": "Zkombinujte typy integritních omezení s jejich atributy z příkladu: <UU5.Bricks.Lsi><UU5.Bricks.Lsi.Item language='en'><UuApp.DesignKit.EmbeddedText codeStyle='sql' noCopy><uu5string.pre> CREATE TABLE emp    (  empno    NUMBER(4)    PRIMARY KEY,       ename    VARCHAR(10)  UNIQUE,       job      VARCHAR(9)   CHECK (JOB IN ('MANAGER','CLERK','ANALYST','PRESIDENT')),       mgr      NUMBER(4)    REFERENCES emp(empno) ON DELETE SET NULL,       hiredate DATE,       sal      NUMBER(7, 2) NOT NULL,       comm     NUMBER(7, 2),       deptno   NUMBER(2)    REFERENCES dept(deptno) ON DELETE CASCADE )  </uu5string.pre></UuApp.DesignKit.EmbeddedText></UU5.Bricks.Lsi.Item></UU5.Bricks.Lsi>",
+    "answerList": [
+      ["empno", "PRIMARY KEY"],
+      ["deptno", "FOREIGN KEY"],
+      ["ename", "UNIQUE"],
+      ["job", "CHECK"],
+      ["sal", "NOT NULL"]
+    ]
+  },
+  {
+    "task": "Kdy je možné nastavit integritní omezení?",
+    "answerList": [
+      "Když jsou vytvořeny DB objekty.",
+      "Dodatečně za předpokladu, že stávající data již splňují nová integritní omezení."
+    ]
+  },
+  {
+    "task": "Doplň klíčová slova dotazu<br/> SELECT ename _ emp_table _ id = 123",
+    "answerList": ["FROM", "WHERE"]
+  },
+  {
+    "task": "Kombinujte klíčová slova související s DB operacemi.",
+    "answerList": [
+      ["SELECT", "Výběr dat z tabulek nebo pohledů."],
+      ["JOIN", "Spojení více tabulek."],
+      ["WHERE", "Podmínka, kterou musí splňovat data."],
+      ["UPDATE", "Úprava dat v tabulce."]
+    ]
+  },
+  {
+    "task": "Co to jsou logické operátory?",
+    "answerList": ["AND, OR, NOT"]
+  },
+  {
+    "task": "Kterou funkci splňuje BETWEEN option?",
+    "answerList": ["Definuje rozsah hodnot."]
+  },
+  {
+    "task": "Který příkaz je správný pro přidání nového řádku?",
+    "answerList": ["INSERT"]
+  },
+  {
+    "task": "<UU5.Bricks.P> Co budou tyto příkazy dělat?  </UU5.Bricks.P>  <UU5.Bricks.Lsi><UU5.Bricks.Lsi.Item language='en'><UuApp.DesignKit.EmbeddedText codeStyle='sql'><uu5string.pre> INSERT INTO dept (deptno, dname, loc) VALUES (10, 'ACCOUNTING', 'NEW YORK');  INSERT INTO dept VALUES (20, 'RESEARCH', 'DALLAS'); </uu5string.pre></UuApp.DesignKit.EmbeddedText></UU5.Bricks.Lsi.Item></UU5.Bricks.Lsi>",
+    "answerList": ["Oba záznamy se vloží do databáze, pokud tam již nejsou."]
+  },
+  {
+    "task": "Co bude tento příkaz dělat?   <UU5.Bricks.Lsi><UU5.Bricks.Lsi.Item language='en'><UuApp.DesignKit.EmbeddedText codeStyle='sql'><uu5string.pre> UPDATE emp  SET    sal = sal * 1.1  WHERE  deptno = 30  </uu5string.pre></UuApp.DesignKit.EmbeddedText></UU5.Bricks.Lsi.Item></UU5.Bricks.Lsi>",
+    "answerList": ["Zaměstnanci oddělení 30 budou mít zvýšený plat o 10%."]
+  },
+  {
+    "task": "Kterým způsobem lze odebrat zaměstnance Smith z tabulky EMP?",
+    "answerList": ["DELETE", "FROM emp", "WHERE", "ename = 'SMITH'"]
+  },
+  {
+    "task": "Vytvořte funkční dotaz:",
+    "answerList": [
+      "SELECT deptno, empno, ename, MAX(sal)",
+      "FROM emp",
+      "WHERE sal BETWEEN 2000 AND 3000 AND deptno IN (10,12,20)",
+      "GROUP BY deptno, empno, ename"
+    ]
+  },
+  {
+    "task": "Co rozumíme podmínkami výběru?",
+    "answerList": ["Vše, co určuje, které řádky se vyberou."]
+  },
+  {
+    "task": "Co dělá podmínka výběru s vracenými daty?",
+    "answerList": [
+      "Vrátí pouze množinu dat, která zcela splňuje všechny podmínky.",
+      "Pomocí optimalizátoru dotazů krok za krokem ověří všechny části dotazovací podmínky."
+    ]
+  },
+  {
+    "task": "Připojte fragmenty dotazu SELECT správně.",
+    "answerList": [
+      ["SELECT", "<column expressions>"],
+      ["FROM", "<table name>"],
+      ["WHERE", "<row selection criteria>"],
+      ["ORDER BY", "<ordering expression>"]
+    ]
+  },
+  {
+    "task": "Které je správné pořadí vyhodnocení podmínky?",
+    "answerList": [
+      "parenthesis - závorky",
+      "operátory porovnání (=, >,<,<>, IN, BETWEEN, IS NULL, LIKE, ...)",
+      "NOT - logická negace",
+      "AND - logické spojení",
+      "OR - nebo"
+    ]
+  },
+  {
+    "task": "Kterým příkazem mohou být odstraněny duplikáty?",
+    "answerList": ["DISTINCT"]
+  },
+  {
+    "task": "Co dělá LIKE option?",
+    "answerList": ["Umožňuje nahradit zástupné znaky ve vyhledávacím řetězci."]
+  },
+  {
+    "task": "Které jsou zástupné znaky pro LIKE v ORACLE?<br/> SELECT ename, job FROM emp WHERE ename LIKE 'S_I_'",
+    "answerList": ["_", "%"]
+  },
+  {
+    "task": "Správně vytvořte dotaz SELECT z fragmentů.",
+    "answerList": [
+      "SELECT ename",
+      "FROM emp",
+      "WHERE sal",
+      "IN",
+      "2450, 2850, 2975"
+    ]
+  },
+  {
+    "task": "Co značí hodnota NULL?",
+    "answerList": ["Chybějící hodnota"]
+  },
+  {
+    "task": "Jak může být NULL hodnota použita při dorazování?",
+    "answerList": [
+      "SELECT ename, comm",
+      "FROM emp",
+      "WHERE comm",
+      "IS NOT NULL"
+    ]
+  },
+  {
+    "task": "Které použití hodnoty NULL je správné?",
+    "answerList": ["comm IS NOT NULL", "comm IS NULL"]
+  },
+  {
+    "task": "Proč je vhodné používat skupinové funkce?",
+    "answerList": [
+      "Pro zjištění matematických výsledků z více řádků.",
+      "Není potřeba vracet všechny vyhovující záznamy tabulky."
+    ]
+  },
+  {
+    "task": "Připojte fragmenty dotazů SELECT správně:",
+    "answerList": [
+      "SELECT ename,",
+      "ROUND(sal * 1.05, 0) salary",
+      "FROM emp WHERE deptno = 20"
+    ]
+  },
+  {
+    "task": "Spojte fukce a jejich popisy.",
+    "answerList": [
+      ["ROUND", "snížení počtu desetinných míst"],
+      ["AVG", "součet hodnot dělený jejich počtem"],
+      ["COUNT", "počet řádků, které splňují dané výběrové kritérium"],
+      ["SUM", "součet hodnot atributu řádků podle kritérií"]
+    ]
+  },
+  {
+    "task": "Seřaďte správně fragmenty dotazů SELECT:",
+    "answerList": [
+      "SELECT <columns expressions> FROM <table name>",
+      "WHERE <row selection criteria>",
+      "GROUP BY <grouping expression>",
+      "HAVING <group selection criteria>",
+      "ORDER BY <ordering expression>"
+    ]
+  },
+  {
+    "task": "Která jsou správná použití příkazu SELECT?",
+    "answerList": [
+      "SELECT deptno, sum(sal) dSal <br/> FROM emp GROUP BY deptno ORDER BY deptno",
+      "SELECT SUM(sal) FROM emp WHERE depno = 20"
+    ]
+  },
+  {
+    "task": "Propojte fragmenty příkazů SQL.",
+    "answerList": [
+      ["SELECT", "<columns expressions>"],
+      ["FROM", "<table name>"],
+      ["GROUP BY", "<grouping expression>"],
+      ["HAVING", "<group selection criteria>"],
+      ["ORDER BY", "<ordering expression>"]
+    ]
+  },
+  {
+    "task": "Kterým způsobem se používá JOIN predikát?",
+    "answerList": ["Ke spojení více tabulek do jednoho výsledku."]
+  },
+  {
+    "task": "Jak používat JOIN?",
+    "answerList": [
+      "... INNER JOIN dept ON (...",
+      "... from emp natural join dept ..."
+    ]
+  },
+  {
+    "task": "Vytvořte dotaz pomocí JOIN.",
+    "answerList": [
+      "SELECT ename, emp.deptno, dname",
+      "FROM   emp",
+      "INNER JOIN dept ON",
+      "( emp.deptno = dept.deptno )",
+      "WHERE  job = 'MANAGER'"
+    ]
+  },
+  {
+    "task": "Za kterým účelem se používá OUTER JOIN?",
+    "answerList": ["Vrací data také z tabulky, kde záznamy nejsou propojeny."]
+  },
+  {
+    "task": "Vyberte klíčová slova související se spojením tabulkek.",
+    "answerList": [
+      ["NATURAL JOIN", "Spojení tabulek podle vztahu PK-FK."],
+      ["LEFT / RIGHT OUTER JOIN", "Poloviční spojení."],
+      ["OUTER JOIN", "Chybějící atributy z obou tabulek jsou nahrazeny NULL."]
+    ]
+  },
+  {
+    "task": "Který příklad spojení tabulek je nesprávný?",
+    "answerList": ["... FROM emp RIGHT OUTER dept ..."]
+  },
+  {
+    "task": "K čemu se RIGHT OUTER JOIN používá?",
+    "answerList": ["Chybějící data z jedné tabulky nahradí NULL."]
+  },
+  {
+    "task": "Dokončete správně příkazy JOIN a výsledky.",
+    "answerList": [
+      "SELECT ename, emp.deptno, dname",
+      "FROM   emp INNER JOIN dept",
+      "ON ( emp.deptno = dept.deptno )",
+      "WHERE  job = 'MANAGER'"
+    ]
+  },
+  {
+    "task": "Co jsou poddotazy?",
+    "answerList": ["mechanismus pro provedení dotazu v několika krocích"]
+  },
+  {
+    "task": "Vytvořte funkční poddotaz pro seznam oddělení, která mají zaměstnance, kteří jsou manažery.",
+    "answerList": [
+      "SELECT dname, loc  FROM   dept",
+      "WHERE  deptno IN",
+      "(SELECT deptno FROM   emp",
+      "WHERE  job = 'MANAGER')",
+      "ORDER  BY dname"
+    ]
+  },
+  {
+    "task": "<UuApp.DesignKit.EmbeddedText codeStyle='sql'>\r SELECT deptno, ename, sal \r FROM   emp e1 \r WHERE  sal = (SELECT Max(sal) \r               FROM   emp e2 \r               WHERE  e1.deptno = e2.deptno) \r ORDER  BY deptno \r </UuApp.DesignKit.EmbeddedText>\r <UU5.Bricks.P>\r Který bude výsledek tohoto dotazu? \r </UU5.Bricks.P>",
+    "answerList": [
+      "Vrátí seznam zaměstnanců s nejvyšším platem pro každé oddělení."
+    ]
+  },
+  {
+    "task": "Které příkazy mohou používat poddotazy?",
+    "answerList": ["UPDATE", "DELETE"]
+  },
+  {
+    "task": "Vytvořte funkční UPDATE",
+    "answerList": [
+      "UPDATE emp e1",
+      "SET    sal = (SELECT Round(Avg(sal), 0)",
+      "FROM   emp e2",
+      "WHERE  e1.deptno = e2.deptno)"
+    ]
+  },
+  {
+    "task": "Zkombinujte příklady příkazů a jejich charakteristiku.",
+    "answerList": [
+      ["EXISTS", "Poddotaz nalezne nějaký záznam."],
+      ["IN", "Poddotaz vrací list ID pro hlavní dotaz."],
+      ["FROM emp e1", "Alias pro jednoznačné určení tabulky."]
+    ]
+  },
+  {
+    "task": "K čemu slouží alias tabulky?",
+    "answerList": ["Jednoznačně identifikuje tabulku."]
+  },
+  {
+    "task": "Vytvořte funkční poddotaz z fragmentů, který vymaže zaměstnance, jejichž plat je vyšší než plat jejich manažera.",
+    "answerList": [
+      "DELETE FROM emp e1",
+      "WHERE  EXISTS",
+      "(SELECT * FROM   emp e2",
+      "WHERE  e1.sal > e2.sal",
+      "AND e1.mgr = e2.empno)"
+    ]
+  },
+  {
+    "task": "Můžeme použít příkaz UPDATE pro VIEW?",
+    "answerList": ["Ano, ale má to specifická omezení."]
+  },
+  {
+    "task": "Zaškrtněte všechna pravdivá tvrzení o View:",
+    "answerList": [
+      "View lze použít ke zjednodušení přístupu k databázovým tabulkám.",
+      "View mohou obsahovat funkce, poddotazy nebo spojení více tabulek."
+    ]
+  },
+  {
+    "task": "Která syntaxe pro vytvoření VIEW je správná?",
+    "answerList": [
+      "CREATE VIEW dept_sal",
+      "AS",
+      "SELECT deptno, sum(sal) totsal",
+      "FROM   emp",
+      "GROUP  BY deptno"
+    ]
+  },
+  {
+    "task": "Proč používáme INDEX?",
+    "answerList": ["Pro rychlejší vyhledávání."]
+  },
+  {
+    "task": "Která syntaxe je správná  pro vytvoření indexu pro atribut <UU5.Bricks.Code>depno</UU5.Bricks.Code> v tabulce <UU5.Bricks.Code>emp</UU5.Bricks.Code>?",
+    "answerList": ["CREATE", "INDEX emp_i01", "ON", "emp", "(deptno)"]
+  },
+  {
+    "task": "Co je to Access plan?",
+    "answerList": [
+      "Jeho cílem je zjistit, jaké požadavky má dotaz na databázi."
+    ]
+  },
+  {
+    "task": "Jak pracuje System Optimizer s indexy?",
+    "answerList": ["Identifikuje použitelné indexy pro každý jednotlivý dotaz."]
+  },
+  {
+    "task": "Mohlo by se zpomalit provedení operace UPDATE aplikováním na sloupce, které jsou indexovány?",
+    "answer": true
+  },
+  {
+    "task": "Je atribut pro kód velikosti oblečení (XS, S, M, L, XL, XXL) vhodný pro vytvoření indexu?",
+    "answerList": ["Není."]
+  },
+  {
+    "task": "Co jsou databázové transakce?",
+    "answerList": [
+      "Transakce zajišťují konzistenci při úpravě dat v relačních databázích."
+    ]
+  },
+  {
+    "task": "Co je zkratka ACID?",
+    "answerList": ["Atomicity, Consistency, Isolation, Durability"]
+  },
+  {
+    "task": "Co znamená Concurrency?",
+    "answerList": [
+      "Řešení problému paralelních transakcí.",
+      "Dokud není transakce potvrzena příkazem COMMIT, jsou data uzamčena pro další zpracování."
+    ]
+  },
+  {
+    "task": "Jak spravujeme transakce?",
+    "answerList": [
+      "Transakce je spouštěna automaticky.",
+      "Transakce musí být potvrzena příkazem COMMIT."
+    ]
+  },
+  {
+    "task": "Může být použití transakcí v relační databázi vypnuto?",
+    "answer": false
+  },
+  {
+    "task": "Spojte slova tvořící zkratku ACID a jejich charakteristiku.",
+    "answerList": [
+      [
+        "Atomicity",
+        "Všechny operace v rámci transakce musí být provedeny nebo zrušeny."
+      ],
+      [
+        "Consistency",
+        "Po dokončení transakce musí databáze dosáhnout konzistentního stavu."
+      ],
+      [
+        "Isolation",
+        "Průběžné výsledky neúplných transakcí nejsou přístupné jiným transakcím."
+      ],
+      [
+        "Durability",
+        "Commitovanou transakci nelze vrátit zpět nebo změny ztratit."
+      ]
+    ]
+  }
+]

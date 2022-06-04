@@ -1,0 +1,384 @@
+[
+  {
+    "task": "MongoDB je multiplatformní nativní dokumentová databáze.",
+    "answer": true
+  },
+  {
+    "task": "MongoDB je _ databáze.",
+    "answerList": ["NoSQL"]
+  },
+  {
+    "task": "Který nativní formát souborů používá MongoDB pro uchováváni dat?",
+    "answerList": ["BSON"]
+  },
+  {
+    "task": "MongoDB je licencován jako _ software.",
+    "answerList": ["open source"]
+  },
+  {
+    "task": "Co patří mezí hlavní funkce pro zpracování dat v MongoDB?",
+    "answerList": ["Ad hoc dotazy", "Indexace", "Agregace"]
+  },
+  {
+    "task": "Co znamenají následující zkratky?",
+    "answerList": [
+      [
+        "SQL",
+        "Standardizovaný strukturovaný dotazovací jazyk, používán pro práci s daty v relačních databázích."
+      ],
+      [
+        "NoSQL",
+        "Databázový koncept, ve kterém datové úložiště i zpracování dat používají jiné prostředky než tabulková schémata."
+      ]
+    ]
+  },
+  {
+    "task": "Co znamená zkratka SQL?",
+    "answerList": ["Structured Query Language"]
+  },
+  {
+    "task": "NoSQL databáze je vhodná tehdy, když se používá dynamické datové schéma.",
+    "answer": true
+  },
+  {
+    "task": "Které pojmy SQL odpovídají pojmu NoSQL?",
+    "answerList": [
+      ["Relační tabulka", "Kolekce dat"],
+      ["Řádky tabulky", "Strukturovaný dokument formátu JSON"],
+      ["Sloupec tabulky", "Položka nebo pole ve strukturovaném dokumentu"]
+    ]
+  },
+  {
+    "task": "Co z následujícího <UU5.Bricks.Strong>platí</UU5.Bricks.Strong> pro NoSQL databáze?",
+    "answerList": [
+      "Neexistuje žádná předem daná datová struktura.",
+      "Nejsou zde integritní omezení.",
+      "Transakční zpracování defaultně probíhá na úrovni jednoho dokumentu v kolekci."
+    ]
+  },
+  {
+    "task": "Do kterého typu NoSQL databáze patří MongoDB?",
+    "answerList": ["NoSQL dokumentové databáze"]
+  },
+  {
+    "task": "Které vlastnosti mají SQL databáze (RDBMS) pro transakční zpracování?",
+    "answerList": [
+      "Při selhání některého z příkazů může být celá transakce vrácena zpět.<br/> (v závislosti na nastavení transakčního zpracování a ošetření výjimek)",
+      "Jednotlivé transakce jsou vzájemně izolované.<br/> (změny dat lze číst už před ukončením transakce v závislosti na nastavení úrovně izolace, ale do ukončení jedné transakce je nelze jinou transakcí měnit)"
+    ]
+  },
+  {
+    "task": "Která specifika má normalizace při definici datového modelu v MongoDB?",
+    "answerList": [
+      "Dovoluje (preferuje) výskyt duplicitních dat.",
+      "Nemá pevně definovaný datový model - je řízen dynamicky. <br/> (po přidání políčka ve formuláři aplikace není potřeba v NoSQL databázi nic měnit - v SQL se musí nejprve tabulka o nový atribut rozšířit)",
+      "Konzistence dat závisí na aplikaci, databáze nemá téměř žádné restrikce. <br/> (výjimkou je například unikátní ID pole v každém dokumentu kolekce)"
+    ]
+  },
+  {
+    "task": "Dá se použít MongoDB jako cloudová služba (DBaaS)?",
+    "answer": true
+  },
+  {
+    "task": "Jeden z postupů pro spuštěni procesu serveru databáze MongoDB je pomocí příkazové řádky. <br/> Seřaďte správně jednotlivé kroky:",
+    "answerList": [
+      "Spustit terminál (<UU5.Bricks.Code>cmd.exe</UU5.Bricks.Code> u Windows OS) a  <br/>přejit do složky s nainstalovanou databází <br/> (například <UU5.Bricks.Code>cd C:\\MongoDB\\Server\\4.2\\bin</UU5.Bricks.Code>)",
+      "Spustit příkaz <UU5.Bricks.Code>mongod</UU5.Bricks.Code>",
+      "Zkontrolovat výpis konzole a ověřit, že DB běží."
+    ]
+  },
+  {
+    "task": "Pomocí kterého příkazu se spoušti MongoDB klient?",
+    "answerList": ["mongo"]
+  },
+  {
+    "task": "Přiřaďte příslušné příkazy k následujícím operacím.",
+    "answerList": [
+      ["MongoDB server", "mongod - spustit<br/> CTRL/Command + C - ukončit"],
+      ["MongoDB klient", "mongo - spustit<br/> exit - opustit"]
+    ]
+  },
+  {
+    "task": "Databáze v MongoDB vzniknou automaticky při prvním zápisu.",
+    "answer": true
+  },
+  {
+    "task": "MongoDB má integrovaný clustering.",
+    "answer": true
+  },
+  {
+    "task": "Co je to clustering databazí?",
+    "answerList": [
+      "Proces kombinování více než jednoho serveru nebo instancí připojení databáze."
+    ]
+  },
+  {
+    "task": "Které výhody přináší clustering databází?",
+    "answerList": ["Vysokou dostupnost dat", "Snížení doby načítaní dat"]
+  },
+  {
+    "task": "Co znamenají následující principy clusteringu?",
+    "answerList": [
+      ["Replikace", "Zajišťuje, že na vícero MongoDB nodech jsou stejná data."],
+      [
+        "Sharding",
+        "Rozprostření jedné databáze a kolekce dokumentů přes vícero nodů z důvodu škálovaní."
+      ]
+    ]
+  },
+  {
+    "task": "Při shardingu jsou data z jedné tabulky podle _ rozdělena do více fyzických tabulek.",
+    "answerList": ["Shard key"]
+  },
+  {
+    "task": "Co je MongoDB Compass?",
+    "answerList": [
+      "Nástroj s GUI, které umožňuje vizualizovat data.",
+      "Nástroj pro podporu agregace dat."
+    ]
+  },
+  {
+    "task": "Nástroj MongoDB Compass je GUI, které umožňuje rychle _ strukturu dat v databázi a provádět dotazy ad hoc - to vše _ dotazů jazyka MongoDB.",
+    "answerList": ["vizualizovat", "nevyžaduje znalost"]
+  },
+  {
+    "task": "Co všechno umožnuje nástroj Mongo DB Compass?",
+    "answerList": [
+      "CRUD operace nad daty",
+      "Import/export dat do JSON",
+      "Spravovat indexy"
+    ]
+  },
+  {
+    "task": "Co umožňují nástroje Robo 3T a Studio 3T?",
+    "answerList": [
+      "Provádět CRUD operace včetně složitějších agregačních funkcí.",
+      "Dotazy vytvořit stylem SQL syntaxe."
+    ]
+  },
+  {
+    "task": "Které výhody má nástroj Studio 3T?",
+    "answerList": [
+      "Migrace databáze a relace mezi SQL a MongoDB.",
+      "Umožňuje používat SQL pro dotazování v MongoDB.",
+      "Vizuální tvorba dotazů."
+    ]
+  },
+  {
+    "task": "Který zápis JSON formátu je správný?",
+    "answerList": [
+      "<UU5.CodeKit.CodeViewer codeStyle='json'> {  'height': 186 } </UU5.CodeKit.CodeViewer>"
+    ]
+  },
+  {
+    "task": "<UU5.CodeKit.CodeViewer codeStyle='json'> {   'gender': 'male' } </UU5.CodeKit.CodeViewer> <UU5.Bricks.P>  Klíčem v uvedeném příkladu je '_' a hodnotou '_'.  </UU5.Bricks.P>",
+    "answerList": ["gender", "male"]
+  },
+  {
+    "task": "Který zápis JSON formátu je správný?",
+    "answerList": [
+      "<UU5.CodeKit.CodeViewer codeStyle='json'> {    'name':'John',    'age':30,    'cars':{       'car1':'Ford',       'car2':'BMW',       'car3':'Fiat'    } } </UU5.CodeKit.CodeViewer>"
+    ]
+  },
+  {
+    "task": "Je JSON formát dat typu key-value (klíč-hodnota) ?",
+    "answer": true
+  },
+  {
+    "task": "Které zápisy JSON formátu jsou správné?",
+    "answerList": [
+      "<UU5.CodeKit.CodeViewer codeStyle='json'> {   'name':'John',   'age':30,   'car': true } </UU5.CodeKit.CodeViewer>",
+      "<UU5.CodeKit.CodeViewer codeStyle='json'> {   'name':'Will Smith',   'age': 51,   'cars':[   null   ] } </UU5.CodeKit.CodeViewer>"
+    ]
+  },
+  {
+    "task": "Jak se nazývají následující datové formáty v JSONu?",
+    "answerList": [
+      ["textový řetězec", "JSONString"],
+      [
+        "číslo (celočíselné nebo reálné, včetně zápisu s exponentem)",
+        "JSONNumber"
+      ],
+      ["pole", "JSONArray"],
+      ["logická hodnota", "JSONBoolean"]
+    ]
+  },
+  {
+    "task": "<UU5.Bricks.P>  Jaká je struktura operace insert? </UU5.Bricks.P> _._._(_)",
+    "answerList": [
+      "db",
+      "collection",
+      "insert",
+      "<document or array of documents>"
+    ]
+  },
+  {
+    "task": "<UU5.Bricks.P>  Jaká je struktura operace find? </UU5.Bricks.P> _._._(_, _)",
+    "answerList": ["db", "collection", "find", "<criteria>", "<projection>"]
+  },
+  {
+    "task": "Parametr _ příkazu remove zajistí smazání jen prvního výskytu.",
+    "answerList": ["justOne"]
+  },
+  {
+    "task": "Co znamenají parametry query a update v operaci update?",
+    "answerList": [
+      ["query", "podmínka, pro které záznamy se má změna provést"],
+      ["update", "předmět změny"]
+    ]
+  },
+  {
+    "task": "Co znamenají parametry criteria a projection v operaci find?",
+    "answerList": [
+      ["criteria", "parametry hledání"],
+      ["projection", "filrování atributů, které chceme zobrazit"]
+    ]
+  },
+  {
+    "task": "<UU5.Bricks.P>\r  Máme kolekci <UU5.Bricks.Code>students</UU5.Bricks.Code>, která je prázdná. Do ní chceme vložit studenta s následujícími parametry:\r </UU5.Bricks.P>\r <UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r 'name':'Martin'\r 'age': 20\r 'faculty': 'Information Technology'\r </uu5string.pre></UuApp.DesignKit.EmbeddedText>\r \r <UU5.Bricks.P>\r Jak bude tato databáze vypadat? \r </UU5.Bricks.P>",
+    "answerList": [
+      "<UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r db.students.insert(\r    {\r       'name':'Martin',     \r       'age':20,    \r       'faculty':'Information Technology'\r    }\r )\r </uu5string.pre></UuApp.DesignKit.EmbeddedText>"
+    ]
+  },
+  {
+    "task": "<UU5.Bricks.P>\r  Máme kolekci <UU5.Bricks.Code>students</UU5.Bricks.Code>, která je prázdná. Do ní chceme vložit seznam studentů. Označte všechny validní zápisy.\r </UU5.Bricks.P>",
+    "answerList": [
+      "<UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r db.students.insertMany(\r [\r    {\r       'name':'Martin',\r       'age':20,\r       'faculty':'Information Technology'\r    },\r    {\r       'name':'Peter',\r       'age':19,\r       'faculty':'Economics and management'\r    },\r    {\r       'name':'Anna',\r       'age':21,\r       'faculty':'Information Technology'\r    }\r ]\r )\r </uu5string.pre></UuApp.DesignKit.EmbeddedText>",
+      "<UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r var studentsList =\r [\r    {\r       'name':'Martin',\r       'age':20,\r       'faculty':'Information Technology'\r    },\r    {\r       'name':'Peter',\r       'age':19,\r       'faculty':'Economics and management'\r    },\r    {\r       'name':'Anna',\r       'age':21,\r       'faculty':'Information Technology'\r    }\r ];\r \r db.students.insertMany(studentsList);\r </uu5string.pre></UuApp.DesignKit.EmbeddedText>"
+    ]
+  },
+  {
+    "task": "<UU5.Bricks.P>\r  Máme kolekci <UU5.Bricks.Code>students</UU5.Bricks.Code>:\r </UU5.Bricks.P>\r <UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r [\r    {\r       'name':'Peter',\r       'age':19,\r       'faculty':'Economics and management'\r    },\r    {\r       'name':'Anna',\r       'age':21,\r       'faculty':'Information Technology'\r    }\r    ...\r ]\r </uu5string.pre></UuApp.DesignKit.EmbeddedText>\r \r <UU5.Bricks.P>\r  Pomocí kterého příkazu lze vyhledat všechny studenty se jménem Martin?\r </UU5.Bricks.P>",
+    "answerList": [
+      "<UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre> db.students.find({'name':'Martin'} ) </uu5string.pre></UuApp.DesignKit.EmbeddedText>"
+    ]
+  },
+  {
+    "task": "<UU5.Bricks.P>\r  Máme kolekci <UU5.Bricks.Code>students</UU5.Bricks.Code>:\r </UU5.Bricks.P>\r <UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r [\r    {\r       'name':'Peter',\r       'age':19,\r       'faculty':'Economics and management',\r       'address': {\r         'street' : 'Dictum Court',\r         'number' : 415.0,\r         'city' : 'Yukon',\r         'country' : 'Christmas Island'\r       }\r    },\r    {\r       'name':'Anna',\r       'age':21,\r       'faculty':'Information Technology',\r       'address': {\r         'street' : 'Bushwick Place',\r         'number' : 804.0,\r         'city' : 'Waterview',\r         'country' : 'Suriname'\r       }\r    }\r    ...\r ]\r </uu5string.pre></UuApp.DesignKit.EmbeddedText>\r <UU5.Bricks.P>\r   Pomocí kterého příkazu lze vyhledat všechny studenty, kteří jsou z Yukonu?\r </UU5.Bricks.P>",
+    "answerList": [
+      "<UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre> db.students.find({'address.city':'Yukon'}) </uu5string.pre></UuApp.DesignKit.EmbeddedText>"
+    ]
+  },
+  {
+    "task": "<UU5.Bricks.P>\r  Máme kolekci <UU5.Bricks.Code>students</UU5.Bricks.Code>:\r </UU5.Bricks.P>\r <UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r [\r    {\r       'name':'Peter',\r       'age':19,\r       'faculty':'Economics and management'\r    },\r    {\r       'name':'Anna',\r       'age':21,\r       'faculty':'Information Technology'\r    }\r    ...\r ]\r </uu5string.pre></UuApp.DesignKit.EmbeddedText>\r \r <UU5.Bricks.P>\r  Pomocí kterého příkazu lze změnit obor všech studentů na 'Information Technology'?\r </UU5.Bricks.P>",
+    "answerList": [
+      "<UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre> db.students.update(    {     },    {       '$set':{          'faculty':'Information Technology'       }    },    {       'multi':true    } ) </uu5string.pre></UuApp.DesignKit.EmbeddedText>"
+    ]
+  },
+  {
+    "task": "<UU5.Bricks.P>\r  Máme kolekci <UU5.Bricks.Code>students</UU5.Bricks.Code> a chceme smazat všechny studenty mladší 18 let.\r </UU5.Bricks.P>",
+    "answerList": [
+      "<UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r db.students.remove('age':{$lt:18})\r </uu5string.pre></UuApp.DesignKit.EmbeddedText>"
+    ]
+  },
+  {
+    "task": "<UU5.Bricks.P>\r  Máme kolekci <UU5.Bricks.Code>students</UU5.Bricks.Code>:\r </UU5.Bricks.P>\r <UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r [\r    {\r       'name':'Peter',\r       'age':19,\r       'faculty':'Economics and management'\r    },\r    {\r       'name':'Anna',\r       'age':21,\r       'faculty':'Information Technology'\r    }\r    ...\r ]\r </uu5string.pre></UuApp.DesignKit.EmbeddedText>\r \r <UU5.Bricks.P>\r  Pomocí kterého příkazu lze změnit věk studenta se jménem Martin?\r </UU5.Bricks.P>",
+    "answerList": [
+      "<UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre> db.students.update(    {    'name':'Martin'    },    {       '$set':{          'age': 21       }    } ) </uu5string.pre></UuApp.DesignKit.EmbeddedText>"
+    ]
+  },
+  {
+    "task": "Který index používá MongoDB?",
+    "answerList": ["B-Tree index"]
+  },
+  {
+    "task": "_ slouží ke zrychlení vyhledávacích a dotazovacích procesů v databázi.",
+    "answerList": ["Indexy"]
+  },
+  {
+    "task": "Co znamenají následující typy indexů v MongoDB?",
+    "answerList": [
+      ["Hashed Index", "Index založený na hash"],
+      ["Text Indexes", "Index pro vyhledávání v textu"],
+      ["Jednoduchý index", "Index nad jedním atributem"],
+      ["Multikey Index", "Index nad atributem pole"]
+    ]
+  },
+  {
+    "task": "Indexy mohou zpomalit databáze.",
+    "answer": true
+  },
+  {
+    "task": "<UU5.Bricks.P> Jaká je struktura operace tvorby indexu? </UU5.Bricks.P> db.collection._(_, _)",
+    "answerList": ["createIndex", "keys", "options"]
+  },
+  {
+    "task": "<UU5.Bricks.P>\r  Máme databázi <UU5.Bricks.Code>students</UU5.Bricks.Code> a potřebujeme zrychlit vyhledávaní studentu podle adresy.\r  <UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r [\r    {\r       'name':'Peter',\r       'age':19,\r       'faculty':'Economics and management',\r       'address': {\r         'street' : 'Dictum Court',\r         'number' : 415.0,\r         'city' : 'Yukon',\r         'country' : 'Christmas Island'\r       }\r    },\r    {\r       'name':'Anna',\r       'age':21,\r       'faculty':'Information Technology',\r       'address': {\r         'street' : 'Bushwick Place',\r         'number' : 804.0,\r         'city' : 'Waterview',\r         'country' : 'Suriname'\r       }\r    }\r    ...\r ]\r </uu5string.pre></UuApp.DesignKit.EmbeddedText>\r </UU5.Bricks.P>\r <UU5.Bricks.P>\r  Pomocí kterého příkazu nastavíme index nad položkou <UU5.Bricks.Code>address</UU5.Bricks.Code>?\r </UU5.Bricks.P>",
+    "answerList": [
+      "<UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json' showCopyButton=false><uu5string.pre> db.students.createIndex({'address': 1}) </uu5string.pre></UuApp.DesignKit.EmbeddedText>"
+    ]
+  },
+  {
+    "task": "Pomocí kterého příkazu lze vypsat všechny indexy databáze <UU5.Bricks.Code>students</UU5.Bricks.Code>?",
+    "answerList": [
+      "<UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r db.students.getIndexes()\r </uu5string.pre></UuApp.DesignKit.EmbeddedText>"
+    ]
+  },
+  {
+    "task": "Jaké metody umožňuje pro provedení agregací MongoDB?",
+    "answerList": ["pipeline", "map/reduce", "agregační framework"]
+  },
+  {
+    "task": "Přiřaď ekvivalentní NoSQL agregační funkce k SQL příkazům.",
+    "answerList": [
+      ["SELECT", "$project"],
+      ["WHERE", "$match"],
+      ["GROUP BY", "$group"],
+      ["ORDER BY", "$sort"],
+      ["LIMIT", "$limit"]
+    ]
+  },
+  {
+    "task": "Co znamenají následující agregační operátory v MongoDB?",
+    "answerList": [
+      ["$avg", "Průměr hodnot atributu."],
+      ["$push", "Vloží hodnotu do pole."],
+      ["$addToSet", "Vloží hodnotu do pole, pokud tam ještě není."],
+      ["$max", "Maximální hodnota atributu."]
+    ]
+  },
+  {
+    "task": "Jak můžeme vytvořit dotaz s exekučním plánem?\r db.lide._({'jmeno':'tom'})._('_')",
+    "answerList": ["find", "explain", "executionStats"]
+  },
+  {
+    "task": "_ určuje volitelná kritéria pro výběr dokumentů.",
+    "answerList": ["query"]
+  },
+  {
+    "task": "<UU5.Bricks.P>\r  Máme kolekci <UU5.Bricks.Code>students</UU5.Bricks.Code>:\r </UU5.Bricks.P>\r <UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r [\r    {\r       'name':'Peter',\r       'age':19,\r       'faculty':'Economics and management'\r    },\r    {\r       'name':'Anna',\r       'age':21,\r       'faculty':'Information Technology'\r    }\r    ...\r ]\r </uu5string.pre></UuApp.DesignKit.EmbeddedText>\r \r <UU5.Bricks.P>\r   Pomocí kterého příkazu lze zjistit celkový počet studentů?\r </UU5.Bricks.P>",
+    "answerList": [
+      "<UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r > db.students.aggregate([ {\r    $group: {\r       _id: null,\r       'TotalCount': {\r          $sum:1\r       }\r    }\r } ] );\r </uu5string.pre>\r </UuApp.DesignKit.EmbeddedText>"
+    ]
+  },
+  {
+    "task": "<UU5.Bricks.P>\r  Máme kolekci <UU5.Bricks.Code>students</UU5.Bricks.Code>:\r </UU5.Bricks.P>\r <UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r [\r    {\r       'name':'Peter',\r       'age':19,\r       'faculty':'Economics and management'\r    },\r    {\r       'name':'Anna',\r       'age':21,\r       'faculty':'Information Technology'\r    }\r    ...\r ]\r </uu5string.pre></UuApp.DesignKit.EmbeddedText>\r \r <UU5.Bricks.P>\r   Pomocí kterého příkazu lze zjistit celkový počet studentů podle studované fakulty?\r </UU5.Bricks.P>",
+    "answerList": [
+      "<UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r > db.students.aggregate([ {\r    $group: {\r       _id: 'faculty',\r       'TotalCount': {\r          $sum:1\r       }\r    }\r } ] );\r </uu5string.pre>\r </UuApp.DesignKit.EmbeddedText>"
+    ]
+  },
+  {
+    "task": "<UU5.Bricks.P>\r  Máme kolekci <UU5.Bricks.Code>students</UU5.Bricks.Code>:\r </UU5.Bricks.P>\r <UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r [\r    {\r       'name':'Peter',\r       'age':19,\r       'faculty':'Economics and management'\r    },\r    {\r       'name':'Anna',\r       'age':21,\r       'faculty':'Information Technology'\r    }\r    ...\r ]\r </uu5string.pre></UuApp.DesignKit.EmbeddedText>\r \r <UU5.Bricks.P>\r   Pomocí kterého příkazu lze zjistit celkový počet studentů, jejichž věk je devatenáct nebo dvacet let?\r </UU5.Bricks.P>",
+    "answerList": [
+      "<UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r > db.students.aggregate([ \r   { $match: { age: { $gt: 18, $lt: 21} } },\r   { $group: { _id: null, count: { $sum: 1} } }\r ] );\r </uu5string.pre>\r </UuApp.DesignKit.EmbeddedText>"
+    ]
+  },
+  {
+    "task": "<UU5.Bricks.P>\r  Máme kolekci <UU5.Bricks.Code>students</UU5.Bricks.Code>:\r </UU5.Bricks.P>\r <UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r [\r    {\r       'name':'Peter',\r       'age':19,\r       'gender': 'male',\r       'faculty':'Economics and management'\r    },\r    {\r       'name':'Anna',\r       'age':21,\r       'gender': 'female',\r       'faculty':'Information Technology'\r    }\r    ...\r ]\r </uu5string.pre></UuApp.DesignKit.EmbeddedText>\r <UU5.Bricks.P>\r   Pomocí kterého příkazu lze zjistit průměrný věk můžu a žen?\r </UU5.Bricks.P>",
+    "answerList": [
+      "<UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r > db.students.aggregate([\r   {\r     $group: {\r       _id:'$gender', \r       'averageAge': {\r         $avg: '$age'\r       } \r     }\r   }\r ])\r </uu5string.pre>\r </UuApp.DesignKit.EmbeddedText>"
+    ]
+  },
+  {
+    "task": "<UU5.Bricks.P>\r  Máme kolekci <UU5.Bricks.Code>students</UU5.Bricks.Code>:\r </UU5.Bricks.P>\r <UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r [\r    {\r       'name':'Peter',\r       'age':19,\r       'faculty':'Economics and management'\r    },\r    {\r       'name':'Anna',\r       'age':21,\r       'faculty':'Information Technology'\r    }\r    ...\r ]\r </uu5string.pre></UuApp.DesignKit.EmbeddedText>\r \r <UU5.Bricks.P>\r   Jak lze pomocí funkce <UU5.Bricks.Code>mapReduce</UU5.Bricks.Code> zjistit celkový počet studentů podle oboru studia?\r </UU5.Bricks.P>",
+    "answerList": [
+      "<UuApp.DesignKit.EmbeddedText showCopyButton=false codeStyle='json'><uu5string.pre>\r >db.students.mapReduce(\r    function() {emit(this.faculty,1);},  //map function\r    function(faculty,values) {return Array.sum(values)}, {   //reduce function\r       'out': 'totalStudentsFaculty',\r    }\r ).find();\r </uu5string.pre>\r </UuApp.DesignKit.EmbeddedText>"
+    ]
+  },
+  {
+    "task": "Pomocí kterého operátoru lze rozbalit pole <UU5.Bricks.Code>subjects</UU5.Bricks.Code> v kolekci <UU5.Bricks.Code>students</UU5.Bricks.Code>?",
+    "answerList": [
+      "<UuApp.DesignKit.EmbeddedText codeStyle='javascript' showCopyButton=false><uu5string.pre> db.students.aggregate([{$unwind:'$subjects'}]) </uu5string.pre></UuApp.DesignKit.EmbeddedText>"
+    ]
+  }
+]

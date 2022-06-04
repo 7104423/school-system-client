@@ -28,6 +28,7 @@ import { StudyProgrammeAdd } from "./views/StudyProgrammeAdd";
 import { StudyProgrammeEdit } from "./views/StudyProgrammeEdit";
 import { useApp } from "./contexts/appContext";
 import { Alert, AlertTitle, Slide, Snackbar } from "@mui/material";
+import { InlineSearch } from "./views/InlineSearch";
 
 function App() {
   const [hasAccess, setAccess] = useState(null);
@@ -139,6 +140,7 @@ function App() {
                 <Route path="/app/*" element={<Subjects />} />
               </>
             )}
+            <Route path="/search" element={<InlineSearch />} />
             <Route path="*" element={<LoginView />} />
           </Routes>
           <Snackbar
