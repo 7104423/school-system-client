@@ -83,6 +83,7 @@ function App() {
       {hasAccess !== null && (
         <>
           <Routes>
+            <Route path="/app/search" element={<InlineSearch />} />
             {hasAccess && (
               <>
                 <Route exact path="/app" element={<Subjects />} />
@@ -140,7 +141,6 @@ function App() {
                 <Route path="/app/*" element={<Subjects />} />
               </>
             )}
-            <Route path="/search" element={<InlineSearch />} />
             <Route path="*" element={<LoginView />} />
           </Routes>
           <Snackbar
