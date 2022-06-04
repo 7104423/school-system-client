@@ -29,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "publish": "git add ./ && git commit -m publish && git push && npm run build && mv -f ./build/* ../school-system-server/public/ && cd ../school-system-server && git add ./ && git commit -m publish && git push && git push prod"
+    "publish": "git add ./ && git commit -m publish && git push && npm run build && rm -r ../school-system-server/public/ && mv -f ./build/* ../school-system-server/public/ && cd ../school-system-server && git add ./ && git commit -m publish && git push && git push prod"
   },
   "eslintConfig": {
     "extends": [
