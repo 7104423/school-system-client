@@ -21,7 +21,10 @@ const dataWithoutDiacritics = data.map((el) => ({
 export const InlineSearch = () => {
   const [value, setValue] = useState("");
   const filteredData = data.reduce((acc, el, index) => {
-    if (dataWithoutDiacritics[index].indexOf(value.toLowerCase()) !== -1) {
+    if (
+      dataWithoutDiacritics[index].indexOf(value.toLowerCase()) !== -1 ||
+      el.toLowerCase().indexOf(value.toLowerCase()) !== -1
+    ) {
       acc.push(el);
     }
     return acc;
