@@ -24,7 +24,7 @@ export const InlineSearch = () => {
   const filteredData = data.reduce((acc, el, index) => {
     if (
       dataWithoutDiacritics[index].task.indexOf(value.toLowerCase()) !== -1 ||
-      el.toLowerCase().indexOf(value.toLowerCase()) !== -1
+      el.task.toLowerCase().indexOf(value.toLowerCase()) !== -1
     ) {
       acc.push(el);
     }
