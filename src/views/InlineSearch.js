@@ -4,24 +4,28 @@ import { data } from "../config/db/data";
 
 const withDiacritics = "áäčďéěíĺľňóô öŕšťúů üýřžÁÄČĎÉĚÍĹĽŇÓÔ ÖŔŠŤÚŮ ÜÝŘŽ";
 const withoutDiacritics = "aacdeeillnoo orstuu uyrzAACDEEILLNOO ORSTUU UYRZ";
+const dataWithoutDiacritics = data.map((el) => ({
+  ...el,
+  task: el.task
+    .toLowerCase()
+    .map((el) => {
+      const position = withDiacritics.indexOf(el) !== -1;
+      if (position === -1) {
+        return el;
+      }
+      return withoutDiacritics.charAt(position);
+    })
+    .join(),
+}));
 
 export const InlineSearch = () => {
   const [value, setValue] = useState("");
-  const filteredData = data.filter(
-    (el) =>
-      el.task
-        .toLowerCase()
-        .split()
-        .map((el) => {
-          const position = withDiacritics.indexOf(el) !== -1;
-          if (position === -1) {
-            return el;
-          }
-          return withoutDiacritics.charAt(position);
-        })
-        .join()
-        .indexOf(value.toLowerCase()) !== -1
-  );
+  const filteredData = data.reduce((acc, el, index) => {
+    if (dataWithoutDiacritics[index].indexOf(value.toLowerCase()) !== -1) {
+      acc.push(el);
+    }
+    return acc;
+  }, []);
 
   return (
     <Grid width={"100%"} p={3} container spacing={2}>
