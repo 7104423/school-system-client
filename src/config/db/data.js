@@ -2396,4 +2396,244 @@ export const data = [
       "The project team implements the requested feature in cooperation with the product team in a way that it can be easily integrated into the product and made a standard feature of the uuAppServer.",
     ],
   },
+  {
+    task: "What is the purpose of uu5?",
+    answerList: [
+      "To simplify development of responsive applications that are able to adapt their user interface to any device.",
+      "To make beautiful and easy to use uuApps.",
+    ],
+  },
+  {
+    task: "What does <UU5.Bricks.Strong>Mobile First</UU5.Bricks.Strong> mean?",
+    answerList: [
+      "An approach to design human interface of applications. First, it is designed to provide excellent user experience on mobile devices. It is adjusted for all the other devices (tablets, desktops etc.) later.",
+    ],
+  },
+  {
+    task: "Connect technology and its purpose:",
+    answerList: [
+      ["HTML", "Creating of the web page structure and content."],
+      ["JavaScript", "Adding dynamic elements and functionalities."],
+      ["React", "Creating and rendering components."],
+      ["uuGDS", "Design system for the human interface."],
+    ],
+  },
+  {
+    task: "Could you use another React components and libraries in uu5?",
+    answer: true,
+  },
+  {
+    task: "What does the uu5 toolbox contain?",
+    answerList: [
+      "Well-documented Components",
+      "Concepts, guidelines and examples",
+      "Online courses and trainings",
+      "Support teams",
+      "Tools for design, development, testing and deployment",
+    ],
+  },
+  {
+    task: "Which device can you use to open an application developed in uu5?",
+    answerList: ["Mobile phone", "Tablet", "TV", "Laptop"],
+  },
+  {
+    task: "Is the <UU5.Bricks.Link target='_blank' href='https://unicorn.com'>unicorn.com</UU5.Bricks.Link> website using uu5?",
+    answer: true,
+  },
+  {
+    task: "Is uuCourseKit (that you are using right now) using uu5?",
+    answer: true,
+  },
+  {
+    task: "When is a library loaded by dynamic component loading?",
+    answerList: [
+      "When a component from a library is rendered for the first time (if the library has not been downloaded yet).",
+    ],
+  },
+  {
+    task: "Is it possible to display the <b>same application</b> (in uu5) on both a mobile phone and TV?",
+    answer: true,
+  },
+  {
+    task: "Where can you find applications created by uu5?",
+    answerList: ["App Store", "Web Browser", "Google Play"],
+  },
+  {
+    task: "Is it possible to use components from different libraries on one page?",
+    answerList: [
+      "Yes, they will be displayed in visual harmony thanks to uuGds.",
+    ],
+  },
+  {
+    task: "Which of the statements are true?",
+    answerList: [
+      "uu5 uses uuGds, which defines one standard style for all of components.",
+      "Components from different libraries look great together in one page.",
+    ],
+  },
+  {
+    task: "Do uu5 Components use Mobile First approach?",
+    answer: true,
+  },
+  {
+    task: "Where can a user create his own content with components?",
+    answerList: [
+      "In all uuApps that support editable content.",
+      "In a page/component where the user has the rights to edit content.",
+    ],
+  },
+  {
+    task: "Is it necessary for uuApp to know which components will be inserted in its editable content?",
+    answer: false,
+  },
+  {
+    task: "If your uuApp has a web user interface and native applications for iOS and Android, how many times do you have to develop it?",
+    answerList: [
+      "Only once – exactly the same code runs on all devices, in all browsers and even as native mobile app.",
+    ],
+  },
+  {
+    task: "Can a user change the language of a uuApp?",
+    answerList: ["Yes, the content is changed without a reload of the page."],
+  },
+  {
+    task: "What are the advantages of uu5 when working with the user identity?",
+    answerList: [
+      "It can recognize if the user is logged in or not.",
+      "There can be different content displayed for an authenticated and non-authenticated user.",
+      "The uu5 allows to create components for logging in and logging out.",
+    ],
+  },
+  {
+    task: "How does uu5 support i18n (internationalization)?",
+    answerList: [
+      "It solves time zones.",
+      "It solves the date/time/number format.",
+      "It solves multilingual user interface.",
+      "It solves inserting of multilingual content.",
+    ],
+  },
+  {
+    task: "How does uu5 solve user data input?",
+    answerList: [
+      "uu5 contains form components for simple user data input.",
+      "uu5 contains Form component that makes multiple input composition easy.",
+      "uu5 validates the correct format of the user input data.",
+    ],
+  },
+  {
+    task: "Why does uu5 encourage SPA (Single Page Application)?",
+    answerList: [
+      "SPA uses the computation power of the user's device and loads just data from the server for each page.",
+      "SPA does not load a HTML file for each page.",
+    ],
+  },
+  {
+    task: "How does uu5 solve error handling?",
+    answerList: [
+      "Multilingual error messages.",
+      "Sending logs to the server.",
+      "Components for error catching.",
+      "Components for displaying messages.",
+    ],
+  },
+  {
+    task: "Try to join library with its purpose.",
+    answerList: [
+      ["uu5Chart", "Various charts for displaying large data sets."],
+      [
+        "uu5Tiles",
+        "Large data displayed responsively by tiles or table with filtering, sorting and bulk actions.",
+      ],
+      ["uu5Forms", "Inputs and forms for getting information from user."],
+      ["uu5Imaging", "Image input, display and manipulation."],
+      ["uu5Calendar", "Calendar display and manipulation components."],
+    ],
+  },
+  {
+    task: "Does uu5 contain support for server communication?",
+    answer: true,
+  },
+  {
+    task: "Is uu5 suitable for manipulation with large data sets?",
+    answerList: ["Yes, there are specialized uu5 libraries that make it easy."],
+  },
+  {
+    task: "What are the main advantages of using uu5 components?",
+    answerList: [
+      "They work in all major browsers on different operating systems.",
+      "They are responsive and support showing different content on different screen sizes.",
+      "They support multilingual content.",
+      "They can communicate with another uu5 components.",
+      "They have unified visual style and settings.",
+    ],
+  },
+  {
+    task: "Which of the following statements are true for uu5 components?",
+    answerList: [
+      "Each uu5 component is reusable.",
+      "Non-visual components take care of communication with the server.",
+      "uu5 component can be composed from another uu5 components.",
+    ],
+  },
+  {
+    task: "What is the difference between props and context?",
+    answerList: [
+      ["Props", "They are set directly to a component when you use it."],
+      [
+        "Context",
+        "Some of parent component sets it and the component in a child structure reads it itself.",
+      ],
+    ],
+  },
+  {
+    task: "What forces a component to re-render?",
+    answerList: ["Props change", "Context change", "State change"],
+  },
+  {
+    task: "What can a component be used for?",
+    answerList: [
+      "For creating web pages",
+      "For creating book contents",
+      "For loading server data",
+      "For displaying data",
+      "For getting data from the users through inputs",
+    ],
+  },
+  {
+    task: "Is it possible to put component from one uuApp to the content of another uuApp?",
+    answerList: ["Yes, component will load data from its 'home' uuApp."],
+  },
+  {
+    task: "Is it possible to test uu5 Component locally?",
+    answerList: ["Yes, it is simple thanks to uuDevKit tasks."],
+  },
+  {
+    task: "What does a developer have to do to publish uu5 Components?",
+    answerList: ["Just run a task and components are in production."],
+  },
+  {
+    task: "What does the uu5 documentation contain?",
+    answerList: [
+      "Get Started",
+      "Examples",
+      "API Documentation",
+      "Online Courses",
+    ],
+  },
+  {
+    task: "What should you get familiar with before start of development of your first component?",
+    answerList: [
+      "Javascript",
+      "HTML",
+      "Cascade Style Sheets (CSS)",
+      "uuApp Framework key principles",
+    ],
+  },
+  {
+    task: "Can a non-developer use uu5 components?",
+    answerList: [
+      "Yes, anyone can use visual editor to compose components in uuApps like uuBookKit, uuWebKit, uuDocKit. More, if they understand the uu5string html-like syntax, they can edit the content source online to get all features.",
+    ],
+  },
 ];
