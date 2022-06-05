@@ -2,32 +2,10 @@ import { Box, Grid, TextField } from "@mui/material";
 import { useState } from "react";
 import { data } from "../config/db/data";
 
-const withDiacritics = "áäčďéěíĺľňóô öŕšťúů üýřžÁÄČĎÉĚÍĹĽŇÓÔ ÖŔŠŤÚŮ ÜÝŘŽ";
-const withoutDiacritics = "aacdeeillnoo orstuu uyrzAACDEEILLNOO ORSTUU UYRZ";
-const dataWithoutDiacritics = data.map((el) => ({
-  ...el,
-  task: el.task
-    .toLowerCase()
-    .split()
-    .map((el) => {
-      const position = withDiacritics.indexOf(el);
-      if (position === -1) {
-        return el;
-      }
-      console.log(el, withoutDiacritics.charAt(position));
-      return withoutDiacritics.charAt(position);
-    })
-    .join(),
-}));
-
 export const InlineSearch = () => {
   const [value, setValue] = useState("");
-  console.log(dataWithoutDiacritics);
-  const filteredData = data.reduce((acc, el, index) => {
-    if (
-      dataWithoutDiacritics[index].task.indexOf(value.toLowerCase()) !== -1 ||
-      el.task.toLowerCase().indexOf(value.toLowerCase()) !== -1
-    ) {
+  const filteredData = data.reduce((acc, el) => {
+    if (el.task.toLowerCase().indexOf(value.toLowerCase()) !== -1) {
       acc.push(el);
     }
     return acc;
