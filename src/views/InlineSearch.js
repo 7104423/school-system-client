@@ -14,6 +14,7 @@ const dataWithoutDiacritics = data.map((el) => ({
       if (position === -1) {
         return el;
       }
+      console.log(el, withoutDiacritics.charAt(position));
       return withoutDiacritics.charAt(position);
     })
     .join(),
