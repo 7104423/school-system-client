@@ -10,7 +10,7 @@ const dataWithoutDiacritics = data.map((el) => ({
     .toLowerCase()
     .split()
     .map((el) => {
-      const position = withDiacritics.indexOf(el) !== -1;
+      const position = withDiacritics.indexOf(el);
       if (position === -1) {
         return el;
       }
