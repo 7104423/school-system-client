@@ -2101,4 +2101,299 @@ export const data = [
       "Compilation of Lessons learned",
     ],
   },
+  {
+    task: "What is the purpose of the uuAppServer?",
+    answerList: [
+      "To provide a standardized way to design and develop API.",
+      "Unification of technology used for server-side in uuApps.",
+      "To provide a standardized way to solve common server features.",
+    ],
+  },
+  {
+    task: "What is unified by the uuAppServer?",
+    answerList: [
+      "The way we design and develop API.",
+      "How common server features are handled.",
+      "The development environment.",
+    ],
+  },
+  {
+    task: "Is it possible to easily create a user interface for the uuAppServer?",
+    answerList: [
+      "Yes, the most efficient way is using the uu5 product in the uuApp Framework, which provides a means to easily create a user interface and a nice frontend for the uuAppServer.",
+    ],
+  },
+  {
+    task: "Is it complicated to deploy the uuAppServer in the cloud?",
+    answerList: [
+      "No, in the uuApp Framework, the cloud environment is managed by the uuCloud. Thanks to the synergy between products of the uuApp Framework and the toolset provided by the uuAppServer, anyone can easily make the deployment in the cloud.",
+    ],
+  },
+  {
+    task: "The uuAppServer provides common _ features (like authorization and validation of inputs), so _ don't have to deal with them while creating uuApps. Instead, they can focus on implementation of API and _.",
+    answerList: ["server", "developers", "business logic"],
+  },
+  {
+    task: "Does the uuAppServer provide means of user Authorization?",
+    answerList: [
+      "Yes, either directly by the uuAppServer or based on the organizational structure in the uuBusinessTerritory.",
+    ],
+  },
+  {
+    task: "What is an application server?",
+    answerList: ["Server designed to run applications."],
+  },
+  {
+    task: "The Architecture helps us, because in project development we need to handle a lot of _ features,  which we do not want to develop in every project all over again.",
+    answerList: ["common"],
+  },
+  {
+    task: "Can you use uuAppServer in cloud?",
+    answer: true,
+  },
+  {
+    task: "If the same uuApp was implemented in two programming languages, would its API be different?",
+    answer: false,
+  },
+  {
+    task: "Is there any advantage in having the uuAppServer in NodeJS and the user interface in uu5?",
+    answerList: ["Yes, both use the same programming language."],
+  },
+  {
+    task: "In microservice architecture an application is built _.",
+    answerList: ["as a collection of loosely coupled services"],
+  },
+  {
+    task: "How can you effectively create an application that needs to provide quick response to users but also do demanding calculations at the same time?",
+    answerList: [
+      "Split it into two services which are not affecting each other and can be scaled according to current needs.",
+    ],
+  },
+  {
+    task: "Can a uuApp be composed of microservices in two different programming languages?",
+    answerList: ["Yes, because they communicate through their API."],
+  },
+  {
+    task: "The uuAppServer is technology _ and its API is _ in every programming language in which it is implemented.",
+    answerList: ["independent", "the same"],
+  },
+  {
+    task: "What are the benefits of using the uuAppServer?",
+    answerList: [
+      "It saves time and resources.",
+      "Developers can focus on API and business logic instead of writing common server features.",
+      "It comes in synergy with products for the development of a human interface and deployment to the cloud.",
+    ],
+  },
+  {
+    task: "Is it hard for a uuApp developer to switch from developing one uuApp to another?",
+    answerList: [
+      "No, as both are developed using the uuApp Framework, which means that the same principles, approach and patterns are used.",
+    ],
+  },
+  {
+    task: "Which parts of uuCmd define the API of a uuApp?",
+    answerList: [
+      "Endpoint (url at which the uuCmd is available).",
+      "DtoIn and its validation.",
+      "DtoOut and uuAppErrorMap.",
+    ],
+  },
+  {
+    task: "What are the advantages in having the way we create DtoIn and DtoOut defined by the uuAppServer?",
+    answerList: [
+      "The definition of API is unified for all uuApps.",
+      "The design of every uuCmd in every uuApp has inputs and outputs defined in a unified fashion.",
+      "If uuCmd response contains an error, then its code, message and attributes are clear and defined in a same way in every application.",
+    ],
+  },
+  {
+    task: "Can you define who is authorized to call a uuCmd?",
+    answerList: [
+      "Yes, you define uuAppProfiles (such as Authorities) and assign them to uuCmds. These profiles can then be assigned to users.",
+    ],
+  },
+  {
+    task: "What is true about the uuAppServer and human interface?",
+    answerList: [
+      "Human interface for uuAppServer may be created in any technology, but the most efficient way to create it is using the uu5 product which is optimized for use with the uuAppServer.",
+    ],
+  },
+  {
+    task: "What is the most efficient way to create a new uuApp project with the uuAppServer?",
+    answerList: [
+      "Running the <UU5.Bricks.Em>create-uuapp</UU5.Bricks.Em> task provided by the uuAppDevKit, which automatically creates the uuApp according to the latest patterns.",
+    ],
+  },
+  {
+    task: "Does the uuAppServer provide a toolset to facilitate the development?",
+    answer: true,
+  },
+  {
+    task: "The deployment of a uuApp to the uuCloud requires _ knowledge of cloud environment and _ who is authorized can do it using the uuAppDevKit toolset.",
+    answerList: ["no special", "every developer"],
+  },
+  {
+    task: "When should a uuApp be deployed to the uuCloud during the development?",
+    answerList: ["Any day, starting on the first day of the development."],
+  },
+  {
+    task: "Does the deployment of a uuApp to Azure, Amazon or OnPremise environment require a different approach and knowledge from developers?",
+    answerList: [
+      "No, because the developer deploys it using the standardized uuAppDevKit and uuCloud interface which encapsulates the technology of the specific environment.",
+    ],
+  },
+  {
+    task: "Can one uuAppWorkspace access the data of another one?",
+    answerList: [
+      "Yes, but only through API provided by the uuApp. Direct access to data in the same database is not possible.",
+    ],
+  },
+  {
+    task: "What is true about multitenancy in the uuAppServer?",
+    answerList: [
+      "It is a standard part of the uuAppServer product.",
+      "It saves resources.",
+      "uuAppWorkspaces may share a database, but are independent of each other and their data are isolated.",
+      "Users work with the uuAppWorkspace as if it was the application itself.",
+    ],
+  },
+  {
+    task: "Match the data types to the appropriate data storage.",
+    answerList: [
+      [
+        "uuAppObjectStore",
+        "Structured object",
+        "JSON object containing name/value pairs",
+      ],
+      ["uuAppBinaryStore", "Binary object", "Image"],
+    ],
+  },
+  {
+    task: "If two or more uuApps have some functionality in common, in what way should it be implemented?",
+    answerList: [
+      "The reusable parts should be in a standalone library that may be used by any uuApp.",
+    ],
+  },
+  {
+    task: "Can uuApps created with the uuAppServer use zero-downtime deployment and be deployed without outages?",
+    answer: true,
+  },
+  {
+    task: "Is it possible to scale the resources of uuApps deployed in the uuCloud based on their operational needs?",
+    answerList: [
+      "Yes, the uuAppServer is stateless and the uuCloud supports elastic scaling.",
+    ],
+  },
+  {
+    task: "What can audit-log records be used for?",
+    answerList: [
+      "For security audits of who did what in an application.",
+      "For calculating statistics on how many uuCmds are called.",
+    ],
+  },
+  {
+    task: "Is the uuAppServer in compliance with OWASP Application Security Verification Standard (ASVS)?",
+    answer: true,
+  },
+  {
+    task: "Is high availability supported by the uuAppServer and uuCloud?",
+    answerList: [
+      "Yes, uuApps can be deployed to two or even more nodes and be available should one of them fail.",
+    ],
+  },
+  {
+    task: "Does the uuAppServer support logging of application errors?",
+    answerList: ["Yes, it is a standard feature of the uuAppServer."],
+  },
+  {
+    task: "_ verifies that the users executing use-cases are who they say to be, while _ gives these users permission to call them.",
+    answerList: ["Authentication", "Authorization"],
+  },
+  {
+    task: "Can you log events from application logic into audit log?",
+    answerList: [
+      "Yes, you can explicitly create an audit log record from application logic.",
+    ],
+  },
+  {
+    task: "What is the relation between an API and a uuCmd?",
+    answerList: ["The API of a uuApp is defined by uuCmds."],
+  },
+  {
+    task: "What needs to be specified for each uuCmd?",
+    answerList: [
+      "Input (dtoIn).",
+      "Output (dtoOut).",
+      "Business Logic.",
+      "How the uuCmd can be called (Endpoint).",
+      "Who is authorized to call the uuCmd (uuAppProfiles).",
+    ],
+  },
+  {
+    task: "Is the way of informing about errors in uuCmds standardized?",
+    answerList: [
+      "Yes, every uuCmds must include uuAppErrorMap in its response.",
+    ],
+  },
+  {
+    task: "The _ uuCmd is executed immediately and the user waits for the result, while the _ uuCmd runs in the background and can take a while to be processed.",
+    answerList: ["synchronous", "asynchronous"],
+  },
+  {
+    task: "Match uuCmd parts with their descriptions.",
+    answerList: [
+      ["DtoIn", "Input of a uuCmd."],
+      ["DtoOut", "Output of a uuCmd."],
+      ["Business Logic", "What the uuCmd does."],
+      ["Validation schema", "Defines the structure of dtoIn."],
+      [
+        "uuAppErrorMap",
+        "Standardized object for returning errors from uuCmds.",
+      ],
+    ],
+  },
+  {
+    task: "What must be defined in documentation of each uuCmd in the application model?",
+    answerList: [
+      "Which uuAppProfiles are authorized to call the uuCmd and how it can be called.",
+      "What the expected input and output are.",
+      "What its business logic is.",
+    ],
+  },
+  {
+    task: "Do we need to validate the input of a uuCmd on server?",
+    answerList: [
+      "Yes, it is necessary to define the expected input and validate it on application server for each invoked uuCmd.",
+    ],
+  },
+  {
+    task: "uuCmds defined in _  are assigned to uuAppProfiles which can be assigned to specific users within _.",
+    answerList: ["uuApps", "uuAppWorkspaces"],
+  },
+  {
+    task: "How is the need for the same functionality in all uuApps handled by the uuApp Framework?",
+    answerList: [
+      "The solution is standardized, documented, and integrated into uuApp Framework products.",
+    ],
+  },
+  {
+    task: "Can you check whether your application or product is in compliance with development standards, security, operation capabilities and serviceability?",
+    answerList: [
+      "Yes, by submitting it to certification by the uuApp Framework Evangelists.",
+    ],
+  },
+  {
+    task: "Is there a difference between the deployment of NodeJS and Java applications to the uuCloud using the uuAppDevKit?",
+    answerList: [
+      "No, the uuAppDevKit provides the 'deploy' task which is configured and executed in the same way.",
+    ],
+  },
+  {
+    task: "What is a correct approach if a project requires some changes in the way the uuAppServer works?",
+    answerList: [
+      "The project sends a request to the uuAppServer product. The requested feature is evaluated and if it is considered beneficial as a standard feature of the uuAppServer it is incorporated into the product roadmap and implemented.",
+      "The project team implements the requested feature in cooperation with the product team in a way that it can be easily integrated into the product and made a standard feature of the uuAppServer.",
+    ],
+  },
 ];
