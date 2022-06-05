@@ -8,6 +8,7 @@ const dataWithoutDiacritics = data.map((el) => ({
   ...el,
   task: el.task
     .toLowerCase()
+    .split()
     .map((el) => {
       const position = withDiacritics.indexOf(el) !== -1;
       if (position === -1) {
